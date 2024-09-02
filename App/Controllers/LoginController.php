@@ -114,18 +114,17 @@ class LoginController extends Controller {
         $mail = new PHPMailer(true);
     
         try {
-            // Configurações do servidor SMTP
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = 'thoeralivro@gmail.com'; 
-            $mail->Password = 'thoeralivro123'; 
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587; 
+            $mail->Password = 'eyexqsxxessowwbu'; 
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = 465; 
     
             // Configurações do e-mail
             $mail->setFrom('thoeralivro@gmail.com', 'Thoera | Casa & Negócios');
-            $mail->addAddress($email);
+            $mail->addAddress('luan.h.pinto@aluno.senai.br');
             $mail->isHTML(true);
             $mail->Subject = 'Recuperação de Senha';
             $mail->Body = "Seu código de verificação é: <strong>$codigo</strong><br>Este código é válido por 15 minutos.";
