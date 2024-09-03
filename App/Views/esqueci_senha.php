@@ -2,7 +2,7 @@
   <div class="login-box">
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="/login" class="h1"><b>Admin</b>LTE</a>
+        <a href="/login" class="h1"><b>Casa &</b>Negócios</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">Você esqueceu sua senha? Aqui você pode facilmente redefini-la.</p>
