@@ -19,7 +19,10 @@ return function(RouteCollector $r) {
     $r->addRoute('POST', '/novousuario', [LoginController::class, 'novoUsuario']);
     
     $r->addRoute('GET', '/recuperarsenha', [LoginController::class, 'esqueci_senha']);
-    $r->addRoute('POST', '/novasenha', [LoginController::class, 'esqueciSenha']);
+    $r->addRoute('POST', '/esqueci_senha', [LoginController::class, 'esqueciSenha']);
+    $r->addRoute('POST', '/validar_codigo', [LoginController::class, 'validar_codigo']);
+    $r->addRoute('POST', '/enviar', [LoginController::class, 'enviar']);
+
 
     // $r->addRoute('GET', '/clientes_cadastro', [ContasController::class, 'index']);
     $r->addRoute('POST', '/novocliente', [ContasController::class, 'novoCliente']);

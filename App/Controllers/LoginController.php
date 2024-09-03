@@ -122,9 +122,8 @@ class LoginController extends Controller {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = 465; 
     
-            // Configurações do e-mail
             $mail->setFrom('thoeralivro@gmail.com', 'Thoera | Casa & Negócios');
-            $mail->addAddress('luan.h.pinto@aluno.senai.br');
+            $mail->addAddress($email);
             $mail->isHTML(true);
             $mail->Subject = 'Recuperação de Senha';
             $mail->Body = "Seu código de verificação é: <strong>$codigo</strong><br>Este código é válido por 15 minutos.";
@@ -135,8 +134,6 @@ class LoginController extends Controller {
         }
     }
 
-
-
     public function esqueciSenha() {
         try {
             $email = $_POST['email'] ?? null;
@@ -145,43 +142,68 @@ class LoginController extends Controller {
                 throw new Exception('Email vazio!');
             }
     
-            // Validação do e-mail
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 throw new Exception('Formato de e-mail inválido!');
             }
-
-            var_dump($email);
             
             $usuario = Usuario::where('email', $email)->first();
-            var_dump($usuario->email);
+
             if (!$usuario) {
                 throw new Exception('E-mail não encontrado!');
             }
     
-            // Gerar um código de verificação
             $codigo_verificacao = $this->gerar_codigo_verificacao();
             $this->armazenar_codigo($email, $codigo_verificacao);
     
-            // Enviar o código por e-mail
             $this->enviar_email_recuperacao($email, $codigo_verificacao);
     
             echo 'Código de verificação enviado para seu e-mail!';
-            // header('Location: /validar_senha');
+            echo '
+            <div class="hold-transition login-page">
+                <div class="login-box">
+                    <div class="card card-outline card-primary">
+                        <div class="card-header text-center">
+                        <a href="/login" class="h1"><b>Casa &</b>Negócios</a>
+                        </div>
+                        <div class="card-body">
+                        <p class="login-box-msg">Digite o código de 6 dígitos que foi enviado no seu email.</p>
+                        <form action="/validar_codigo" method="post">
+                            <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="codigo" placeholder="Código">
+                            <input type="hidden" class="form-control" name="email" value="' . htmlspecialchars($email) .'">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-block">Enviar o código</button>
+                            </div>
+                            </div>
+                        </form>
+                        <p class="mt-3 mb-1">
+                            <a href="/login">Login</a>
+                        </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ';
         } catch (Exception $e) {
             echo ($e->getMessage());
         }
     }
     
     private function gerar_codigo_verificacao() {
-
         return str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
     }
     
     private function armazenar_codigo($email, $codigo) {
-
         $usuario = Usuario::where('email', $email)->first();
         $usuario->codigo_verificacao = $codigo;
-        $usuario->codigo_expiracao = date('Y-m-d H:i:s', strtotime('+15 minutes')); // Expira em 15 minutos
+        $usuario->codigo_expiracao = date('Y-m-d H:i:s', strtotime('+15 minutes')); 
         $usuario->save();
     }
 
@@ -202,15 +224,68 @@ class LoginController extends Controller {
             if (!$usuario) {
                 throw new Exception('Código inválido ou expirado!');
             }
-    
-            // Código válido, exibir formulário para redefinir a senha
+
             echo '
-            <form method="post" action="redefinir_senha.php">
-                <input type="hidden" name="email" value="' . htmlspecialchars($email) . '">
-                <input type="hidden" name="codigo" value="' . htmlspecialchars($codigo) . '">
-                Nova Senha: <input type="password" name="nova_senha">
-                <button type="submit">Atualizar Senha</button>
-            </form>';
+            <div class="hold-transition login-page">
+                <div class="login-box">
+                    <div class="card card-outline card-primary">
+                        <div class="card-header text-center">
+                        <a href="/login" class="h1"><b>Admin</b>LTE</a>
+                        </div>
+                        <div class="card-body">
+                        <p class="login-box-msg">Seu código foi verificado com sucesso! Digite sua nova senha</p>
+                        <form action="/enviar" method="post">
+                            <div class="input-group mb-3">
+                            <input type="hidden" class="form-control" name="email" value="' . $email . '">
+                            <input type="hidden" class="form-control" name="codigo" value="' . $codigo . '">
+                            <input type="password" class="form-control" name="nova_senha" placeholder="Digite sua nova senha">
+                            </div>
+                            <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-block">Atualizar a senha</button>
+                            </div>
+                            </div>
+                        </form>
+                        <p class="mt-3 mb-1">
+                            <a href="/login">Login</a>
+                        </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ';
+        } catch (Exception $e) {
+            echo ($e->getMessage());
+        }
+    }
+
+    public function enviar() {
+        try {
+            $email = $_POST['email'] ?? null;
+            $codigo = $_POST['codigo'] ?? null;
+            $nova_senha = $_POST['nova_senha'] ?? null;
+
+            if (empty($email) || empty($codigo) || empty($nova_senha)) {
+                throw new Exception('Email, código ou nova senha não fornecidos!');
+            }
+    
+            $usuario = Usuario::where('email', $email)
+                              ->where('codigo_verificacao', $codigo)
+                              ->where('codigo_expiracao', '>', date('Y-m-d H:i:s'))
+                              ->first();
+    
+            if (!$usuario) {
+                throw new Exception('Código inválido ou expirado!');
+            }
+
+            // Atualiza a senha
+            $usuario->senha = sha1(md5($nova_senha)); // Alterar conforme a forma de hashing desejada
+            $usuario->codigo_verificacao = null; // Limpa o código de verificação após a atualização
+            $usuario->codigo_expiracao = null; // Limpa a expiração
+            $usuario->save();
+    
+            echo 'Senha atualizada com sucesso!';
+            return redirect('/login')->sucesso('Senha atualizada com sucesso!');
         } catch (Exception $e) {
             echo ($e->getMessage());
         }

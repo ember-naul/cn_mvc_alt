@@ -4,7 +4,8 @@ USE dbcasanegocios;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "-03:00";
+SET GLOBAL time_zone = '-03:00';
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -154,7 +155,7 @@ INSERT INTO `servicos` (`id`, `id_contrato`, `data_hora`, `status_servico`) VALU
 (2, 1, '2024-07-10 09:00:00', 'em_andamento');
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `celular`, `cpf`, `rg`, `senha`) VALUES
-(1, 'Luan', 'luan@gmail.com', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350');
+(1, 'Luan', 'lluann930@gmail.com', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
