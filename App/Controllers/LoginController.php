@@ -169,7 +169,7 @@ class LoginController extends Controller {
                         <p class="login-box-msg">Digite o código de 6 dígitos que foi enviado no seu email.</p>
                         <form action="/validar_codigo" method="post">
                             <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="codigo" placeholder="Código">
+                            <input type="text" class="form-control" name="codigo" placeholder="Digite o código de 6 dígitos">
                             <input type="hidden" class="form-control" name="email" value="' . htmlspecialchars($email) .'">
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -230,7 +230,7 @@ class LoginController extends Controller {
                 <div class="login-box">
                     <div class="card card-outline card-primary">
                         <div class="card-header text-center">
-                        <a href="/login" class="h1"><b>Admin</b>LTE</a>
+                        <a href="/login" class="h1"><b>Casa & </b> Negócios</a>
                         </div>
                         <div class="card-body">
                         <p class="login-box-msg">Seu código foi verificado com sucesso! Digite sua nova senha</p>
@@ -279,9 +279,9 @@ class LoginController extends Controller {
             }
 
             // Atualiza a senha
-            $usuario->senha = sha1(md5($nova_senha)); // Alterar conforme a forma de hashing desejada
-            $usuario->codigo_verificacao = null; // Limpa o código de verificação após a atualização
-            $usuario->codigo_expiracao = null; // Limpa a expiração
+            $usuario->senha = sha1(md5($nova_senha));
+            $usuario->codigo_verificacao = null; 
+            $usuario->codigo_expiracao = null; 
             $usuario->save();
     
             echo 'Senha atualizada com sucesso!';
