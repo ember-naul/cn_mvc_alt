@@ -1,15 +1,15 @@
 <?php
 
-use App\Widgets\BaseWidget;
+// use App\Widgets\BaseWidget;
 
-$breadcumb = [
-    [
-        'title' => 'Dashboard',
-        'url'   => '/home',
-    ],
-];
+// $breadcumb = [
+//     [
+//         'title' => 'Dashboard',
+//         'url'   => '/home',
+//     ],
+// ];
 
-BaseWidget::breadcumb('Home', $breadcumb);
+// BaseWidget::breadcumb('Home', $breadcumb);
 
 ?>
 
@@ -23,8 +23,7 @@ BaseWidget::breadcumb('Home', $breadcumb);
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Responsiva</title>
-    <!-- Adicione o link para o Bootstrap CSS -->
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .flex-container {
@@ -124,36 +123,38 @@ BaseWidget::breadcumb('Home', $breadcumb);
             }
 
             .teste-2 {
-                max-width: 90%; /* Garante que a largura da seção não ultrapasse 90% da largura da tela */
-                margin: 1rem auto; /* Centraliza e adiciona margem vertical */
+                max-width: 90%; 
+                margin: 1rem auto;
             }
         }
 
-        /* Estilos para a seção com id="servicos" */
         #servicos {
-            width: 100vw; /* Largura total da viewport */
-            margin-left: calc(-50vw + 50%); /* Alinha a seção com as bordas da viewport */
-            margin-right: calc(-50vw + 50%); /* Alinha a seção com as bordas da viewport */
-            padding: 0; /* Remove o padding interno da seção */
-            min-height: 500px; /* Define uma altura mínima para aumentar o comprimento da seção */
+            width: 99.58vw;
+            margin-left: calc(-50vw + 50%); 
+            margin-right: calc(-50vw + 50%); 
+            padding: 0; 
+            min-height: 500px; 
         }
 
         #servicos .container {
-            padding: 0; /* Remove o padding interno do contêiner para ocupar toda a largura da seção */
-            max-width: 100%; /* Remove a largura máxima do contêiner */
+            padding: 0;
+            max-width: 100%;
         }
 
         #servicos .row {
-            margin: 0; /* Remove a margem externa das linhas */
+            margin: 0;
         }
 
-        /* .home{
-            background-image: url(assets/img/background-home.jpeg);
-        } */
+        #sobrenos{
+            width: 99.58vw;
+            padding: 0;
+            height 
+            min-height: 500px; 
+        }
     </style>
 </head>
 <body>
-    <div class="container-wrapper mt-5">
+    <div class="wrapper mt-5">
         <div class="text-center mb-0">
             <h1 class="titleh1 inter-h1 m-1">
                 Diversos tipos de serviços<br>
@@ -164,7 +165,6 @@ BaseWidget::breadcumb('Home', $breadcumb);
                 <p class="testep mb-3">Encontre profissionais e contrate <br>serviços para tudo o que você precisar</p>
             </div>
         </div>
-
         <section id="servicos" class="bg-white">
             <div class="container">
                 <div class="row d-flex justify-content-center">
@@ -175,10 +175,9 @@ BaseWidget::breadcumb('Home', $breadcumb);
                             <button class="btn btn-dark" data-toggle="modal" data-target="#modal_cadastro_cliente">Cadastre-se</button>
                         </section>
                     </div>
-
                     <div class="col-md-6 col-lg-4 p-3 d-flex">
                         <section class="teste-2 align-items-center">
-                            <p class="testep mb-2">Você deseja se cadastrar como um <b>profissional</b> para realizar uma<br> tarefa em nosso web site?</p>
+                            <p class="testep mb-2">Você deseja se cadastrar como um <b>profissional</b> para divulgar seus serviços<br> em nosso web site?</p>
                             <p class="testep mb-3">Clique aqui para saber mais!</p>
                             <button class="btn btn-dark" data-toggle="modal" data-target="#modal_cadastro_profissional">Cadastre-se</button>
                         </section>
@@ -186,7 +185,6 @@ BaseWidget::breadcumb('Home', $breadcumb);
                 </div>
             </div>
         </section>
-
         <section id="sobrenos" class="container l-5 about-section mt-5 mb-5">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-left">

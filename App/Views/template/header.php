@@ -34,7 +34,7 @@
       if (isset($_SESSION['erro'])) {
         ?>
 
-        <div class="alert alert-success alert-dismissible">
+        <div class="alert alert-danger alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
           <?= $_SESSION['erro'] ?>
         </div>
