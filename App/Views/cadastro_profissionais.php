@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <div class="modal fade" id="modal_cadastro_profissional" tabindex="-1" role="dialog"
   aria-labelledby="modalCadastroProfissionalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
@@ -67,10 +68,9 @@
 
 <script>
   document.getElementById('cep_p').addEventListener('input', function () {
-    let value = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-    this.value = value; // Atualiza o valor do campo
+    let value = this.value.replace(/\D/g, ''); 
+    this.value = value; 
 
-    // Faz a busca do CEP somente se o comprimento for 8
     if (value.length === 8) {
       const cep = value.replace('-', '');
       fetch(`https://viacep.com.br/ws/${cep}/json/`)
@@ -81,7 +81,6 @@
           return response.json();
         })
         .then(data => {
-          console.log('Dados recebidos:', data);
           if (data.logradouro && data.bairro && data.localidade && data.uf) {
             document.getElementById('endereco_p').value = data.logradouro || '';
             document.getElementById('bairro_p').value = data.bairro || '';

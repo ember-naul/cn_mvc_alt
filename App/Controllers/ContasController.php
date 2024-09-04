@@ -10,6 +10,7 @@ use Exception;
 
 class ContasController extends Controller
 {
+    
     public function novoCliente()
     {
         $id_usuario = $_POST['id_usuario'] ?? null; 
@@ -25,16 +26,16 @@ class ContasController extends Controller
             $cliente->id_usuario = $id_usuario;
             $cliente->save();
 
-            // Cria o endereço associado ao cliente
             $endereco_a = new Endereco();
             $endereco_a->id_cliente = $cliente->id;
-            $endereco_a->id_profissional = null;  // Associa o endereço ao cliente criado
+            $endereco_a->id_profissional = null;
             $endereco_a->cep = $cep;
             $endereco_a->bairro = $bairro;
             $endereco_a->cidade = $cidade;
             $endereco_a->endereco = $endereco;
             $endereco_a->numero = $numero;
             $endereco_a->save();
+            $_SESSION['tipo_usuario'] = 'cliente'; 
             return redirect('/home')->sucesso('Operação realizada com sucesso');
         } catch (Exception $e) {
             return redirect('/home')->erro($e->getMessage());
@@ -42,6 +43,7 @@ class ContasController extends Controller
     }
     public function novoProfissional()
     {
+
         $id_usuario = $_POST['id_usuario'] ?? null; 
         $cnpj = $_POST['cnpj'] ?? null;
         $cep = $_POST['cep'] ?? null;
@@ -65,7 +67,7 @@ class ContasController extends Controller
             $endereco_a->endereco = $endereco;
             $endereco_a->numero = $numero;
             $endereco_a->save();
-
+            $_SESSION['tipo_usuario'] = 'profissional'; 
             return redirect('/home')->sucesso('Operação realizada com sucesso');
         } catch (Exception $e) {
             return redirect('/home')->erro($e->getMessage());

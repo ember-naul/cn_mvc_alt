@@ -15,10 +15,12 @@
   <link rel="stylesheet" href="assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <link rel="stylesheet" href="assets/plugins/toastr/toastr.min.css">
 </head>
-<?php if ($_SESSION['logado'] == true): ?>
+<?php 
+$_SESSION['cliente'] = false;
+$_SESSION['profissional'] = false;
+if ($_SESSION['logado'] == true): ?>
 
   <body class="hold-transition layout-top-nav">
-
     <div class="wrapper">
       <?php require_once __DIR__ . '/../../../App/Views/template/navbar.php'; ?>
       <div class="content-wrapper p-2">

@@ -17,6 +17,8 @@
           <li class="nav-item">
             <a href="#" class="nav-link">Contato</a>
           </li>
+          <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'cliente'): ?>
+            
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="nav-link dropdown-toggle">Serviços</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -24,7 +26,6 @@
               <li><a href="/servicos" class="dropdown-item">Pedreiro</a></li>
 
               <li class="dropdown-divider"></li>
-
               <!-- Level two dropdown-->
               <li class="dropdown-submenu dropdown-hover">
                 <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
@@ -50,6 +51,7 @@
               <!-- End Level two -->
             </ul>
           </li>
+          <?php endif; ?>
         </ul>
       <!-- Right navbar links -->
       <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
