@@ -15,7 +15,6 @@ return function(RouteCollector $r) {
     $r->addRoute('GET', '/login', [LoginController::class, 'index']);
     $r->addRoute('POST', '/iniciarsessao', [LoginController::class, 'login']);
     $r->addRoute('GET', '/deslogar', [LoginController::class, 'deslogar']);
-
     $r->addRoute('GET', '/cadastro', [LoginController::class, 'cadastro']);
     $r->addRoute('POST', '/novousuario', [LoginController::class, 'novoUsuario']);
     
@@ -24,8 +23,6 @@ return function(RouteCollector $r) {
     $r->addRoute('POST', '/validar_codigo', [SenhaController::class, 'validar_codigo']);
     $r->addRoute('POST', '/enviar', [SenhaController::class, 'enviar']);
 
-
-    // $r->addRoute('GET', '/clientes_cadastro', [ContasController::class, 'index']);
     $r->addRoute('POST', '/novocliente', [ContasController::class, 'novoCliente']);
     $r->addRoute('POST', '/novoprofissional', [ContasController::class, 'novoProfissional']);
 

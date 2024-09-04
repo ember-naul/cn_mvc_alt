@@ -10,11 +10,6 @@ use Exception;
 
 class ContasController extends Controller
 {
-    public function index()
-    {
-        return require_once __DIR__ . '/../Views/cadastro_clientes.php';
-    }
-    
     public function novoCliente()
     {
         $id_usuario = $_POST['id_usuario'] ?? null; 
@@ -33,26 +28,22 @@ class ContasController extends Controller
             // Cria o endereço associado ao cliente
             $endereco_a = new Endereco();
             $endereco_a->id_cliente = $cliente->id;
-            $endereco_a->id_profissional = 0;  // Associa o endereço ao cliente criado
+            $endereco_a->id_profissional = null;  // Associa o endereço ao cliente criado
             $endereco_a->cep = $cep;
             $endereco_a->bairro = $bairro;
             $endereco_a->cidade = $cidade;
             $endereco_a->endereco = $endereco;
             $endereco_a->numero = $numero;
             $endereco_a->save();
-            echo '
-            <script>
-                window.location.href = "/home";
-            </script>
-            ';
-            // return redirect('/home')->sucesso('Operação realizada com sucesso');
+            return redirect('/home')->sucesso('Operação realizada com sucesso');
         } catch (Exception $e) {
-            return redirect('/homes')->erro($e->getMessage());
+            return redirect('/home')->erro($e->getMessage());
         }
     }
     public function novoProfissional()
     {
         $id_usuario = $_POST['id_usuario'] ?? null; 
+        $cnpj = $_POST['cnpj'] ?? null;
         $cep = $_POST['cep'] ?? null;
         $endereco = $_POST['endereco'] ?? null;
         $bairro = $_POST['bairro'] ?? null;
@@ -62,11 +53,12 @@ class ContasController extends Controller
         try {
             $profissional = new Profissional();
             $profissional->id_usuario = $id_usuario;
+            $profissional->cnpj = $cnpj;
             $profissional->save();
 
             $endereco_a = new Endereco();
             $endereco_a->id_profissional = $profissional->id;
-            $endereco_a->id_cliente = 0;
+            $endereco_a->id_cliente = null;
             $endereco_a->cep = $cep;
             $endereco_a->bairro = $bairro;
             $endereco_a->cidade = $cidade;
@@ -74,15 +66,9 @@ class ContasController extends Controller
             $endereco_a->numero = $numero;
             $endereco_a->save();
 
-            //isso é gambiarra, mas funciona.
-            echo '
-            <script>
-                window.location.href = "/home";
-            </script>
-            ';
-            // return redirect('/home')->sucesso('Operação realizada com sucesso');
+            return redirect('/home')->sucesso('Operação realizada com sucesso');
         } catch (Exception $e) {
-            return redirect('/homes')->erro($e->getMessage());
+            return redirect('/home')->erro($e->getMessage());
         }
     }
 }

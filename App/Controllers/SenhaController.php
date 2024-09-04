@@ -39,7 +39,6 @@ public function esqueciSenha() {
 
         $this->enviar_email_recuperacao($email, $codigo_verificacao);
 
-        echo 'Código de verificação enviado para seu e-mail!';
         echo '
         <div class="hold-transition login-page">
             <div class="login-box">

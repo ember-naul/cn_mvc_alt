@@ -16,6 +16,11 @@ BaseWidget::breadcumb('Home', $breadcumb);
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <style>
+        .content-wrapper{
+            padding: 0;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Responsiva</title>
@@ -141,16 +146,20 @@ BaseWidget::breadcumb('Home', $breadcumb);
         #servicos .row {
             margin: 0; /* Remove a margem externa das linhas */
         }
+
+        /* .home{
+            background-image: url(assets/img/background-home.jpeg);
+        } */
     </style>
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container-wrapper mt-5">
         <div class="text-center mb-0">
             <h1 class="titleh1 inter-h1 m-1">
                 Diversos tipos de serviços<br>
                 <span class="second-line">em um só lugar!</span>
             </h1>
-            <div class="flex-container">
+            <div class="flex-container home">
                 <img src="assets/img/jardineiro.png" class="jardineiro img-fluid" alt="Jardineiro">
                 <p class="testep mb-3">Encontre profissionais e contrate <br>serviços para tudo o que você precisar</p>
             </div>
@@ -168,12 +177,10 @@ BaseWidget::breadcumb('Home', $breadcumb);
                     </div>
 
                     <div class="col-md-6 col-lg-4 p-3 d-flex">
-                        <section class="teste-2">
+                        <section class="teste-2 align-items-center">
                             <p class="testep mb-2">Você deseja se cadastrar como um <b>profissional</b> para realizar uma<br> tarefa em nosso web site?</p>
                             <p class="testep mb-3">Clique aqui para saber mais!</p>
-                            <a href="/servicos">
-                                <button class="btn btn-dark">Serviços</button>
-                            </a>
+                            <button class="btn btn-dark" data-toggle="modal" data-target="#modal_cadastro_profissional">Cadastre-se</button>
                         </section>
                     </div>
                 </div>
