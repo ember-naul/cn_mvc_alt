@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
+use App\Models\Usuario;
 use App\Models\Cliente;
 use App\Models\Profissional;
 use App\Models\Endereco;
@@ -18,7 +19,7 @@ class ClienteController extends Controller
     }
     public function novoCliente()
     {
-        $id_usuario = $_POST['id_usuario'] ?? null;
+        // $id_usuario = $_POST['id_usuario'] ?? null;
         $cep = $_POST['cep'] ?? null;
         $endereco = $_POST['endereco'] ?? null;
         $bairro = $_POST['bairro'] ?? null;
@@ -28,7 +29,7 @@ class ClienteController extends Controller
         try {
             // Cria o cliente
             $cliente = new Cliente();
-            $cliente->id_usuario = $id_usuario;
+            $cliente->id_usuario = $usuario->id;
             $cliente->save();
 
             $endereco_a = new Endereco();

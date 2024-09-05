@@ -11,6 +11,7 @@
       </div>
       <div class="modal-body">
         <form action='/novoprofissional' id="form-cadastro-profissional" method='post'>
+        <input type="hidden" name='id_usuario' value=<?= $_SESSION['id_usuario']; ?>>
           <div class="form-group">
             <label for="usuarioId">Seu nome</label>
             <input type="text" class="form-control" id="id_usuario" name="nome" disabled

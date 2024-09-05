@@ -10,9 +10,10 @@
       </div>
       <div class="modal-body">
         <form action='/novocliente' id="form-cadastro-cliente" method='post'>
+          <input type="hidden" name='id_usuario' value=<?= $_SESSION['id_usuario']; ?>>
           <div class="form-group">
             <label for="usuarioId">Seu nome</label>
-            <input type="text" class="form-control" id="id_usuario" name="nome" disabled
+            <input type="text" class="form-control" id="nome" name="nome" disabled
               value='<?php echo ($_SESSION['nome']); ?>' required>
           </div>
 

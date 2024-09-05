@@ -3,13 +3,20 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
+use App\Models\Usuario;
 use App\Models\Cliente;
 use App\Models\Profissional;
 use App\Models\Endereco;
 use Exception;
 
 class ProfissionalController extends Controller
-{
+{   
+    public function cliente_home()
+    {
+        return require_once __DIR__ . '/../Views/profissional/index.php';
+
+    }
+
     public function novoProfissional()
     {
 
@@ -23,7 +30,7 @@ class ProfissionalController extends Controller
 
         try {
             $profissional = new Profissional();
-            $profissional->id_usuario = $id_usuario;
+            $profissional->id_usuario = $id_usuario; //$usuario->id; 
             $profissional->cnpj = $cnpj;
             $profissional->save();
 
