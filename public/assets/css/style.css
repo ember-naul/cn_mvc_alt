@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f1f1f1;
+}
+
+header {
+    background-color: #9c9ba1;
+    padding: 5px;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+   align-items: center;
+
+}
+
+.logo {
+    flex: 1;
+}
+
+.logo img {
+    max-height: 65px; 
+    margin-left: 15rem;
+}
+
+
+nav {
+    display: flex; 
+    justify-content: center; 
+    margin-right: 1vh;
+    font-size: larger;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-right: 2.5rem;
+}
+nav a {
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Transição suave para a mudança de cor */
+}
+
+nav a:hover {
+    color: #FFD700; /* Cor quando o mouse está sobre o link */
+    text-decoration: underline; /* Sublinha o texto ao passar o mouse */
+}
+
+.auth-buttons {
+    margin-left: 30rem; 
+    display: flex;
+    align-items: center;
+ 
+}
+
+.auth-buttons .button {
+    background-color: Transparent; 
+    color: #2B313D; 
+    padding: 10px 15px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+}
+
+.auth-buttons .button:hover {
+    background-color: Transparent; 
+}
+
+main {
+    padding-top: 80px; 
+}
+
+section {
+    padding: 40px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #2B313D;
+    color: #fff;
+}
+
+.font-family-karla {
+    font-family: 'Poppins', sans-serif; 
+}
+
+section.styled-line {
+
+    border: 0;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.5);
+    width: 50%; /* Largura da linha */
+    margin-top: 1rem; /* Espaçamento acima e abaixo da linha */
+    margin-left: 30rem;
+    border-radius: 5px; /* Borda arredondada */
+}
+
+section.style-line{
+    border: 0;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.5);
+    width: 50%; /* Largura da linha */
+    margin-top: 6rem; /* Espaçamento acima e abaixo da linha */
+    margin-left: 30rem;
+    border-radius: 3px; /* Borda arredondada */
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Centraliza o texto e a imagem dentro da home */
+}
+
+.text-container {
+    display: flex;
+    align-items: center; /* Alinha verticalmente o h1 e a imagem */
+    justify-content: center; /* Centraliza horizontalmente o h1 e a imagem */
+}
+
+.inter-h1 {
+    font-family: "Inter", sans-serif;
+    font-weight: 1000;
+    font-size: 40px;
+    margin: 0; /* Remove margens para evitar espaçamento indesejado */
+    line-height: 1.2; /* Ajuste o valor conforme necessário para o espaçamento entre as linhas */
+    display: inline-block; /* Permite que o h1 ajuste seu tamanho conforme o conteúdo */
+}
+
+.second-line {
+    display: inline-block; /* Faz com que o texto da segunda linha comece na mesma linha vertical */
+    vertical-align: baseline; /* Alinha verticalmente o texto da segunda linha com o da primeira linha */
+    margin-right: 208px;
+}
+
+.jardineiro {
+    margin-left: -10px; /* Espaço entre o h1 e a imagem */
+    margin-right: -300px;
+}
+
+.inter-a {
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    margin-top: -120px; /* Espaço acima do link */
+    margin-right: 290px;
+}
+
+.teste{
+    background-color: #868686;
+    width: 100%;
+    height: 110%;
+    margin-top: 97px;
+    display: flex;
+    gap:20%;
+}
+
+.teste-2{
+    background-color: #2f2f2f;
+    width: 40%;
+    height: 80%;
+    margin-top: 97px;
+}
+
+.testep{
+    color: white;
+    font-size: 40px;
+}
+
+.teste-3{
+    background-color: #2f2f2f;
+    width: 40%;
+    height: 80%;
+    margin-top: 97px;
+
+}
