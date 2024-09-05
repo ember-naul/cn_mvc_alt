@@ -107,18 +107,17 @@ class LoginController extends Controller
             $_SESSION['rg'] = $usuario->rg;
             $_SESSION['cpf'] = $usuario->cpf;
 
-            // Verifica se o usuário é um cliente
             $cliente = Cliente::where('id_usuario', $usuario->id)->first();
-            // Verifica se o usuário é um profissional
             $profissional = Profissional::where('id_usuario', $usuario->id)->first();
             
-
+            
             if ($cliente && $profissional) {
                 echo "Os dois estão puxando";
-                // return redirect('/escolha_conta')->sucesso('Operação realizada com sucesso! Você tem contas de cliente e profissional.');
+                return redirect('/escolha_conta')->sucesso('Operação realizada com sucesso! Você tem contas de cliente e profissional.');
             } elseif ($cliente) {
+                $_SESSION['tipo_usuario'] = 'cliente';
                 echo "Só cliente está puxando";
-                // return redirect('/cliente/home')->sucesso('Operação realizada com sucesso! Você entrou como cliente.');
+                return redirect('/cliente/home')->sucesso('Operação realizada com sucesso! Você entrou como cliente.');
             } elseif ($profissional) {
                 echo "Só profissional está puxando";
                 // return redirect('/profissional/home')->sucesso('Operação realizada com sucesso! Você entrou como profissional.');
