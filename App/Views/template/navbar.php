@@ -14,7 +14,7 @@
           <li class="nav-item">
             <a href="#" class="nav-link">Contato</a>
           </li>
-          <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'cliente'): ?>
+          <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'cliente'): ?>
             
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="nav-link dropdown-toggle">Serviços</a>
