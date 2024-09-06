@@ -11,7 +11,7 @@ use Exception;
 
 class ProfissionalController extends Controller
 {   
-    public function cliente_home()
+    public function profissional_home()
     {
         return require_once __DIR__ . '/../Views/profissional/index.php';
 
@@ -19,8 +19,6 @@ class ProfissionalController extends Controller
 
     public function novoProfissional()
     {
-
-        $id_usuario = $_POST['id_usuario'] ?? null; 
         $cnpj = $_POST['cnpj'] ?? null;
         $cep = $_POST['cep'] ?? null;
         $endereco = $_POST['endereco'] ?? null;
@@ -30,7 +28,7 @@ class ProfissionalController extends Controller
 
         try {
             $profissional = new Profissional();
-            $profissional->id_usuario = $id_usuario; //$usuario->id; 
+            $profissional->id_usuario = user()->id_usuario; //$id_usuario; 
             $profissional->cnpj = $cnpj;
             $profissional->save();
 

@@ -16,13 +16,11 @@
             <input type="text" class="form-control" id="nome" name="nome" disabled
               value='<?php echo ($_SESSION['nome']); ?>' required>
           </div>
-
           <div class="form-group">
             <label for="celular">Seu celular</label>
             <input type="text" class="form-control" id="celular" name="celular" disabled
               value='<?php echo ($_SESSION['celular']); ?>' required>
           </div>
-
           <div class="form-group">
             <label for="rg">Seu RG</label>
             <input type="text" class="form-control" id="rg" name="rg" disabled value='<?php echo ($_SESSION['rg']); ?>'

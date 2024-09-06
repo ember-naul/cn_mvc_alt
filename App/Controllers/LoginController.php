@@ -78,27 +78,22 @@ class LoginController extends Controller
     public function login()
     {
         try {
-            // Coleta os dados do POST
             $email = $_POST['email'] ?? null;
             $senha = $_POST['senha'] ?? null;
 
-            // Valida se email e senha foram fornecidos
             if (!$email || !$senha) {
                 throw new Exception("Obrigatório inserir email e senha");
             }
 
-            // Busca o usuário com base no email e senha
             $usuario = Usuario::where([
                 ['email', '=', $email],
                 ['senha', '=', sha1(md5($senha))]
             ])->first();
 
-            // Verifica se o usuário foi encontrado
             if (!$usuario) {
                 throw new Exception("Credenciais incorretas");
             }
 
-            // Configura as variáveis de sessão
             $_SESSION['logado'] = true;
             $_SESSION['id_usuario'] = $usuario->id;
             $_SESSION['email'] = $usuario->email;
@@ -112,18 +107,13 @@ class LoginController extends Controller
             
             
             if ($cliente && $profissional) {
-                echo "Os dois estão puxando";
-                return redirect('/escolha_conta')->sucesso('Operação realizada com sucesso! Você tem contas de cliente e profissional.');
-            } elseif ($cliente) {
-                $_SESSION['tipo_usuario'] = 'cliente';
-                echo "Só cliente está puxando";
+                return require_once __DIR__ . '/../Views/escolha.php';
+            } else if ($cliente) {
                 return redirect('/cliente/home')->sucesso('Operação realizada com sucesso! Você entrou como cliente.');
-            } elseif ($profissional) {
-                echo "Só profissional está puxando";
-                // return redirect('/profissional/home')->sucesso('Operação realizada com sucesso! Você entrou como profissional.');
+            } else if ($profissional) {
+                return redirect('/profissional/home')->sucesso('Operação realizada com sucesso! Você entrou como profissional.');
             } else {
-                echo "Nenhum está puxando";
-                // return redirect('/home')->sucesso('Operação realizada com sucesso.');
+                return redirect('/home')->sucesso('Operação realizada com sucesso.');
             }
         } catch (Exception $e) {
             return redirect('/login')->erro($e->getMessage());

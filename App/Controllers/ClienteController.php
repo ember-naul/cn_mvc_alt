@@ -29,7 +29,7 @@ class ClienteController extends Controller
         try {
             // Cria o cliente
             $cliente = new Cliente();
-            $cliente->id_usuario = $usuario->id;
+            $cliente->id_usuario = user()->id_usuario;
             $cliente->save();
 
             $endereco_a = new Endereco();

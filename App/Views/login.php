@@ -72,3 +72,23 @@
     </div>
   </div>
   </form>
+
+  <div class="modal fade" id="modal_escolha_conta" tabindex="-1" role="dialog" aria-labelledby="modalEscolhaContaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEscolhaContaLabel">Escolha de Conta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Você tem contas de cliente e profissional. Por favor, escolha como deseja entrar:</p>
+                <div class="d-flex justify-content-around">
+                    <a href="/cliente/home" class="btn btn-primary">Entrar como Cliente</a>
+                    <a href="/profissional/home" class="btn btn-success">Entrar como Profissional</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

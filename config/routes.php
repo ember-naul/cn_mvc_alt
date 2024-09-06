@@ -15,7 +15,6 @@ return function(RouteCollector $r) {
     $r->addRoute('GET', '/home', [HomeController::class, 'index']);
 
     $r->addRoute('GET', '/login', [LoginController::class, 'index']);
-    $r->addRoute('GET', '/escolha_conta', [LoginController::class, 'escolha_conta']);
     $r->addRoute('POST', '/iniciarsessao', [LoginController::class, 'login']);
     $r->addRoute('GET', '/deslogar', [LoginController::class, 'deslogar']);
     $r->addRoute('GET', '/cadastro', [LoginController::class, 'cadastro']);

@@ -7,7 +7,15 @@
 //     ],
 // ];
 // BaseWidget::breadcumb('Home', $breadcumb);
+
+/** 
+  * @see App\Controllers\HomeController::index()
+  * @see App\Controllers\ClienteController::novoCliente()
+  * @see App\Controllers\ProfissionalController::novoProfissional()
+  */
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -143,7 +151,6 @@
         #sobrenos{
             width: 99.58vw;
             padding: 0;
-            height 
             min-height: 500px; 
         }
     </style>

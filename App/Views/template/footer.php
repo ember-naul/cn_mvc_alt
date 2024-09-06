@@ -1,4 +1,3 @@
-<?php require_once __DIR__ . '../../escolha_conta.php'; ?>
 <?php require_once __DIR__ . '../../cadastro_clientes.php'; ?>
 <?php require_once __DIR__ . '../../cadastro_profissionais.php'; ?>
 <?php if($_SESSION['logado'] == true): ?>
@@ -6,7 +5,7 @@
   <!-- Footer -->
   <footer class="main-footer">
         <div class="float-right d-none d-sm-inline">
-            Olá <?php echo $_SESSION['nome']; ?>.
+            Olá <?php echo $_SESSION['nome'] . " " . $_SESSION['id_usuario']; ?>.
         </div>
         <strong>&copy; 2024 <a href="/home">Casa & Negócios</a>.</strong> Todos os direitos reservados.
     </footer>
