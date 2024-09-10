@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `enderecos` (
   `bairro` 			varchar(70) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cidade` 			varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `numero` 			varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `latitude` 			varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `longitude` 			varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitude` 			decimal(10,8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitude` 			decimal(11,8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   KEY `id_cliente` (`id_cliente`),
   KEY `id_profissional` (`id_profissional`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

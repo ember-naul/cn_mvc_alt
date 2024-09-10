@@ -34,7 +34,7 @@ return function(RouteCollector $r) {
     
     $r->addRoute('GET', '/pareando', [HomeController::class, 'pareando']);
     
-    
+    $r->addRoute('GET', '/coord', [HomeController::class, 'pareando']);
   
 
 };
