@@ -17,6 +17,9 @@ $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
           <li class="nav-item">
             <a href="#" class="nav-link">Contato</a>
           </li>
+          <li class="nav-item">
+            <a href="/mapa" class="nav-link">Mapa</a>
+          </li>         
           <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'cliente'): ?>
             
           <li class="nav-item dropdown">

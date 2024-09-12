@@ -1,18 +1,17 @@
-
-
-
-<?php
-
+<?php 
+namespace App\Views;
 use App\Models\Endereco;
 
-$id_cliente = 3;
+$latitude = $_GET['latitude'] ?? 'não fornecida';
+$longitude = $_GET['longitude'] ?? 'não fornecida';
 
-$endereco = Endereco::where('id_cliente', $id_cliente)->first();
+$endereco = new Endereco();
 
-if ($endereco){
+$endereco->latitude = $latitude;
+$endereco->longitude = $longitude;
+$endereco->save();
 
-$coordenada = sprintf("%s, %s",$endereco->latitude, $endereco->longitude);
-}
+echo "A sua latitude é: $latitude, e a sua longitude é $longitude"; 
 ?>
 
 <head>
@@ -28,7 +27,7 @@ $coordenada = sprintf("%s, %s",$endereco->latitude, $endereco->longitude);
 
         gmp-map {
             height: 40rem;
-            width: 35%;
+            width: 100%;
             margin: auto;
             border: 2px solid #ddd;
             border-radius: 10px;
@@ -47,34 +46,32 @@ $coordenada = sprintf("%s, %s",$endereco->latitude, $endereco->longitude);
             width: 100%;
         }
     </style>
+	<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+	 
 </head>
 <body>
-<div class='container-mapa'>
-    <ul class="list-group">
-      <li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Morbi leo risus</li>
-      <li class="list-group-item">Porta ac consectetur ac</li>
-      <li class="list-group-item">Vestibulum at eros</li>
-    </ul>
-    <gmpx-api-loader key="AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4" solution-channel="GMP_GE_mapsandplacesautocomplete_v1"></gmpx-api-loader>
-    <gmp-map center="<?= $coordenada ?>" zoom="17" map-id="DEMO_MAP_ID">
+<gmpx-api-loader key="AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4" solution-channel="GMP_GE_mapsandplacesautocomplete_v1"></gmpx-api-loader>
+    <gmp-map center="37.4219983,-122.084" zoom="17" map-id="DEMO_MAP_ID" id="map">
         <div slot="control-block-start-inline-start" class="place-picker-container">
             <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
         </div>
         <gmp-advanced-marker></gmp-advanced-marker>
     </gmp-map>
-</div>
+<form action="/gravardados" method="post">
+    <input type="submit" value="teste">
+</form>
 
 <script>
+    let map, marker, placePicker;
+
     async function init() {
         await customElements.whenDefined('gmp-map');
         await customElements.whenDefined('gmpx-place-picker');
         await customElements.whenDefined('gmp-advanced-marker');
 
-        const map = document.querySelector('gmp-map');
-        const marker = document.querySelector('gmp-advanced-marker');
-        const placePicker = document.querySelector('gmpx-place-picker');
+        map = document.querySelector('gmp-map');
+        marker = document.querySelector('gmp-advanced-marker');
+        placePicker = document.querySelector('gmpx-place-picker');
 
         map.innerMap.setOptions({
             mapTypeControl: false
@@ -100,7 +97,6 @@ $coordenada = sprintf("%s, %s",$endereco->latitude, $endereco->longitude);
         });
 
         try {
-            // High accuracy geolocation
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     async (position) => {
@@ -125,6 +121,9 @@ $coordenada = sprintf("%s, %s",$endereco->latitude, $endereco->longitude);
         } catch (error) {
             console.error("Error: " + error.message);
         }
+
+        // Initialize Pusher
+        initializePusher();
     }
 
     async function verifyCoordinates(location) {
@@ -145,6 +144,40 @@ $coordenada = sprintf("%s, %s",$endereco->latitude, $endereco->longitude);
             throw new Error('Geocoding failed: ' + data.status);
         }
     }
+
+	function initializePusher() {
+		Pusher.logToConsole = true;
+
+		var pusher = new Pusher('029930d84c0bc83b9357', {
+			cluster: 'us2'
+		});
+
+		var channel = pusher.subscribe('my-channel');
+
+		channel.bind('my-event', function(data) {
+			try {
+				const { lat, lng } = data;
+				updateMap(lat, lng);
+			} catch (e) {
+				console.error("Failed to parse JSON:", e.message);
+			}
+		});
+	}
+
+    function updateMap(lat, lng) {
+	
+		const newLocation = { lat, lng };
+
+		if (typeof lat === 'number' && typeof lng === 'number') {
+			map.center = newLocation;
+
+			marker.position = newLocation;
+
+			map.zoom = 16;
+		} else {
+			console.error("Invalid coordinates provided for the map update.");
+		}
+	}
 
     document.addEventListener('DOMContentLoaded', init);
 </script>
