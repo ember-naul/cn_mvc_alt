@@ -1,6 +1,7 @@
 <?php
 
 ob_start();
+session_start();
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../database.php';
@@ -8,7 +9,7 @@ require_once __DIR__ . '/../config/functions.php';
 
 use App\Services\DefaultServices;
 
-session_start();
+
 
 $_SESSION['logado'] ??= false;
 
@@ -22,10 +23,10 @@ $uri = rawurldecode(parse_url($uri, PHP_URL_PATH));
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
-        echo '404 - Página não encontrada';
+        echo '404 - A Página que você tentou acessar não encontrada no nosso sistema';
         break;
     case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-        echo '405 - Método não permitido';
+        echo '405 - Método não permitido. Tente alternar entre GET e POST.';
         break;
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];

@@ -4,6 +4,8 @@ use App\Controllers\HomeController;
 use App\Controllers\LoginController;
 use App\Controllers\ContasController;
 use App\Controllers\SenhaController;
+use App\Controllers\ClienteController;
+use App\Controllers\ProfissionalController;
 
 
 use FastRoute\RouteCollector;
@@ -11,6 +13,9 @@ use FastRoute\RouteCollector;
 return function(RouteCollector $r) {
     $r->addRoute('GET', '/', [HomeController::class, 'index']);
     $r->addRoute('GET', '/home', [HomeController::class, 'index']);
+    $r->addRoute('GET', '/mapa', [HomeController::class, 'mapa']);
+    $r->addRoute('GET', '/gravardados', [HomeController::class, 'gravardados']);
+    $r->addRoute('GET', '/chat_teste', [HomeController::class, 'chat_teste']);
 
     $r->addRoute('GET', '/login', [LoginController::class, 'index']);
     $r->addRoute('POST', '/iniciarsessao', [LoginController::class, 'login']);
@@ -23,9 +28,13 @@ return function(RouteCollector $r) {
     $r->addRoute('POST', '/validar_codigo', [SenhaController::class, 'validar_codigo']);
     $r->addRoute('POST', '/enviar', [SenhaController::class, 'enviar']);
 
-    $r->addRoute('POST', '/novocliente', [ContasController::class, 'novoCliente']);
-    $r->addRoute('POST', '/novoprofissional', [ContasController::class, 'novoProfissional']);
+    $r->addRoute('POST', '/novocliente', [ClienteController::class, 'novoCliente']);
+    $r->addRoute('POST', '/novoprofissional', [ProfissionalController::class, 'novoProfissional']);
 
+    $r->addRoute('GET', '/cliente/home', [ClienteController::class, 'cliente_home']);
+    $r->addRoute('GET', '/cliente/avalie', [CLienteController::class, 'avaliacao']);
+    $r->addRoute('GET', '/profissional/home', [ProfissionalController::class, 'profissional_home']);
+    
     $r->addRoute('GET', '/pareando', [HomeController::class, 'pareando']);
     
     

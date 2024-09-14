@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <div class="modal fade" id="modal_cadastro_cliente" tabindex="-1" role="dialog"
   aria-labelledby="modalCadastroClienteLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
@@ -11,24 +10,22 @@
       </div>
       <div class="modal-body">
         <form action='/novocliente' id="form-cadastro-cliente" method='post'>
+          <input type="hidden" name='id_usuario' value=<?= $_SESSION['id_usuario']; ?>>
           <div class="form-group">
             <label for="usuarioId">Seu nome</label>
-            <input type="text" class="form-control" id="id_usuario" name="nome" disabled
+            <input type="text" class="form-control" id="nome" name="nome" disabled
               value='<?php echo ($_SESSION['nome']); ?>' required>
           </div>
-
           <div class="form-group">
             <label for="celular">Seu celular</label>
             <input type="text" class="form-control" id="celular" name="celular" disabled
               value='<?php echo ($_SESSION['celular']); ?>' required>
           </div>
-
           <div class="form-group">
             <label for="rg">Seu RG</label>
             <input type="text" class="form-control" id="rg" name="rg" disabled value='<?php echo ($_SESSION['rg']); ?>'
               required>
           </div>
-
           <div class="form-group">
             <label for="cep">Seu CEP</label>
             <input type="text" class="form-control" id="cep" name="cep" required>
@@ -62,7 +59,6 @@
     </div>
   </div>
 </div>
-<script src="assets/plugins/jquery/jquery.min.js"></script>
 
 <script>
   document.getElementById('cep').addEventListener('input', function () {
@@ -95,6 +91,4 @@
         });
     }
   });
-
-
 </script>

@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <div class="modal fade" id="modal_cadastro_profissional" tabindex="-1" role="dialog"
   aria-labelledby="modalCadastroProfissionalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
@@ -11,6 +11,7 @@
       </div>
       <div class="modal-body">
         <form action='/novoprofissional' id="form-cadastro-profissional" method='post'>
+        <input type="hidden" name='id_usuario' value=<?= $_SESSION['id_usuario']; ?>>
           <div class="form-group">
             <label for="usuarioId">Seu nome</label>
             <input type="text" class="form-control" id="id_usuario" name="nome" disabled
@@ -64,7 +65,6 @@
     </div>
   </div>
 </div>
-<script src="assets/plugins/jquery/jquery.min.js"></script>
 
 <script>
   document.getElementById('cep_p').addEventListener('input', function () {
@@ -97,6 +97,4 @@
         });
     }
   });
-
-
 </script>

@@ -1,17 +1,20 @@
 <?php
-
 // use App\Widgets\BaseWidget;
-
 // $breadcumb = [
 //     [
 //         'title' => 'Dashboard',
 //         'url'   => '/home',
 //     ],
 // ];
-
 // BaseWidget::breadcumb('Home', $breadcumb);
 
+/** 
+  * @see App\Controllers\HomeController::index()
+  * @see App\Controllers\ClienteController::novoCliente()
+  * @see App\Controllers\ProfissionalController::novoProfissional()
+  */
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -148,7 +151,6 @@
         #sobrenos{
             width: 99.58vw;
             padding: 0;
-            height 
             min-height: 500px; 
         }
     </style>
@@ -193,6 +195,17 @@
                 </div>
                 <div class="col-md-6 text-center">
                     <img src="assets/img/logo2.png" class="img-fluid" alt="Logo">
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="assets/img/contato.png" class="img-fluid" alt="Logo">
+                </div>
+                <div class="col-md-6 text-center text-md-left">
+                <h2 class="inter-h1 mt-5">Contato</h2>
+                    <p class="about-text mt-4">Celular  : (19) 99332-6023<br>
+                                               Email    : casanegocios@sac.com<br>
+                                               Instagram: @casanegocios<br>
+                                               Facebook  : casanegocios<br>
+                                               </p>
                 </div>
             </div>
         </section>

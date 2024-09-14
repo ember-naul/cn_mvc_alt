@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `enderecos` (
   `bairro` 			varchar(70) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cidade` 			varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `numero` 			varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `latitude` 			varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `longitude` 			varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitude` 			decimal(10,8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitude` 			decimal(11,8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   KEY `id_cliente` (`id_cliente`),
   KEY `id_profissional` (`id_profissional`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -127,8 +127,7 @@ INSERT INTO `categorias` (`id`, `nome`, `descrição`) VALUES
 (2, 'Limpeza', 'Serviços de limpeza residencial e comercial');
 
 INSERT INTO `clientes` (`id`, `id_usuario`) VALUES
-(1, 1),
-(2, 2);
+(1, 1);
 
 INSERT INTO `contratos` (`id`, `id_cliente`, `id_profissional`, `data_inicio`, `data_fim`, `valor`, `status_servico`) VALUES
 (1, 1, 1, '2024-07-01 00:00:00', '2024-12-31 00:00:00', '1200.00', 'ativo');
@@ -140,20 +139,14 @@ INSERT INTO `habilidades` (`id`, `nome`, `descricao`) VALUES
 INSERT INTO `pagamentos` (`id`, `id_contrato`, `data_pagamento`, `valor`, `status_pagamento`) VALUES
 (1, 1, '2024-07-01', '1200.00', 'pago');
 
-INSERT INTO `profissionais` (`id`, `id_usuario`, `cnpj`) VALUES
-(1, 3, '78823734523255');
-
 INSERT INTO `profissionais_categorias` (`id`, `id_profissional`, `id_categoria`) VALUES
-(1, 1, 1),
-(2, 1, 2);
+(1, 1, 1);
 
 INSERT INTO `profissionais_habilidades` (`id`, `id_profissional`, `id_habilidade`) VALUES
-(1, 1, 1),
-(2, 1, 2);
+(1, 1, 1);
 
 INSERT INTO `servicos` (`id`, `id_contrato`, `data_hora`, `status_servico`) VALUES
-(1, 1, '2024-07-05 09:00:00', 'solicitado'),
-(2, 1, '2024-07-10 09:00:00', 'em_andamento');
+(1, 1, '2024-07-05 09:00:00', 'solicitado');
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `celular`, `cpf`, `rg`, `senha`) VALUES
 (1, 'Luan', 'lluann930@gmail.com', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350');
