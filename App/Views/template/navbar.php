@@ -132,68 +132,6 @@ $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
   </div>
 </div>
 
-<!-- Bootstrap CSS & JS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Custom CSS -->
-<style>
-  .modal-header {
-    background-color: #f7f7f7;
-    border-bottom: none;
-  }
-
-  .modal-content {
-    border-radius: 15px; /* Borda arredondada */
-  }
-
-  .modal-body h5 {
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .modal-body p {
-    margin-bottom: 0.5rem;
-  }
-
-  .btn-outline-custom {
-    border-color: #007bff; /* Cor da borda dos botões */
-    color: #007bff;
-    border-radius: 8px; /* Borda arredondada dos botões */
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Alinhar ícone e texto à esquerda */
-  }
-
-  .btn-outline-custom img {
-    margin-right: 8px; /* Espaço entre o ícone e o texto */
-  }
-
-  /* Remover o efeito azul ao passar o mouse */
-  .btn-outline-custom:hover {
-    background-color: #f7f7f7; /* Cor ao passar o mouse sem o azul */
-    color: #007bff;
-    border-color: #6c757d;
-  }
-
-  /* Ajustes de responsividade */
-  @media (max-width: 768px) {
-    .modal-dialog {
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    .modal-body .col-6 {
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-  }
-</style>
-
-
-
-
 
 
   

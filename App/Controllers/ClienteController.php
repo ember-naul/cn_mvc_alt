@@ -17,10 +17,15 @@ class ClienteController extends Controller
         return require_once __DIR__ . '/../Views/cliente/index.php';
 
     }
+    public function avaliacao()
+    {
+        return require_once __DIR__ . '/../Views/cliente/avaliacao_cliente.php';
+
+    }
 
     private function geocodeAddress($address)
     {
-        $apiKey = 'AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4'; // Substitua pela sua chave da API
+        $apiKey = 'AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4';
     
         $url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($address) . "&key=" . $apiKey;
         $response = file_get_contents($url);
@@ -41,14 +46,13 @@ class ClienteController extends Controller
 
     public function novoCliente()
     {
-        $cep = $_POST['cep'] ?? null;
-        $endereco = $_POST['endereco'] ?? null;
-        $bairro = $_POST['bairro'] ?? null;
-        $cidade = $_POST['cidade'] ?? null;
-        $numero = $_POST['numero'] ?? null;
+        $cep        = $_POST['cep'] ?? null;
+        $endereco   = $_POST['endereco'] ?? null;
+        $bairro     = $_POST['bairro'] ?? null;
+        $cidade     = $_POST['cidade'] ?? null;
+        $numero     = $_POST['numero'] ?? null;
 
         try {
-            // Cria o cliente
             $cliente = new Cliente();
             $cliente->id_usuario = user()->id_usuario;
             $cliente->save();

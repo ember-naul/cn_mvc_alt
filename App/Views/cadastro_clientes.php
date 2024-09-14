@@ -59,7 +59,6 @@
     </div>
   </div>
 </div>
-<script src="assets/plugins/jquery/jquery.min.js"></script>
 
 <script>
   document.getElementById('cep').addEventListener('input', function () {
@@ -92,6 +91,4 @@
         });
     }
   });
-
-
 </script>

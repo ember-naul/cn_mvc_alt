@@ -10,8 +10,6 @@ $endereco = new Endereco();
 $endereco->latitude = $latitude;
 $endereco->longitude = $longitude;
 $endereco->save();
-
-echo "A sua latitude é: $latitude, e a sua longitude é $longitude"; 
 ?>
 
 <head>
@@ -57,10 +55,6 @@ echo "A sua latitude é: $latitude, e a sua longitude é $longitude";
         </div>
         <gmp-advanced-marker></gmp-advanced-marker>
     </gmp-map>
-<form action="/gravardados" method="post">
-    <input type="submit" value="teste">
-</form>
-
 <script>
     let map, marker, placePicker;
 
@@ -102,7 +96,7 @@ echo "A sua latitude é: $latitude, e a sua longitude é $longitude";
                     async (position) => {
                         const latitude = position.coords.latitude;
                         const longitude = position.coords.longitude;
-
+                            
                         const userLocation = { lat: latitude, lng: longitude };
                         const correctedLocation = await verifyCoordinates(userLocation);
 
@@ -122,7 +116,6 @@ echo "A sua latitude é: $latitude, e a sua longitude é $longitude";
             console.error("Error: " + error.message);
         }
 
-        // Initialize Pusher
         initializePusher();
     }
 
@@ -148,9 +141,9 @@ echo "A sua latitude é: $latitude, e a sua longitude é $longitude";
 	function initializePusher() {
 		Pusher.logToConsole = true;
 
-		var pusher = new Pusher('029930d84c0bc83b9357', {
-			cluster: 'us2'
-		});
+		var pusher = new Pusher('8702b12d1675f14472ac', {
+            cluster: 'sa1'
+        });
 
 		var channel = pusher.subscribe('my-channel');
 
