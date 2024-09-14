@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `profissionais_habilidades` (
   `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_profissional` 	int NOT NULL,
   `id_habilidade` 		int NOT NULL,
+  `data_cadastro` 		date NOT NULL,
   KEY `id_profissional` (`id_profissional`),
   KEY `id_habilidade` (`id_habilidade`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -134,25 +135,20 @@ INSERT INTO `contratos` (`id`, `id_cliente`, `id_profissional`, `data_inicio`, `
 
 INSERT INTO `habilidades` (`id`, `nome`, `descricao`) VALUES
 (1, 'Jardinagem', 'Cuidados e manutenção de jardins'),
-(2, 'Limpeza', 'Serviços de limpeza residencial e comercial');
+(2, 'Limpeza', 'Serviços de limpeza residencial e comercial'),
+(3, 'Cozinheira(o)', 'Serviços de cozinha residencial e comercial');
 
 INSERT INTO `pagamentos` (`id`, `id_contrato`, `data_pagamento`, `valor`, `status_pagamento`) VALUES
 (1, 1, '2024-07-01', '1200.00', 'pago');
 
-INSERT INTO `profissionais` (`id`, `id_usuario`, `cnpj`) VALUES
-(1, 3, '78823734523255');
-
 INSERT INTO `profissionais_categorias` (`id`, `id_profissional`, `id_categoria`) VALUES
-(1, 1, 1),
-(2, 1, 2);
+(1, 1, 1);
 
 INSERT INTO `profissionais_habilidades` (`id`, `id_profissional`, `id_habilidade`) VALUES
-(1, 1, 1),
-(2, 1, 2);
+(1, 1, 1);
 
 INSERT INTO `servicos` (`id`, `id_contrato`, `data_hora`, `status_servico`) VALUES
-(1, 1, '2024-07-05 09:00:00', 'solicitado'),
-(2, 1, '2024-07-10 09:00:00', 'em_andamento');
+(1, 1, '2024-07-05 09:00:00', 'solicitado');
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `celular`, `cpf`, `rg`, `senha`) VALUES
 (1, 'Luan', 'lluann930@gmail.com', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350');

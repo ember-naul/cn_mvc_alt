@@ -14,4 +14,8 @@ class Endereco extends Model
     {
         return $this->belongsTo(Cliente::class, 'id_cliente', 'id');
     }
+    public function profissional()
+    {
+        return $this->belongsTo(Profissional::class, 'id_profissional', 'id');
+    }
 }

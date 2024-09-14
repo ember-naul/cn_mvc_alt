@@ -25,15 +25,11 @@
         const form = document.getElementById('chat-form');
         const messageInput = document.getElementById('message');
 
-        // Nome de usuário definido na sessão PHP
         const username = <?php echo json_encode($username); ?>;
 
-        // Receber mensagens do servidor
         conn.onmessage = function(e) {
-            let message = JSON.parse(e.data); // Parse JSON para obter a mensagem e o remetente
+            let message = JSON.parse(e.data);
             let messageElement = document.createElement('div');
-
-            // Adicionar classe com base no remetente
             if (message.user === username) {
                 messageElement.classList.add('message-self');
                 messageElement.textContent = `Você: ${message.text}`;
@@ -43,17 +39,15 @@
             }
             
             chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight; // Scroll automático
+            chatBox.scrollTop = chatBox.scrollHeight;
         };
 
-        // Enviar mensagens para o servidor
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             let message = messageInput.value;
             let outgoingMessage = JSON.stringify({ user: username, text: message });
             conn.send(outgoingMessage);
             
-            // Exibir a mensagem localmente
             let messageElement = document.createElement('div');
             messageElement.classList.add('message-self');
             messageElement.textContent = `Você: ${message}`;

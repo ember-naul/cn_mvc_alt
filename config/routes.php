@@ -34,6 +34,7 @@ return function(RouteCollector $r) {
     $r->addRoute('GET', '/cliente/home', [ClienteController::class, 'cliente_home']);
     $r->addRoute('GET', '/cliente/avalie', [CLienteController::class, 'avaliacao']);
     $r->addRoute('GET', '/profissional/home', [ProfissionalController::class, 'profissional_home']);
+    $r->addRoute('GET', '/profissional/habilidades', [ProfissionalController::class, 'habilidades']);
     
     $r->addRoute('GET', '/pareando', [HomeController::class, 'pareando']);
     

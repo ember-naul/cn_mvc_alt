@@ -10,8 +10,8 @@ $endereco = new Endereco();
 $endereco->latitude = $latitude;
 $endereco->longitude = $longitude;
 $endereco->save();
-?>
 
+?>
 <head>
     <meta charset="utf-8">
     <title>Google Maps Example</title>
@@ -21,40 +21,162 @@ $endereco->save();
             height: 100%;
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+           
+        }
+
+        .container-mapa {
+            display: flex;
+            height: 100%;
+            width: 80%;
+            margin: auto;
+            
         }
 
         gmp-map {
-            height: 40rem;
+            flex: 1;
+            height: 45rem;
             width: 100%;
             margin: auto;
             border: 2px solid #ddd;
             border-radius: 10px;
         }
-
-        .place-picker-container {
-            padding: 20px;
+        
+        .prestadores-container {
+            width: 35%;
+            background-color: #f9f9f9;
+            padding: 10px;
+            overflow-y: auto; 
+            border-right: 1px solid #ddd;
+            height: 100%; 
+            max-height: 45rem; 
         }
 
-        gmp-advanced-marker {
-            border-radius: 50%;
-        }
 
-        .container-mapa {
+        .prestador {
             display: flex;
-            width: 100%;
+            flex-direction: column;
+            background-color: white;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .prestador:hover {
+            transform: scale(1.02);
+        }
+
+        .prestador img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .prestador h3, .prestador p {
+            margin: 0;
+        }
+
+        .prestador .distancia {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+            @media (max-width: 768px) {
+
+            gmp-map{
+                flex: 1;
+                height: 29rem;
+                width: 100%;
+                margin: auto;
+                border: 2px solid #ddd;
+                border-radius: 10px;
+            }
+            .container-mapa {
+                display: flex;
+                height: 100%;
+                width: 100%;
+                margin: auto;
+            }
+            h3 {
+                font-size: 1.4rem;
+                margin: auto;
+            }
+            .prestadores-container {
+                width: 100%;
+                height: auto;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: rgba(255, 255, 255, 0.9);
+                border-radius: 20px 20px 0 0;
+                padding-bottom: 20px;
+                max-height: 40%;
+                z-index: 999;
+            }
+            .prestador {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .prestador img {
+                margin-right: 10px;
+            }
         }
     </style>
-	<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-	 
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 </head>
+
 <body>
-<gmpx-api-loader key="AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4" solution-channel="GMP_GE_mapsandplacesautocomplete_v1"></gmpx-api-loader>
-    <gmp-map center="37.4219983,-122.084" zoom="17" map-id="DEMO_MAP_ID" id="map">
-        <div slot="control-block-start-inline-start" class="place-picker-container">
-            <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
+    <div class="container-mapa">
+        <div class="prestadores-container">
+            <div class="prestador" onclick="handlePrestadorClick(1)">
+                <img src="/assets/img/florista.webp" alt="Maria Souza">
+                <h3>Maria Souza</h3>
+                <p>47 anos - Florista</p>
+                <span class="distancia">5.2 km</span>
+            </div>
+            <div class="prestador" onclick="handlePrestadorClick(2)">
+                <img src="/assets/img/eletricista.jpg" alt="Bruno Souza">
+                <h3>Bruno Souza</h3>
+                <p>32 anos - Eletricista</p>
+                <span class="distancia">3.4 km</span>
+            </div>
+            <div class="prestador" onclick="handlePrestadorClick(3)">
+                <img src="/assets/img/cozinheiro.jpg" alt="Kevin Matos">
+                <h3>Kevin Matos</h3>
+                <p>53 anos - Cozinheiro</p>
+                <span class="distancia">8.2 km</span>
+            </div>
+            <div class="prestador" onclick="handlePrestadorClick(4)">
+                <img src="/assets/img/jardineiro.jpg" alt="Wesley Silva">
+                <h3>Wesley Silva</h3>
+                <p>27 anos - Jardineiro</p>
+                <span class="distancia">5.2 km</span>
+            </div>
+            <div class="prestador" onclick="handlePrestadorClick(5)">
+                <img src="/assets/img/eletricista.jpg" alt="KOKIMOTO">
+                <h3>Kokimoto SILVA</h3>
+                <p>50 anos - Japones</p>
+                <span class="distancia">5.2 km</span>
+            </div>
         </div>
-        <gmp-advanced-marker></gmp-advanced-marker>
-    </gmp-map>
+
+        <gmpx-api-loader key="AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4" solution-channel="GMP_GE_mapsandplacesautocomplete_v1"></gmpx-api-loader>
+        <gmp-map center="37.4219983,-122.084" zoom="17" map-id="DEMO_MAP_ID" id="map">
+            <div slot="control-block-start-inline-start" class="place-picker-container">
+                <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
+            </div>
+            <gmp-advanced-marker></gmp-advanced-marker>
+        </gmp-map>
+    </div>
 <script>
     let map, marker, placePicker;
 
@@ -116,6 +238,7 @@ $endereco->save();
             console.error("Error: " + error.message);
         }
 
+        // Initialize Pusher
         initializePusher();
     }
 
