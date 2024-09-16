@@ -58,20 +58,19 @@ class ClienteController extends Controller
             $cliente->save();
             
             $endereco_completo = sprintf('%s, %s, %s, %s', $endereco, $bairro, $cidade, $numero);
+            $coordenadas_c = $this->geocodeAddress($endereco_completo);
 
-            $coordenadas = $this->geocodeAddress($endereco_completo);
-
-            $endereco_a = new Endereco();
-            $endereco_a->id_cliente = $cliente->id;
-            $endereco_a->id_profissional = null;
-            $endereco_a->cep = $cep;
-            $endereco_a->bairro = $bairro;
-            $endereco_a->cidade = $cidade;
-            $endereco_a->endereco = $endereco;
-            $endereco_a->numero = $numero;
-            $endereco_a->latitude = $coordenadas['latitude'];
-            $endereco_a->longitude = $coordenadas['longitude'];
-            $endereco_a->save();
+            $endereco_c = new Endereco();
+            $endereco_c->id_cliente = $cliente->id;
+            $endereco_c->id_profissional = null;
+            $endereco_c->cep = $cep;
+            $endereco_c->bairro = $bairro;
+            $endereco_c->cidade = $cidade;
+            $endereco_c->endereco = $endereco;
+            $endereco_c->numero = $numero;
+            $endereco_c->latitude = $coordenadas_c['latitude'];
+            $endereco_c->longitude = $coordenadas_c['longitude'];
+            $endereco_c->save();
             $_SESSION['tipo_usuario'] = 'cliente';
             return redirect('/home')->sucesso('Operação realizada com sucesso');
         } catch (Exception $e) {

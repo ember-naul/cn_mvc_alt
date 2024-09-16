@@ -3,16 +3,17 @@ use App\Widgets\BaseWidget;
 $breadcumb = [
     [
         'title' => 'Cliente',
-        'url'   => '/cliente/home',
+        'url' => '/cliente/home',
     ],
 ];
 BaseWidget::breadcumb('Cliente', $breadcumb);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <style>
-        .content-wrapper{
+        .content-wrapper {
             padding: 0;
         }
     </style>
@@ -68,13 +69,13 @@ BaseWidget::breadcumb('Cliente', $breadcumb);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%; 
+            height: 100%;
         }
 
         .btn-dark {
-            width: 100%; 
-            max-width: 300px; 
-            margin-top: 1rem; 
+            width: 100%;
+            max-width: 300px;
+            margin-top: 1rem;
         }
 
         @media (min-width: 768px) {
@@ -101,7 +102,7 @@ BaseWidget::breadcumb('Cliente', $breadcumb);
             }
 
             .teste-2 {
-                min-height: 300px; 
+                min-height: 300px;
                 padding: 3rem;
             }
         }
@@ -116,17 +117,17 @@ BaseWidget::breadcumb('Cliente', $breadcumb);
             }
 
             .teste-2 {
-                max-width: 90%; 
+                max-width: 90%;
                 margin: 1rem auto;
             }
         }
 
         #servicos {
             width: 99.58vw;
-            margin-left: calc(-50vw + 50%); 
-            margin-right: calc(-50vw + 50%); 
-            padding: 0; 
-            min-height: 500px; 
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            padding: 0;
+            min-height: 500px;
         }
 
         #servicos .container {
@@ -138,16 +139,17 @@ BaseWidget::breadcumb('Cliente', $breadcumb);
             margin: 0;
         }
 
-        #sobrenos{
+        #sobrenos {
             width: 99.58vw;
             padding: 0;
-            height 
-            min-height: 500px; 
+            height min-height: 500px;
         }
     </style>
 </head>
+
 <body>
     <div class="wrapper mt-5">
     </div>
 </body>
+
 </html>

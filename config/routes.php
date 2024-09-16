@@ -19,6 +19,7 @@ return function(RouteCollector $r) {
 
     $r->addRoute('GET', '/login', [LoginController::class, 'index']);
     $r->addRoute('POST', '/iniciarsessao', [LoginController::class, 'login']);
+    $r->addRoute('POST', '/redirect', [LoginController::class, 'redirect_login']);
     $r->addRoute('GET', '/deslogar', [LoginController::class, 'deslogar']);
     $r->addRoute('GET', '/cadastro', [LoginController::class, 'cadastro']);
     $r->addRoute('POST', '/novousuario', [LoginController::class, 'novoUsuario']);
@@ -35,7 +36,8 @@ return function(RouteCollector $r) {
     $r->addRoute('GET', '/cliente/avalie', [CLienteController::class, 'avaliacao']);
     $r->addRoute('GET', '/profissional/home', [ProfissionalController::class, 'profissional_home']);
     $r->addRoute('GET', '/profissional/habilidades', [ProfissionalController::class, 'habilidades']);
-    
+    $r->addRoute('POST', '/profissional/habilidades/inserir', [ProfissionalController::class, 'habilidades_inserir']);
+
     $r->addRoute('GET', '/pareando', [HomeController::class, 'pareando']);
     
     

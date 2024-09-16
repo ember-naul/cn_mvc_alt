@@ -9,7 +9,7 @@ $habilidades = Habilidade::all();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Example</title>
+    <title>Mamando galos negros</title>
     <link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <style>
         .main-card {
@@ -41,19 +41,18 @@ $habilidades = Habilidade::all();
     </style>
 </head>
 <body>
-    <div class="main-card mb-3 card">
+    <div class="main-card card w-25 p-1 h-100">
         <div class="card-body">
-            <form>
+            <form action="/profissional/habilidades/inserir" method="post">
                 <div class="row">
                     <div class="col-md-6">
-                        <select id="dynamic-select" class="form-control js-example-tags" multiple="multiple">
+                        <select id="dynamic-select" class="form-control js-example-tags" name="habilidades[]" multiple="multiple">
                             <?php foreach ($habilidades as $habilidade): ?>
-                                <option value="<?= htmlspecialchars($habilidade['id']) ?>">
-                                    <?= htmlspecialchars($habilidade['nome']) ?>
-                                </option>
+                            <option value="<?= htmlspecialchars($habilidade['id']) ?>">
+                            <?= htmlspecialchars($habilidade['nome']) ?>
+                            </option>
                             <?php endforeach; ?>
                         </select>
-                        
                         <button class="mt-2 btn btn-primary" type="submit">Cadastrar</button>
                     </div>
                 </div>
@@ -68,7 +67,7 @@ $habilidades = Habilidade::all();
             // Initialize Select2
             $(".js-example-tags").select2({
                 tags: true,
-                placeholder: "Selecione suas habilidades", // Placeholder text
+                placeholder: "Selecione suas habilidades",
                 allowClear: true
             });
         });

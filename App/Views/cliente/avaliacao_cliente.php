@@ -2,107 +2,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Avaliação por Estrelas</title>
-    <link rel="stylesheet" href="styles.css">
-  <style>
-      body {
-          font-family: Arial, sans-serif;
-          align-items: center; 
-          height: 100vh;
-          margin: 0; 
-          background-color: #f4f4f4;
-      }
-      .rating-container {
-          text-align: center;
-          max-width: 100%;
-          padding: 20px;
-          box-sizing: border-box;
-      }
+    <div class="container d-flex justify-content-center mt-5">
+    <style>
+        body{
 
-        .stars {
-            font-size: 2em; 
-            color: #ccc;
+            background-color: #f7f6f6;
+            }
+
+            .card{
+
+            width: 350px;
+            border: none;
+            box-shadow: 5px 6px 6px 2px #e9ecef;
+            border-radius: 12px;
+            }
+
+            .circle-image img{
+
+            border: 6px solid #fff;
+            border-radius: 100%;
+            padding: 0px;
+            top: -28px;
+            position: relative;
+            width: 70px;
+            height: 70px;
+            border-radius: 100%;
+            z-index: 1;
+            background: #e7d184;
             cursor: pointer;
-            display: inline-flex;
-        }
 
-        .stars .star {
+            }
+
+
+            .dot {
+            height: 18px;
+            width: 18px;
+            background-color: blue;
+            border-radius: 50%;
             display: inline-block;
-            padding: 0 5px;
-            transition: color 0.2s;
-        }
-
-        .stars .star.selected,
-        .stars .star:hover,
-        .stars .star:hover ~ .star {
-            color: #ffcc00;
-        }
-
-        .rating-result {
-            margin-top: 20px;
-        }
-
-        /* Media queries para dispositivos móveis */
-        @media (max-width: 600px) {
-            .stars {
-                font-size: 1.5em; /* Reduz o tamanho das estrelas em telas menores */
+            position: relative;
+            border: 3px solid #fff;
+            top: -48px;
+            left: 186px;
+            z-index: 1000;
             }
-        }
 
-        /* Media queries para tablets e telas maiores */
-        @media (min-width: 601px) and (max-width: 1200px) {
-            .stars {
-                font-size: 1.8em; /* Ajusta o tamanho das estrelas para tablets */
+            .name{
+            margin-top: -21px;
+            font-size: 18px;
             }
-        }
-  </style>
-  </head>
 
 
-    <div class="rating-container">
-        <h3>Avalie o profissional que te atendeu!</h3>
-        <div class="stars" id="rating-stars">
-            <span data-value="1" class="star">☆</span>
-            <span data-value="2" class="star">☆</span>
-            <span data-value="3" class="star">☆</span>
-            <span data-value="4" class="star">☆</span>
-            <span data-value="5" class="star">☆</span>
-        </div>
-        <input type="hidden" id="rating-value" name="rating" value="0">
-        <div class="rating-result">
-            <p>Sua avaliação: <span id="rating-display">Nenhuma avaliação</span></p>
-        </div>
-        <input type="text" name="descricao">
+            .fw-500{
+            font-weight: 500 !important;
+            }
+
+
+            .start{
+
+            color: green;
+            }
+
+            .stop{
+            color: red;
+            }
+
+
+            .rate{
+
+            border-bottom-right-radius: 12px;
+            border-bottom-left-radius: 12px;
+
+            }
+
+
+
+            .rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center
+            }
+
+            .rating>input {
+            display: none
+            }
+
+            .rating>label {
+            position: relative;
+            width: 1em;
+            font-size: 30px;
+            font-weight: 300;
+            color: #FFD600;
+            cursor: pointer
+            }
+
+            .rating>label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0
+            }
+
+            .rating>label:hover:before,
+            .rating>label:hover~label:before {
+            opacity: 1 !important
+            }
+
+            .rating>input:checked~label:before {
+            opacity: 1
+            }
+
+            .rating:hover>input:checked~label:before {
+            opacity: 0.4
+            }
+
+
+            .buttons{
+            top: 36px;
+            position: relative;
+            }
+
+
+            .rating-submit{
+            border-radius: 15px;
+            color: #fff;
+                height: 49px;
+            }
+
+
+            .rating-submit:hover{
+
+            color: #fff;
+            }
+    </style>
+</head>
+
+<div class="card text-center mb-5">
+    <div class="circle-image">
+        <img src="https://i.imgur.com/hczKIze.jpg" width="50">
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        var $stars = $('#rating-stars .star');
-        var $ratingValue = $('#rating-value');
-        var $ratingDisplay = $('#rating-display');
-        
-        $stars.on('mouseover', function() {
-            var value = $(this).data('value');
-            $stars.each(function() {
-                $(this).toggleClass('selected', $(this).data('value') <= value);
-            });
-        });
-
-        $stars.on('mouseout', function() {
-            var value = $ratingValue.val();
-            $stars.each(function() {
-                $(this).toggleClass('selected', $(this).data('value') <= value);
-            });
-        });
-
-        $stars.on('click', function() {
-            var value = $(this).data('value');
-            $ratingValue.val(value);
-            $stars.each(function() {
-                $(this).toggleClass('selected', $(this).data('value') <= value);
-            });
-            $ratingDisplay.text(value ? value + ' estrela(s)' : 'Nenhuma avaliação');
-        });
-    });
-
-    </script>
-
+    <span class="dot"></span>
+    <span class="name mb-1 fw-500"> Teste </span>
+    <div class="location mt-4">
+        <span class="d-block"><i class="fa fa-map-marker start"></i> <small class="text-truncate ml-2">Ganesha Road, preet vihar new delhi</small> </span>
+        <span><i class="fa fa-map-marker stop mt-2"></i> <small class="text-truncate ml-2">Mandir Road, Mayur vihar, new delhi</small> </span>
+    </div>
+    <div class="rate bg-success py-3 text-white mt-3">
+        <h6 class="mb-0">Avalie o seu profissional</h6>
+        <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+        </div>
+        <div class="buttons px-4 mt-0">
+        <button class="btn btn-warning btn-block rating-submit">Submit</button>
+    </div> 
+    </div>
+</div>
+</div>

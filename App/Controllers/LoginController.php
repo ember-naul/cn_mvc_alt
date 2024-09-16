@@ -51,7 +51,7 @@ class LoginController extends Controller
             ['rg', '=', $rg]
         ])->first();
 
-        if ($usuario){
+        if ($usuario) {
             throw new Exception("Email já cadastrado");
         }
 
@@ -104,8 +104,21 @@ class LoginController extends Controller
 
             $cliente = Cliente::where('id_usuario', $usuario->id)->first();
             $profissional = Profissional::where('id_usuario', $usuario->id)->first();
-            
-            
+
+            if (!isset($_SESSION['tipo_usuario'])) {
+                if ($cliente) {
+                    $_SESSION['tipo_usuario'] = 'cliente';
+                }
+                if ($profissional) {
+                    $_SESSION['tipo_usuario'] = 'profissional';
+                }
+                if ($profissional && $cliente) {
+                    $_SESSION['tipo_usuario'] = '';
+                } else {
+                    $_SESSION['tipo_usuario'] = null;
+                }
+            }
+
             if ($cliente && $profissional) {
                 return require_once __DIR__ . '/../Views/escolha.php';
             } else if ($cliente) {
@@ -117,6 +130,21 @@ class LoginController extends Controller
             }
         } catch (Exception $e) {
             return redirect('/login')->erro($e->getMessage());
+        }
+    }
+
+    public function redirect_login(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['area']) && $_POST['area'] === 'cliente') {
+                $_SESSION['tipo_usuario'] = 'cliente';
+                header('Location: /cliente/home');
+                exit();
+            }
+            if (isset($_POST['area']) && $_POST['area'] === 'profissional') {
+                $_SESSION['tipo_usuario'] = 'profissional';
+                header('Location: /profissional/home');
+                exit();
+            }
         }
     }
     public function deslogar()

@@ -12,7 +12,7 @@
 </div>
 <?php endif; ?>
 </body>
-<script src="/assets/plugins/jquery/jquery.js"></>
+<script src="/assets/plugins/jquery/jquery.js"></script>
 <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.js"></script>
 <script src="/assets/js/adminlte.js?v=3.2.0"></script>
 <script src="/assets/plugins/sweetalert2/sweetalert2.js"></script>
