@@ -12,65 +12,95 @@ $habilidades = Habilidade::all();
     <title>Mamando galos negros</title>
     <link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <style>
-        .main-card {
-            width: 80%;
-            margin: auto;
-        }
-        
-        .form-control {
-            width: 100%; 
-            padding: 0.375rem 0.75rem; 
-            border-radius: 0.25rem; 
-            border: 1px solid #ced4da; 
-        }
+    .btn-submit {
+        display: block;
+        width: 100%;
+        margin-top: 1rem;
+    }
 
-        /* Custom styles for Select2 */
-        .select2-container {
-            width: 100% !important; 
-        }
-        
-        .select2-container--default .select2-selection--single {
-            height: calc(2.25rem + 2px);
-            line-height: 1.5;
-        }
-        
-        .select2-container--default .select2-selection--single .select2-selection__rendered {
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-        }
-    </style>
-</head>
+    /* Centraliza a imagem na coluna direita */
+    .img-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Centraliza o texto no topo */
+    .text-center-top {
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+</style>
+
 <body>
-    <div class="main-card card w-25 p-1 h-100">
-        <div class="card-body">
-            <form action="/profissional/habilidades/inserir" method="post">
-                <div class="row">
-                    <div class="col-md-6">
-                        <select id="dynamic-select" class="form-control js-example-tags" name="habilidades[]" multiple="multiple">
-                            <?php foreach ($habilidades as $habilidade): ?>
+    <div class="container-fluid d-flex justify-content-center align-items-center mt-5">
+        <div class="row w-75">
+
+            <!-- Coluna da esquerda (Texto + Formulário) -->
+            <div class="col-md-6">
+    <!-- Texto no topo -->
+    <div class="text-center-top mb-3">
+        <h1>Mostre o que você pode fazer!</h1>
+    </div>
+
+    <!-- Formulário dentro de um card -->
+    <div class="card h-75">
+        <div class="card-body d-flex flex-column">
+        <p>Habilidades:</p>
+            <form action="/profissional/habilidades/inserir" method="post" class="d-flex flex-column">
+                <div class="form-group">
+                    <select id="dynamic-select" class="form-control js-example-tags" name="habilidades[]" multiple="multiple">
+                        <?php foreach ($habilidades as $habilidade): ?>
                             <option value="<?= htmlspecialchars($habilidade['id']) ?>">
-                            <?= htmlspecialchars($habilidade['nome']) ?>
+                                <?= htmlspecialchars($habilidade['nome']) ?>
                             </option>
-                            <?php endforeach; ?>
-                        </select>
-                        <button class="mt-2 btn btn-primary" type="submit">Cadastrar</button>
-                    </div>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
+
+                <!-- Botão no extremo inferior do card -->
+                <button class="btn btn-primary btn-submit" type="submit">Prosseguir</button>
             </form>
         </div>
     </div>
+</div>
+            <!-- Coluna da direita (Imagem) -->
+                <div class="col-md-6">
+                <div class="img-container">
+                    <img src="../assets/img/habilidades.png" class="img-fluid" alt="Habilidades">
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="/assets/plugins/jquery/jquery.min.js"></script>
-    <script src="/assets/plugins/select2/js/select2.full.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Initialize Select2
-            $(".js-example-tags").select2({
-                tags: true,
-                placeholder: "Selecione suas habilidades",
-                allowClear: true
-            });
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/assets/plugins/select2/js/select2.full.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".js-example-tags").select2({
+            tags: true,
+            placeholder: "Selecione suas habilidades",
+            allowClear: true
         });
-    </script>
+
+        $('#dynamic-select').on('change', function() {
+            var selectedOptions = $(this).find('option:selected').map(function() {
+                return $(this).text();
+            }).get().join(', ');
+
+            $('.selected-skills').html('<p><strong>Habilidades Selecionadas:</strong> ' + selectedOptions + '</p>');
+        });
+    });
+</script>
 </body>
 </html>
