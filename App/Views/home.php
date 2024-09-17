@@ -156,6 +156,7 @@
     </style>
 </head>
 <body>
+    <?= $_SESSION['cliente'] . " < Cliente  Profissional > " . $_SESSION['profissional'] ?>
     <div class="wrapper mt-5">
         <div class="text-center mb-0">
             <h1 class="titleh1 inter-h1 m-1">

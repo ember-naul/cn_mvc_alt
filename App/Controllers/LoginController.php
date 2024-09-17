@@ -105,17 +105,21 @@ class LoginController extends Controller
             $cliente = Cliente::where('id_usuario', $usuario->id)->first();
             $profissional = Profissional::where('id_usuario', $usuario->id)->first();
 
-            if (!isset($_SESSION['tipo_usuario'])) {
+            if (!isset($_SESSION['cliente']) && !isset($_SESSION['profissional'])) {
                 if ($cliente) {
-                    $_SESSION['tipo_usuario'] = 'cliente';
+                    $_SESSION['cliente'] = true;
+                    $_SESSION['profissional'] = false;
                 }
                 if ($profissional) {
-                    $_SESSION['tipo_usuario'] = 'profissional';
+                    $_SESSION['cliente'] = false;
+                    $_SESSION['profissional'] = true;
                 }
                 if ($profissional && $cliente) {
-                    $_SESSION['tipo_usuario'] = '';
+                    $_SESSION['cliente'] = true;
+                    $_SESSION['profissional'] = true;
                 } else {
-                    $_SESSION['tipo_usuario'] = null;
+                    $_SESSION['cliente'] = false;
+                    $_SESSION['profissional'] = false;
                 }
             }
 
@@ -136,12 +140,14 @@ class LoginController extends Controller
     public function redirect_login(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['area']) && $_POST['area'] === 'cliente') {
-                $_SESSION['tipo_usuario'] = 'cliente';
+                $_SESSION['cliente'] = true;
+                $_SESSION['profissional'] = false;
                 header('Location: /cliente/home');
                 exit();
             }
             if (isset($_POST['area']) && $_POST['area'] === 'profissional') {
-                $_SESSION['tipo_usuario'] = 'profissional';
+                $_SESSION['cliente'] = false;
+                $_SESSION['profissional'] = true;
                 header('Location: /profissional/home');
                 exit();
             }

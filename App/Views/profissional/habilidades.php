@@ -9,7 +9,7 @@ $habilidades = Habilidade::all();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mamando galos negros</title>
+    <title>Habilidades</title>
     <link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <style>
     .btn-submit {
@@ -44,7 +44,6 @@ $habilidades = Habilidade::all();
     <div class="container-fluid d-flex justify-content-center align-items-center mt-5">
         <div class="row w-75">
 
-            <!-- Coluna da esquerda (Texto + Formulário) -->
             <div class="col-md-6">
     <!-- Texto no topo -->
     <div class="text-center-top mb-3">
@@ -66,7 +65,6 @@ $habilidades = Habilidade::all();
                     </select>
                 </div>
 
-                <!-- Botão no extremo inferior do card -->
                 <button class="btn btn-primary btn-submit" type="submit">Prosseguir</button>
             </form>
         </div>

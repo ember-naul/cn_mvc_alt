@@ -127,9 +127,6 @@ INSERT INTO `categorias` (`id`, `nome`, `descrição`) VALUES
 (1, 'Jardinagem', 'Serviços relacionados ao cuidado e manutenção de jardins'),
 (2, 'Limpeza', 'Serviços de limpeza residencial e comercial');
 
-INSERT INTO `clientes` (`id`, `id_usuario`) VALUES
-(1, 1);
-
 INSERT INTO `contratos` (`id`, `id_cliente`, `id_profissional`, `data_inicio`, `data_fim`, `valor`, `status_servico`) VALUES
 (1, 1, 1, '2024-07-01 00:00:00', '2024-12-31 00:00:00', '1200.00', 'ativo');
 

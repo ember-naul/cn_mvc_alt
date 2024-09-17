@@ -53,10 +53,10 @@ class ProfissionalController extends Controller
             $profissional->id_usuario = user()->id_usuario;
             $profissional->cnpj = $cnpj;
             $profissional->save();
-    
+            $_SESSION['profissional'] = true; 
             $endereco_completo = sprintf('%s, %s, %s, %s', $endereco, $bairro, $cidade, $numero);
             $coordenadas_p = $this->geocodeAddress($endereco_completo);
-    
+            
             $endereco_p = new Endereco();
             $endereco_p->id_profissional = $profissional->id;
             $endereco_p->id_cliente = null;
@@ -68,8 +68,8 @@ class ProfissionalController extends Controller
             $endereco_p->latitude = $coordenadas_p['latitude'];
             $endereco_p->longitude = $coordenadas_p['longitude'];
             $endereco_p->save();
-            $_SESSION['tipo_usuario'] = 'profissional'; 
-            return redirect('/home')->sucesso('Operação realizada com sucesso');
+            
+            return redirect('/home')->sucesso("Operação realizada com sucesso ".$_SESSION['profissional']." ");
         } catch (Exception $e) {
             return redirect('/home')->erro($e->getMessage());
         }

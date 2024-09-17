@@ -19,12 +19,12 @@ $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
           <a href="#" class="nav-link">Contato</a>
         </li>
 
-        <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'cliente'): ?>
+        <?php if (isset($_SESSION['cliente']) && $_SESSION['cliente'] == true): ?>
           <li class="nav-item">
             <a href="/mapa" class="nav-link">Mapa</a>
           </li>
         <?php endif; ?>
-        <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'profissional'): ?>
+        <?php if (isset($_SESSION['profissional']) && $_SESSION['profissional'] == true): ?>
           <li class="nav-item">
             <a href="/profissional/habilidades" class="nav-link">Serviços</a>
           </li>
