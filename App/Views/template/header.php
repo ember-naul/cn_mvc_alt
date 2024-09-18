@@ -8,28 +8,34 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet"  href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet"  href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet"  href="/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link rel="stylesheet"  href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link rel="stylesheet"  href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="/assets/css/modal.css">
-  <link rel="stylesheet" href="/assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <link rel="stylesheet" href="/assets/plugins/toastr/toastr.min.css">
-  <link rel="stylesheet" href="/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <link rel="stylesheet" href="/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-  <link rel="stylesheet" href="/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"> 
-  <link rel="stylesheet" href="/assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css"> 
-  <link rel="stylesheet" href="/assets/plugins/bs-stepper/css/bs-stepper.min.css"> 
-  <link rel="stylesheet" href="/assets/plugins/dropzone/min/dropzone.min.css"> 
   <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
 </head>
 <?php
 if ($_SESSION['logado'] == true): ?>
-
-  <body class="hold-transition layout-top-nav">
-    <div class="wrapper">
-      <?php require_once __DIR__ . '/../../../App/Views/template/navbar.php'; ?>
-      <div class="content-wrapper p-2">
-      <?php endif ?>
+<body class="starter-page-page">
+<header id="header" class="header d-flex align-items-center fixed-top">
+<?php require_once __DIR__ . '/../../../App/Views/template/navbar.php'; ?>
       <?php if (isset($_SESSION['sucesso'])) { ?>
         <div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -49,3 +55,6 @@ if ($_SESSION['logado'] == true): ?>
         unset($_SESSION['erro']);
       }
       ?>
+<?php endif;?>
+
+      

@@ -1,7 +1,7 @@
 <?php
 use App\Models\Usuario;
 $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
-<nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+<!-- <nav class="main-header navbar navbar-expand-md navbar-light navbar-dark">
   <div class="container">
     <a href="/home" class="navbar-brand">
       <img src="/assets/img/logo2.png" alt="Logo da nossa empresa" width="35px" class="brand-image" style="opacity: .8">
@@ -19,11 +19,7 @@ $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
           <a href="#" class="nav-link">Contato</a>
         </li>
 
-        <?php if (isset($_SESSION['cliente']) && $_SESSION['cliente'] == true): ?>
-          <li class="nav-item">
-            <a href="/mapa" class="nav-link">Mapa</a>
-          </li>
-        <?php endif; ?>
+        
         <?php if (isset($_SESSION['profissional']) && $_SESSION['profissional'] == true): ?>
           <li class="nav-item">
             <a href="/profissional/habilidades" class="nav-link">Serviços</a>
@@ -40,8 +36,34 @@ $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
       </ul>
     </div>
 </nav>
+ -->
 
-<div class="modal fade" id="modal-lg" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+       <img src="/assets/img/logo.png" alt="">
+        <h1 class="sitename">Casa & Negócios</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">Sobre nós</a></li>
+          <li><a href="#services">Serviços</a></li>
+          <li><a href="#contact">Contato</a></li>
+          <li><a href="#" data-toggle="modal" data-target="#modal-lg">Perfil</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="#about">Comece agora</a>
+
+    </div>
+</header>
+
+
+
+<div class="modal fade" id="modal-lg" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true"> 
   <div class="modal-dialog modal-lg">
     <div class="modal-content rounded-lg">
       <div class="modal-header justify-content-center">
@@ -52,7 +74,7 @@ $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
         </button>
       </div>
         <div class="row mb-3">
-          <div class="col-4 text-center"> <!-- Imagem à esquerda -->
+          <div class="col-4 text-center"> Imagem à esquerda
             <img src="/assets/img/perfilicon.png" class="rounded-circle" alt="Perfil" width="120" height="120">
           </div>
           <div class="col-8 text-left">
@@ -64,9 +86,8 @@ $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
           </div>
         </div>
 
-        <!-- Buttons Section -->
         <div class="row text-center">
-          <div class="col-6 mb-2"> <!-- Diminui o espaçamento vertical -->
+          <div class="col-6 mb-2">Diminui o espaçamento vertical 
             <button class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center"
               style="width: 85%; margin-left: auto;">
               <img src="/assets/img/servicos.png" alt="Histórico de Serviços" width="24" class="mr-2"> Histórico de
@@ -126,3 +147,6 @@ function censurarCPF($cpf) {
 
 
 ?>
+
+
+

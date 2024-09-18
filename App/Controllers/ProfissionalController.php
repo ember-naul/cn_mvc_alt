@@ -69,7 +69,7 @@ class ProfissionalController extends Controller
             $endereco_p->longitude = $coordenadas_p['longitude'];
             $endereco_p->save();
             
-            return redirect('/home')->sucesso("Operação realizada com sucesso ".$_SESSION['profissional']." ");
+            return redirect('/profissional/home')->sucesso("Operação realizada com sucesso! Você se cadastrou como profissional");
         } catch (Exception $e) {
             return redirect('/home')->erro($e->getMessage());
         }
