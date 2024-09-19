@@ -8,6 +8,7 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="/assets/img/favicon.png" rel="icon">
   <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 

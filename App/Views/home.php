@@ -22,7 +22,8 @@
                     <h1>Encontre profissionais e contrate serviços para tudo o que você precisar</h1>
                     <p>Diversos tipos de serviços em um só lugar!</p>
                     <div class="d-flex">
-                        <a href="#about" class="btn-get-started">Comece agora</a>
+                        <button data-toggle="modal" data-target="#exampleModalCenter" class="btn-get-started">Comece
+                            agora</button>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
@@ -31,15 +32,13 @@
             </div>
         </div>
 
-    </section><!-- /Hero Section -->
+    </section>
 
-    <!-- About Section -->
     <section id="about" class="about section">
 
-        <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Sobre nós</h2>
-        </div><!-- End Section Title -->
+        </div>>
 
         <div class="container">
 
@@ -63,7 +62,6 @@
         </div>
     </section>
 
-    <!-- Why Us Section -->
     <section id="why-us" class="section why-us light-background" data-builder="section">
 
         <div class="container-fluid">
@@ -88,7 +86,7 @@
                                 <p>Resposta 1.</p>
                             </div>
                             <i class="faq-toggle bi bi-chevron-right"></i>
-                        </div><!-- End Faq item-->
+                        </div>
 
                         <div class="faq-item">
                             <h3><span>02</span> Pergunta 2?
@@ -97,7 +95,7 @@
                                 <p>Resposta 2.</p>
                             </div>
                             <i class="faq-toggle bi bi-chevron-right"></i>
-                        </div><!-- End Faq item-->
+                        </div>
 
                         <div class="faq-item">
                             <h3><span>03</span> Pergunta 3?</h3>
@@ -122,11 +120,10 @@
 
     <section id="services" class="services section">
 
-        <!-- Section Title -->
         <div class="container section-title aos-init aos-animate" data-aos="fade-up">
             <h2>Nossos serviços</h2>
             <p>Quais serviços você pode contratar ou prestar em nossa plataforma</p>
-        </div><!-- End Section Title -->
+        </div>
 
         <div class="container">
 
@@ -141,7 +138,7 @@
                         <p>Cumque eos in qui numquam. Aut aspernatur perferendis sed atque quia voluptas quisquam
                             repellendus temporibus itaqueofficiis odit</p>
                     </div>
-                </div><!-- End Card Item -->
+                </div>
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-item position-relative">
@@ -152,7 +149,7 @@
                         <p>Asperiores provident dolor accusamus pariatur dolore nam id audantium ut et iure incidunt
                             molestiae dolor ipsam ducimus occaecati nisi</p>
                     </div>
-                </div><!-- End Card Item -->
+                </div>
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-item position-relative">
@@ -163,7 +160,7 @@
                         <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque
                             oluptatem aut et molestiae ut et nihil</p>
                     </div>
-                </div><!-- End Card Item -->
+                </div>
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
                     <div class="service-item position-relative">
@@ -174,7 +171,7 @@
                         <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque
                             oluptatem aut et molestiae ut et nihil</p>
                     </div>
-                </div><!-- End Card Item -->
+                </div>
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="500">
                     <div class="service-item position-relative">
@@ -185,7 +182,7 @@
                         <p>Illo consequuntur quisquam delectus praesentium modi dignissimos facere vel cum onsequuntur
                             maiores beatae consequatur magni voluptates</p>
                     </div>
-                </div><!-- End Card Item -->
+                </div>
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="600">
                     <div class="service-item position-relative">
@@ -196,7 +193,7 @@
                         <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi
                             quisquam aut nostrum unde et qui est non quo nulla</p>
                     </div>
-                </div><!-- End Card Item -->
+                </div>
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="700">
                     <div class="service-item position-relative">
@@ -207,7 +204,7 @@
                         <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi
                             quisquam aut nostrum unde et qui est non quo nulla</p>
                     </div>
-                </div><!-- End Card Item -->
+                </div>
 
                 <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="800">
                     <div class="service-item position-relative">
@@ -218,7 +215,7 @@
                         <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi
                             quisquam aut nostrum unde et qui est non quo nulla</p>
                     </div>
-                </div><!-- End Card Item -->
+                </div>
             </div>
             <div class="container section-title" data-aos="fade-up" data-aos-delay="200" style="padding-top:6%">
                 <h5>Entre outros serviços...</h5>
@@ -296,8 +293,7 @@
 
         </div>
 
-    </section><!-- /Call To Action Section -->
-
+    </section>
     <!-- <section id="team" class="team section">
 
             <div class="container section-title" data-aos="fade-up">
@@ -383,7 +379,7 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>Contact</h2>
+            <h2>Contato</h2>
             <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
         </div><!-- End Section Title -->
 
@@ -401,23 +397,23 @@
                                 <p>Rua Vereador Sérgio Leopoldino Alves, 500 - Distrito Industrial I, Santa Bárbara
                                     d'Oeste - SP</p>
                             </div>
-                        </div><!-- End Info Item -->
+                        </div>
 
                         <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
                             <i class="bi bi-telephone flex-shrink-0"></i>
                             <div>
-                                <h3>Call Us</h3>
+                                <h3>Nos ligue!</h3>
                                 <p>+55 (19) 12345-6789</p>
                             </div>
-                        </div><!-- End Info Item -->
+                        </div>
 
                         <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
                             <i class="bi bi-envelope flex-shrink-0"></i>
                             <div>
-                                <h3>Email Us</h3>
+                                <h3> Mande um E-mail!</h3>
                                 <p>casanegocios@contato.com</p>
                             </div>
-                        </div><!-- End Info Item -->
+                        </div>
 
                         <img src="assets/img/login-image.webp" width="100%"></img>
                     </div>
@@ -459,67 +455,38 @@
 
                         </div>
                     </form>
-                </div><!-- End Contact Form -->
+                </div>
 
             </div>
 
         </div>
 
-    </section><!-- /Contact Section -->
-    <!-- <h1> Diversos tipos de serviços </h1>
-                <span class="second-line">em um só lugar!</span>
-            <div class="flex-container home">
-                <img src="assets/img/jardineiro.png" class="jardineiro img-fluid" alt="Jardineiro">
-                <p class="testep mb-3">Encontre profissionais e contrate <br>serviços para tudo o que você precisar</p>
-            </div>
-        </div> -->
-    <!-- <section id="servicos" class="gray">
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-6 col-lg-4 p-3 d-flex">
-                        <section class="teste-2 align-items-center">
-                            <p class="testep mb-1">Você deseja se tornar um <b>cliente</b> para contratar um profissional para você?</p>
-                            <p class="testep mb-3">Clique aqui para saber mais!</p>
-                            <button class="btn btn-dark" data-toggle="modal" data-target="#modal_cadastro_cliente">Cadastre-se</button>
-                        </section>
-                    </div>
-                    <div class="col-md-6 col-lg-4 p-3 d-flex">
-                        <section class="teste-2 align-items-center">
-                            <p class="testep mb-2">Você deseja se cadastrar como um <b>profissional</b> para divulgar seus serviços<br> em nosso web site?</p>
-                            <p class="testep mb-3">Clique aqui para saber mais!</p>
-                            <button class="btn btn-dark" data-toggle="modal" data-target="#modal_cadastro_profissional">Cadastre-se</button>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-    <!-- <section id="sobrenos" class="container l-5 about-section mt-5 mb-5">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-left">
-                    <h2 class="inter-h1">Sobre Nós</h2>
-                    <p class="about-text mt-4">Nosso compromisso é fornecer um ambiente seguro e confiável para que você possa encontrar o que precisa de maneira rápida.<br> Agradecemos por escolher nossa plataforma e estamos sempre aqui para ajudar com qualquer dúvida ou necessidade.</p>
-                </div>
-                <div class="col-md-6 text-center">
-                    <img src="assets/img/logo2.png" class="img-fluid" alt="Logo">
-                </div>
-                <div class="col-md-6 text-center">
-                    <img src="assets/img/contato.png" class="img-fluid" alt="Logo">
-                </div>
-                <div class="col-md-6 text-center text-md-left">
-                <h2 class="inter-h1 mt-5">Contato</h2>
-                    <p class="about-text mt-4">Celular  : (19) 99332-6023<br>
-                                               Email    : casanegocios@sac.com<br>
-                                               Instagram: @casanegocios<br>
-                                               Facebook  : casanegocios<br>
-                                               </p>
-                </div>
-            </div>
-        </section> -->
+    </section>
     </div>
     </div>
     </section>
 </main>
 </body>
+<script>
+    (function ($) {
+
+        "use strict";
+
+        $('[data-toggle="tooltip"]').tooltip()
+
+        // $('#exampleModalCenter').modal('show')
+
+        var fullHeight = function () {
+
+            $('.js-fullheight').css('height', $(window).height());
+            $(window).resize(function () {
+                $('.js-fullheight').css('height', $(window).height());
+            });
+
+        };
+        fullHeight();
+
+    })(jQuery);
+</script>
 
 </html>

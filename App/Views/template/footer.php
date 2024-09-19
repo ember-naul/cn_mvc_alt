@@ -1,5 +1,5 @@
-<?php require_once __DIR__ . '../../cadastro_clientes.php'; ?>
-<?php require_once __DIR__ . '../../cadastro_profissionais.php'; ?>
+<?php require_once __DIR__ . '../../redirect_cadastros.php'; ?>
+<?php //require_once __DIR__ . '../../cadastro_profissionais.php'; ?>
 <?php if ($_SESSION['logado'] == true): ?>
     </div>
     <footer id="footer" class="footer">
@@ -75,6 +75,9 @@
 <script src="/assets/plugins/select2/js/select2.full.min.js"></script>
 <script src="/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/vendor/php-email-form/validate.js"></script>
 <script src="/assets/vendor/aos/aos.js"></script>
