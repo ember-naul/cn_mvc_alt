@@ -17,6 +17,11 @@ class ClienteController extends Controller
         return require_once __DIR__ . '/../Views/cliente/index.php';
 
     }
+    public function cadastro()
+    {
+        return require_once __DIR__ . '/../Views/cliente/cadastro_clientes.php';
+
+    }
     public function avaliacao()
     {
         return require_once __DIR__ . '/../Views/cliente/avaliacao_cliente.php';

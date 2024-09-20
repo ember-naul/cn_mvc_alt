@@ -21,6 +21,12 @@ class ProfissionalController extends Controller
 
     }
 
+    public function cadastro()
+    {
+        return require_once __DIR__ . '/../Views/profissional/cadastro_profissionais.php';
+
+    }
+
     private function geocodeAddress($address)
     {
         $apiKey = 'AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4';

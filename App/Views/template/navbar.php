@@ -1,62 +1,30 @@
 <?php
 use App\Models\Usuario;
 $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
-<!-- <nav class="main-header navbar navbar-expand-md navbar-light navbar-dark">
-  <div class="container">
-    <a href="/home" class="navbar-brand">
-      <img src="/assets/img/logo2.png" alt="Logo da nossa empresa" width="35px" class="brand-image" style="opacity: .8">
-      <span class="brand-text font-weight-light">Casa & Negócios</span>
-    </a>
-
-    <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a href="#" class="nav-link">Contato</a>
-        </li>
-
-        
-        <?php if (isset($_SESSION['profissional']) && $_SESSION['profissional'] == true): ?>
-          <li class="nav-item">
-            <a href="/profissional/habilidades" class="nav-link">Serviços</a>
-          </li>
-        <?php endif; ?>
-        
-      </ul>
-      <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-        <li class="nav-item">
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
-            <img src="/assets/img/perfilicon.png" width="35px">
-          </button>
-        </li>
-      </ul>
-    </div>
-</nav>
- -->
 
 <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <a href="/home" class="logo d-flex align-items-center me-auto">
        <img src="/assets/img/logo.png" alt="">
         <h1 class="sitename">Casa & Negócios</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">Sobre nós</a></li>
-          <li><a href="#services">Serviços</a></li>
-          <li><a href="#contact">Contato</a></li>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/home#about">Sobre nós</a></li>
+          <li><a href="/home#services">Serviços</a></li>
+          <?php if (isset($_SESSION['profissional']) && $_SESSION['profissional'] == true): ?>
+          <li><a href="/profissional/habilidades">Habilidades</a></li>
+        <?php endif; ?>
           <li><a href="#" data-toggle="modal" data-target="#modal-lg">Perfil</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
-      <a class="btn-getstarted" href="#about">Comece agora</a>
+      <?php if (!isset($_SESSION['profissional']) && !isset($_SESSION['cliente'])): ?>
+        <a class="btn-getstarted" data-toggle="modal" data-target="#exampleModalCenter">Comece agora</a>
+        <?php endif; ?>
+      
 
     </div>
 </header>
@@ -74,7 +42,7 @@ $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
         </button>
       </div>
         <div class="row mb-3">
-          <div class="col-4 text-center"> Imagem à esquerda
+          <div class="col-4 text-center"> 
             <img src="/assets/img/perfilicon.png" class="rounded-circle" alt="Perfil" width="120" height="120">
           </div>
           <div class="col-8 text-left">
@@ -87,7 +55,7 @@ $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
         </div>
 
         <div class="row text-center">
-          <div class="col-6 mb-2">Diminui o espaçamento vertical 
+          <div class="col-6 mb-2">
             <button class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center"
               style="width: 85%; margin-left: auto;">
               <img src="/assets/img/servicos.png" alt="Histórico de Serviços" width="24" class="mr-2"> Histórico de

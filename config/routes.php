@@ -16,6 +16,7 @@ return function(RouteCollector $r) {
     $r->addRoute('GET', '/mapa', [HomeController::class, 'mapa']);
     $r->addRoute('GET', '/gravardados', [HomeController::class, 'gravardados']);
     $r->addRoute('GET', '/chat_teste', [HomeController::class, 'chat_teste']);
+    $r->addRoute('POST', '/enviar_mensagem', [HomeController::class, 'enviar_mensagem']);
 
     $r->addRoute('GET', '/login', [LoginController::class, 'index']);
     $r->addRoute('POST', '/iniciarsessao', [LoginController::class, 'login']);
@@ -34,7 +35,9 @@ return function(RouteCollector $r) {
 
     $r->addRoute('GET', '/cliente/home', [ClienteController::class, 'cliente_home']);
     $r->addRoute('GET', '/cliente/avalie', [CLienteController::class, 'avaliacao']);
+    $r->addRoute('GET', '/cliente/cadastro', [CLienteController::class, 'cadastro']);
     $r->addRoute('GET', '/profissional/home', [ProfissionalController::class, 'profissional_home']);
+    $r->addRoute('GET', '/profissional/cadastro', [ProfissionalController::class, 'cadastro']);
     $r->addRoute('GET', '/profissional/habilidades', [ProfissionalController::class, 'habilidades']);
     $r->addRoute('POST', '/profissional/habilidades/inserir', [ProfissionalController::class, 'habilidades_inserir']);
 

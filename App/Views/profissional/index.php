@@ -459,14 +459,6 @@ BaseWidget::breadcumb('Profissional', $breadcumb);
                                     required=""></textarea>
                             </div>
 
-                            <div class="col-md-12 text-center">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                <button type="submit">Send Message</button>
-                            </div>
-
                         </div>
                     </form>
                 </div><!-- End Contact Form -->
