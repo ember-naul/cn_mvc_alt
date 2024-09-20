@@ -11,12 +11,23 @@ SET time_zone = '-03:00';
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE IF NOT EXISTS `avaliacoes` (
+CREATE TABLE IF NOT EXISTS `avaliacoes_clientes` (
+  `id` 						int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_cliente` 				int NOT NULL,
+  `id_servico` 				int NOT NULL,
+  `nota` 					tinyint NOT NULL,
+  `comentário` 				text COLLATE utf8mb4_unicode_ci,
+   KEY `id_servico` 	(`id_servico`),
+   KEY `id_cliente` 	(`id_cliente`)
+) ;
+CREATE TABLE IF NOT EXISTS `avaliacoes_profissionais` (
   `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `id_servico` 			int NOT NULL,
+  `id_profissional`			int NOT NULL,
+  `id_servico` 				int NOT NULL,
   `nota` 				tinyint NOT NULL,
-  `comentário` 			text COLLATE utf8mb4_unicode_ci,
-  KEY `id_servico` (`id_servico`)
+  `comentário` 				text COLLATE utf8mb4_unicode_ci,
+  KEY `id_servico` 		(`id_servico`),
+  KEY `id_profissional` (`id_profissional`)
 ) ;
 
 CREATE TABLE IF NOT EXISTS `categorias` (
@@ -119,9 +130,9 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-INSERT INTO `avaliacoes` (`id`, `id_servico`, `nota`, `comentário`) VALUES
-(1, 1, 5, 'Excelente serviço, muito satisfeito!'),
-(2, 2, 4, 'Bom serviço, mas poderia melhorar a pontualidade.');
+INSERT INTO `avaliacoes_clientes` (`id`, `id_cliente` ,`id_servico`, `nota`, `comentário`) VALUES
+(1, 1, 1, 5, 'Excelente serviço, muito satisfeito!'),
+(2, 2, 1, 4, 'Bom serviço, mas poderia melhorar a pontualidade.');
 
 INSERT INTO `categorias` (`id`, `nome`, `descrição`) VALUES
 (1, 'Jardinagem', 'Serviços relacionados ao cuidado e manutenção de jardins'),
