@@ -48,11 +48,11 @@ class ProfissionalController extends Controller
     public function novoProfissional()
     {
         $cnpj       = $_POST['cnpj'] ?? null;
-        $cep        = $_POST['cep_p'] ?? null;
-        $endereco   = $_POST['endereco_p'] ?? null;
-        $bairro     = $_POST['bairro_p'] ?? null;
-        $cidade     = $_POST['cidade_p'] ?? null;
-        $numero     = $_POST['numero_p'] ?? null;
+        $cep        = $_POST['cep'] ?? null;
+        $endereco   = $_POST['endereco'] ?? null;
+        $bairro     = $_POST['bairro'] ?? null;
+        $cidade     = $_POST['cidade'] ?? null;
+        $numero     = $_POST['numero'] ?? null;
     
         try {
             $profissional = new Profissional();
@@ -75,7 +75,7 @@ class ProfissionalController extends Controller
             $endereco_p->longitude = $coordenadas_p['longitude'];
             $endereco_p->save();
             
-            return redirect('/profissional/home')->sucesso("Operação realizada com sucesso! Você se cadastrou como profissional");
+            return redirect('/profissional/home')->sucesso("Você se cadastrou como profissional");
         } catch (Exception $e) {
             return redirect('/home')->erro($e->getMessage());
         }

@@ -3,6 +3,7 @@
 <?php if ($_SESSION['logado'] == true): ?>
     </div>
     <footer id="footer" class="footer">
+    <div id="preloader"></div>
         <div class="container footer-top">
             <div class="row gy-4">
                 <div class="col-lg-4 col-md-6 footer-about">
@@ -22,9 +23,9 @@
                 <div class="col-lg-2 col-md-3 footer-links">
                     <h4>Links úteis</h4>
                     <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Sobre nós</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Serviços</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="/home">Home</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="/home#about">Sobre nós</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="/home#services">Serviços</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Termos de serviço</a></li>
                     </ul>
                 </div>
@@ -58,35 +59,28 @@
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Preloader -->
-    <div id="preloader"></div>
-    <!-- <footer class="main-footer">
-        <div class="float-right d-none d-sm-inline">
-            Olá .
-        </div>
-        
-    </footer> -->
+  
     </div>
 <?php endif; ?>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+
 </body>
-<script src="/assets/plugins/jquery/jquery.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="/assets/plugins/sweetalert2/sweetalert2.js"></script>
-<script src="/assets/plugins/toastr/toastr.min.js"></script>
 <script src="/assets/plugins/select2/js/select2.full.min.js"></script>
 <script src="/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/vendor/php-email-form/validate.js"></script>
 <script src="/assets/vendor/aos/aos.js"></script>
-<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+
 <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="/assets/vendor/waypoints/noframework.waypoints.js"></script>
 <script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
-<script src="/assets/js/main.js"></script>
 
 </html>

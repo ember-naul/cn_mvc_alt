@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
               <label for="cep">Seu CNPJ (Se possuir)</label>
-              <input type="text" class="form-control" maxlength="14" id="cnpj" name="cep" required>
+              <input type="text" class="form-control" maxlength="14" id="cnpj" name="cnpj" required>
             </div>
             <div class="form-group">
               <label for="cep">Seu CEP</label>

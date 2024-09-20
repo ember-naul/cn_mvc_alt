@@ -4,7 +4,7 @@
     <title>Sistema de Avaliação por Estrelas</title>
     <div class="container d-flex justify-content-center mt-5">
     <style>
-        body{
+            body{
 
             background-color: #f7f6f6;
             }

@@ -22,8 +22,14 @@
                     <h1>Encontre profissionais e contrate serviços para tudo o que você precisar</h1>
                     <p>Diversos tipos de serviços em um só lugar!</p>
                     <div class="d-flex">
-                        <button data-toggle="modal" data-target="#exampleModalCenter" class="btn-get-started">Comece
+                        <?php if (isset($_SESSION['escolha'])):?>
+                        <button data-toggle="modal" data-target="#modalescolha" class="btn-get-started">Comece
                             agora</button>
+                        <?php endif;;?>
+                        <?php if (!isset($_SESSION['escolha'])):?>
+                        <button data-toggle="modal" data-target="#exampleModalCenter" class="btn-get-started">Teste
+                        agora</button>
+                        <?php endif;;?>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">

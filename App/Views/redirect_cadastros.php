@@ -16,9 +16,9 @@
             gap: 2rem;
         }
         .btn-square {
-            width: 250px; /* Ajuste o tamanho conforme necessário */
-            height: 225px; /* Ajuste o tamanho conforme necessário */
-            font-size: 1.5rem; /* Aumenta o tamanho do texto */
+            width: 250px; 
+            height: 225px;
+            font-size: 1.5rem; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -47,6 +47,32 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade ajuste" id="modalescolha" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg d-flex">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Escolha seu perfil</h5>
+                    <p class="text-center">Por favor, escolha como deseja continuar navegando em nosso site:</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-around mt-4">
+                        <form method="post" action="/redirect">
+                            <input type="hidden" name="area" value="cliente">
+                            <button type="submit" class="btn btn-primary btn-lg">Área do Cliente</button>
+                        </form>
+                        <form method="post" action="/redirect">
+                            <input type="hidden" name="area" value="profissional">
+                            <button type="submit" class="btn btn-success btn-lg">Área do Profissional</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/popper.js"></script>

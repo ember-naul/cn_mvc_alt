@@ -115,6 +115,7 @@ class LoginController extends Controller
                     $_SESSION['profissional'] = true;
                 }
                 if ($profissional && $cliente) {
+                    $_SESSION['escolha'] = true;
                     $_SESSION['cliente'] = true;
                     $_SESSION['profissional'] = true;
                 } else {
@@ -124,7 +125,7 @@ class LoginController extends Controller
             }
 
             if ($cliente && $profissional) {
-                return require_once __DIR__ . '/../Views/escolha.php';
+                return redirect('/home')->sucesso('Você foi redirecionado para escolher seu perfil!');
             } else if ($cliente) {
                 return redirect('/cliente/home')->sucesso('Operação realizada com sucesso! Você entrou como cliente.');
             } else if ($profissional) {

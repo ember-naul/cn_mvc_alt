@@ -77,9 +77,9 @@ class ClienteController extends Controller
             $endereco_c->longitude = $coordenadas_c['longitude'];
             $endereco_c->save();
             $_SESSION['cliente'] = true;
-            return redirect('/cliente/home')->sucesso('Operação realizada com sucesso');
+            return redirect('/cliente/home')->sucesso('Você se cadastrou como cliente.');
         } catch (Exception $e) {
-            return redirect('/home')->erro($endereco_completo);
+            return redirect('/home')->erro($e->getMessage());
         }
     }
 }

@@ -6,7 +6,7 @@ $usuario = Usuario::where('id', '=', $_SESSION['id_usuario'])->first(); ?>
 
       <a href="/home" class="logo d-flex align-items-center me-auto">
        <img src="/assets/img/logo.png" alt="">
-        <h1 class="sitename">Casa & Negócios</h1>
+        <h1 style="text-decoration:none;" class="sitename">Casa & Negócios</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
