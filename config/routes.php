@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\AvaliacaoController;
 use App\Controllers\HomeController;
 use App\Controllers\LoginController;
 use App\Controllers\ContasController;
@@ -35,10 +36,13 @@ return function(RouteCollector $r) {
 
     $r->addRoute('GET', '/cliente/home', [ClienteController::class, 'cliente_home']);
     $r->addRoute('GET', '/cliente/avalie', [CLienteController::class, 'avaliacao']);
+    $r->addRoute('POST', '/cliente/avaliou', [AvaliacaoController::class, 'avaliacao_cliente']);
     $r->addRoute('GET', '/cliente/cadastro', [CLienteController::class, 'cadastro']);
     $r->addRoute('GET', '/profissional/home', [ProfissionalController::class, 'profissional_home']);
     $r->addRoute('GET', '/profissional/cadastro', [ProfissionalController::class, 'cadastro']);
     $r->addRoute('GET', '/profissional/habilidades', [ProfissionalController::class, 'habilidades']);
+    $r->addRoute('GET', '/profissional/avalie', [ProfissionalController::class, 'avaliacao']);
+    $r->addRoute('POST', '/profissional/avaliou', [AvaliacaoController::class, 'avaliacao_profissional']);
     $r->addRoute('POST', '/profissional/habilidades/inserir', [ProfissionalController::class, 'habilidades_inserir']);
 
     $r->addRoute('GET', '/pareando', [HomeController::class, 'pareando']);

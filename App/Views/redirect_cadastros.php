@@ -5,44 +5,50 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/ionicons.min.css">
-    <link rel="stylesheet" href="/assets/css/flaticon.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <style>
         .modal-body {
             display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            gap: 2rem;
+            justify-content: center;
+            padding: 2rem;
+            gap: 0.5rem;
+            height:300px;
+            width: 500px;
         }
+
         .btn-square {
-            width: 250px; 
-            height: 225px;
-            font-size: 1.5rem; 
+            width: 70%;
+            height: 100%;
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            
-        } 
+
+        }
     </style>
 </head>
 
 <body>
-    <div class="modal fade ajuste" id="exampleModalCenter" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg d-flex">
-            <div class="modal-content">
-                <div class="modal-header">
+    <div class="modal fade ajuste" id="exampleModalCenter" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content rounded-lg">
+                <div class="modal-header justify-content-center">
                     <h5 class="modal-title">Escolha seu perfil</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close position-absolute" style="right: 15px;" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <a href="/cliente/cadastro" class="btn btn-primary btn-square">
-                        <i class="fa fa-user"></i><br>Cadastre-se como cliente
-                    </a>
-                    <a href="/profissional/cadastro" class="btn btn-primary btn-square">
-                        <i class="fa fa-briefcase"></i><br>Cadastre-se como profissional
-                    </a>
+                <div class="row mb-3">
+                    <div class="modal-body">
+                        <a href="/cliente/cadastro" class="btn btn-primary btn-square">
+                            <i class="fa fa-user"></i>Cadastre-se como cliente
+                        </a>
+                        <a href="/profissional/cadastro" class="btn btn-primary btn-square">
+                            <i class="fa fa-briefcase"></i>Cadastre-se como profissional
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,7 +61,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Escolha seu perfil</h5>
                     <p class="text-center">Por favor, escolha como deseja continuar navegando em nosso site:</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
                     <div class="d-flex justify-content-around mt-4">
@@ -72,11 +78,6 @@
             </div>
         </div>
     </div>
-    
-
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/popper.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
 </body>
 
 </html>

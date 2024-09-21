@@ -76,69 +76,60 @@ class LoginController extends Controller
     }
 
     public function login()
-    {
-        try {
-            $email = $_POST['email'] ?? null;
-            $senha = $_POST['senha'] ?? null;
+{
+    try {
+        $email = $_POST['email'] ?? null;
+        $senha = $_POST['senha'] ?? null;
 
-            if (!$email || !$senha) {
-                throw new Exception("Obrigatório inserir email e senha");
-            }
-
-            $usuario = Usuario::where([
-                ['email', '=', $email],
-                ['senha', '=', sha1(md5($senha))]
-            ])->first();
-
-            if (!$usuario) {
-                throw new Exception("Credenciais incorretas");
-            }
-
-            $_SESSION['logado'] = true;
-            $_SESSION['id_usuario'] = $usuario->id;
-            $_SESSION['email'] = $usuario->email;
-            $_SESSION['nome'] = $usuario->nome;
-            $_SESSION['celular'] = $usuario->celular;
-            $_SESSION['rg'] = $usuario->rg;
-            $_SESSION['cpf'] = $usuario->cpf;
-
-            $cliente = Cliente::where('id_usuario', $usuario->id)->first();
-            $profissional = Profissional::where('id_usuario', $usuario->id)->first();
-
-            if (!isset($_SESSION['cliente']) && !isset($_SESSION['profissional'])) {
-                if ($cliente) {
-                    $_SESSION['cliente'] = true;
-                    $_SESSION['profissional'] = false;
-                }
-                if ($profissional) {
-                    $_SESSION['cliente'] = false;
-                    $_SESSION['profissional'] = true;
-                }
-                if ($profissional && $cliente) {
-                    $_SESSION['escolha'] = true;
-                    $_SESSION['cliente'] = true;
-                    $_SESSION['profissional'] = true;
-                } else {
-                    $_SESSION['cliente'] = false;
-                    $_SESSION['profissional'] = false;
-                }
-            }
-
-            if ($cliente && $profissional) {
-                return redirect('/home')->sucesso('Você foi redirecionado para escolher seu perfil!');
-            } else if ($cliente) {
-                return redirect('/cliente/home')->sucesso('Operação realizada com sucesso! Você entrou como cliente.');
-            } else if ($profissional) {
-                return redirect('/profissional/home')->sucesso('Operação realizada com sucesso! Você entrou como profissional.');
-            } else {
-                return redirect('/home')->sucesso('Operação realizada com sucesso.');
-            }
-        } catch (Exception $e) {
-            return redirect('/login')->erro($e->getMessage());
+        if (!$email || !$senha) {
+            throw new Exception("Obrigatório inserir email e senha");
         }
+
+        $usuario = Usuario::where([
+            ['email', '=', $email],
+            ['senha', '=', sha1(md5($senha))]
+        ])->first();
+
+        if (!$usuario) {
+            throw new Exception("Credenciais incorretas");
+        }
+
+        $_SESSION['logado'] = true;
+        $_SESSION['id_usuario'] = $usuario->id;
+        $_SESSION['email'] = $usuario->email;
+        $_SESSION['nome'] = $usuario->nome;
+        $_SESSION['celular'] = $usuario->celular;
+        $_SESSION['rg'] = $usuario->rg;
+        $_SESSION['cpf'] = $usuario->cpf;
+
+        // Verificar se o usuário é cliente ou profissional
+        $cliente = Cliente::where('id_usuario', $usuario->id)->first();
+        $profissional = Profissional::where('id_usuario', $usuario->id)->first();
+
+        if ($cliente && !$profissional) {
+            $_SESSION['cliente'] = true;
+            $_SESSION['profissional'] = false;
+            return redirect('/cliente/home')->sucesso('Operação realizada com sucesso! Você entrou como cliente.');
+        } else if ($profissional && !$cliente) {
+            $_SESSION['cliente'] = false;
+            $_SESSION['profissional'] = true;
+            return redirect('/profissional/home')->sucesso('Operação realizada com sucesso! Você entrou como profissional.');
+        } else if ($cliente && $profissional) {
+            $_SESSION['cliente'] = true;
+            $_SESSION['profissional'] = true;
+            $_SESSION['escolha'] = true;
+            return redirect('/home')->sucesso('Você foi redirecionado para escolher seu perfil!');
+        } else {
+            throw new Exception("O usuário não possui perfil de cliente nem de profissional.");
+        }
+
+    } catch (Exception $e) {
+        return redirect('/login')->erro($e->getMessage());
     }
+}
 
     public function redirect_login(){
+        $_SESSION['escolha'] = false;
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['area']) && $_POST['area'] === 'cliente') {
                 $_SESSION['cliente'] = true;

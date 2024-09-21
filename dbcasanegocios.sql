@@ -1,3 +1,4 @@
+-- Active: 1725406851568@@127.0.0.1@3306@dbcasanegocios
 DROP DATABASE if exists dbcasanegocios;
 CREATE DATABASE dbcasanegocios;
 USE dbcasanegocios;
@@ -12,129 +13,131 @@ SET time_zone = '-03:00';
 /*!40101 SET NAMES utf8mb4 */;
 
 CREATE TABLE IF NOT EXISTS `avaliacoes_clientes` (
-  `id` 						int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` 						    int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_cliente` 				int NOT NULL,
+  `id_profissional`		int NOT NULL,
   `id_servico` 				int NOT NULL,
-  `nota` 					tinyint NOT NULL,
-  `comentário` 				text COLLATE utf8mb4_unicode_ci,
+  `nota` 					    tinyint NOT NULL,
+  `comentario` 				text COLLATE utf8mb4_unicode_ci,
    KEY `id_servico` 	(`id_servico`),
    KEY `id_cliente` 	(`id_cliente`)
-) ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `avaliacoes_profissionais` (
-  `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `id_profissional`			int NOT NULL,
+  `id` 					      int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_cliente` 				int NOT NULL,
+  `id_profissional`		int NOT NULL,
   `id_servico` 				int NOT NULL,
-  `nota` 				tinyint NOT NULL,
-  `comentário` 				text COLLATE utf8mb4_unicode_ci,
+  `nota` 				      tinyint NOT NULL,
+  `comentario` 				text COLLATE utf8mb4_unicode_ci,
   KEY `id_servico` 		(`id_servico`),
   KEY `id_profissional` (`id_profissional`)
-) ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `categorias` (
-  `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `nome` 				varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descrição` 			text COLLATE utf8mb4_unicode_ci
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id` 					    int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `nome` 				    varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descricao` 			text COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `clientes` (
-  `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` 					    int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_usuario` 			int NOT NULL,
   KEY `id_usuario` (`id_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `contratos` (
-  `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` 					    int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_cliente` 			int NOT NULL,
-  `id_profissional` 	int NOT NULL,
+  `id_profissional` int NOT NULL,
   `data_inicio` 		datetime NOT NULL,
-  `data_fim` 			datetime DEFAULT NULL,
-  `valor` 				decimal(10,2) DEFAULT NULL,
-  `status_servico` 		enum('ativo','inativo') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `data_fim` 			  datetime DEFAULT NULL,
+  `valor` 				  decimal(10,2) DEFAULT NULL,
+  `status_servico` 	enum('ativo','inativo') COLLATE utf8mb4_unicode_ci NOT NULL,
   KEY `id_cliente` (`id_cliente`),
   KEY `id_profissional` (`id_profissional`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `enderecos` (
-  `id` 				int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `id_cliente` 		int,
+  `id` 				      int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_cliente` 		  int,
   `id_profissional` int,
-  `cep` 			char(9) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `endereco` 		varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bairro` 			varchar(70) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cidade` 			varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero` 			varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `latitude` 			decimal(10,8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cep` 			      char(9) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `endereco` 		    varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bairro` 			    varchar(70) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cidade` 			    varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `numero` 			    varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitude` 			  decimal(10,8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `longitude` 			decimal(11,8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   KEY `id_cliente` (`id_cliente`),
   KEY `id_profissional` (`id_profissional`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `habilidades` (
-  `id` 				int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `nome` 			varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` 				    int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `nome` 			    varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `descricao` 		text COLLATE utf8mb4_unicode_ci
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `pagamentos` (
-  `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `id_contrato` 		int NOT NULL,
+  `id` 					      int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id_contrato` 		  int NOT NULL,
   `data_pagamento` 		date NOT NULL,
-  `valor` 				decimal(10,2) NOT NULL,
+  `valor` 				    decimal(10,2) NOT NULL,
   `status_pagamento` 	varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   KEY `id_contrato` (`id_contrato`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `profissionais` (
-  `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` 					    int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_usuario` 			int NOT NULL,
-  `cnpj`				char(14) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cnpj`				    char(14) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   KEY `id_usuario` (`id_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `profissionais_categorias` (
-  `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` 					      int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_profissional` 	int NOT NULL,
-  `id_categoria` 		int NOT NULL,
+  `id_categoria` 		  int NOT NULL,
   KEY `id_profissional` (`id_profissional`),
   KEY `id_categoria` (`id_categoria`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `profissionais_habilidades` (
-  `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` 					      int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_profissional` 	int NOT NULL,
   `id_habilidade` 		int NOT NULL,
   `data_cadastro` 		date NOT NULL,
   KEY `id_profissional` (`id_profissional`),
   KEY `id_habilidade` (`id_habilidade`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `servicos` (
-  `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` 					    int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_contrato` 		int NOT NULL,
-  `data_hora`			datetime NOT NULL,
-  `status_servico` 		varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `data_hora`			  datetime NOT NULL,
+  `status_servico` 	varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   KEY `id_contrato` (`id_contrato`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id` 					int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `nome` 				varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` 				varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `celular` 			char(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cpf` 				char(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rg` 					char(9) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `senha` 				varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `codigo_verificacao` 	varchar(255) COLLATE utf8mb4_unicode_ci,
-  `codigo_expiracao` 	datetime COLLATE utf8mb4_unicode_ci
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `celular` char(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cpf` char(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rg` char(9) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `senha` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo_verificacao` varchar(255) COLLATE utf8mb4_unicode_ci,
+  `codigo_expiracao` datetime COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-INSERT INTO `avaliacoes_clientes` (`id`, `id_cliente` ,`id_servico`, `nota`, `comentário`) VALUES
+INSERT INTO `avaliacoes_clientes` (`id`, `id_cliente` ,`id_servico`, `nota`, `comentario`) VALUES
 (1, 1, 1, 5, 'Excelente serviço, muito satisfeito!'),
 (2, 2, 1, 4, 'Bom serviço, mas poderia melhorar a pontualidade.');
 
-INSERT INTO `categorias` (`id`, `nome`, `descrição`) VALUES
+INSERT INTO `categorias` (`id`, `nome`, `descricao`) VALUES
 (1, 'Jardinagem', 'Serviços relacionados ao cuidado e manutenção de jardins'),
 (2, 'Limpeza', 'Serviços de limpeza residencial e comercial');
 

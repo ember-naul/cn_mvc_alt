@@ -46,40 +46,49 @@ class ProfissionalController extends Controller
     }
 
     public function novoProfissional()
-    {
-        $cnpj       = $_POST['cnpj'] ?? null;
-        $cep        = $_POST['cep'] ?? null;
-        $endereco   = $_POST['endereco'] ?? null;
-        $bairro     = $_POST['bairro'] ?? null;
-        $cidade     = $_POST['cidade'] ?? null;
-        $numero     = $_POST['numero'] ?? null;
-    
-        try {
-            $profissional = new Profissional();
-            $profissional->id_usuario = user()->id_usuario;
-            $profissional->cnpj = $cnpj;
-            $profissional->save();
-            $_SESSION['profissional'] = true; 
-            $endereco_completo = sprintf('%s, %s, %s, %s', $endereco, $bairro, $cidade, $numero);
-            $coordenadas_p = $this->geocodeAddress($endereco_completo);
-            
-            $endereco_p = new Endereco();
-            $endereco_p->id_profissional = $profissional->id;
-            $endereco_p->id_cliente = null;
-            $endereco_p->cep = $cep;
-            $endereco_p->bairro = $bairro;
-            $endereco_p->cidade = $cidade;  
-            $endereco_p->endereco = $endereco;
-            $endereco_p->numero = $numero;
-            $endereco_p->latitude = $coordenadas_p['latitude'];
-            $endereco_p->longitude = $coordenadas_p['longitude'];
-            $endereco_p->save();
-            
-            return redirect('/profissional/home')->sucesso("Você se cadastrou como profissional");
-        } catch (Exception $e) {
-            return redirect('/home')->erro($e->getMessage());
+{
+    $cnpj       = $_POST['cnpj'] ?? null;
+    $cep        = $_POST['cep'] ?? null;
+    $endereco   = $_POST['endereco'] ?? null;
+    $bairro     = $_POST['bairro'] ?? null;
+    $cidade     = $_POST['cidade'] ?? null;
+    $numero     = $_POST['numero'] ?? null;
+
+    try {
+        // Verificar se já existe um profissional com esse CNPJ
+        $existeProfissional = Profissional::where('cnpj', $cnpj)->first();
+        
+        if ($existeProfissional) {
+            return redirect('/profissional/cadastro')->erro("Já existe um profissional cadastrado com este CNPJ.");
         }
+
+        $profissional = new Profissional();
+        $profissional->id_usuario = user()->id_usuario;
+        $profissional->cnpj = $cnpj;
+        $profissional->save();
+        $_SESSION['profissional'] = true; 
+
+        $endereco_completo = sprintf('%s, %s, %s, %s', $endereco, $bairro, $cidade, $numero);
+        $coordenadas_p = $this->geocodeAddress($endereco_completo);
+        
+        $endereco_p = new Endereco();
+        $endereco_p->id_profissional = $profissional->id;
+        $endereco_p->id_cliente = null;
+        $endereco_p->cep = $cep;
+        $endereco_p->bairro = $bairro;
+        $endereco_p->cidade = $cidade;  
+        $endereco_p->endereco = $endereco;
+        $endereco_p->numero = $numero;
+        $endereco_p->latitude = $coordenadas_p['latitude'];
+        $endereco_p->longitude = $coordenadas_p['longitude'];
+        $endereco_p->save();
+        
+        return redirect('/profissional/home')->sucesso("Você se cadastrou como profissional");
+    } catch (Exception $e) {
+        return redirect('/home')->erro($e->getMessage());
     }
+}
+
 
 
    public function habilidades_inserir() 
