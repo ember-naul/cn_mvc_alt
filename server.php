@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+/*require __DIR__ . '/vendor/autoload.php';
 
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
@@ -33,6 +33,50 @@ class Chat implements MessageComponentInterface {
     public function onClose(ConnectionInterface $conn) {
         // Remove o cliente desconectado
         $this->users->detach($conn);
+        echo "Conexão {$conn->resourceId} fechada\n";
+    }
+
+    public function onError(ConnectionInterface $conn, \Exception $e) {
+        echo "Erro: {$e->getMessage()}\n";
+        $conn->close();
+    }
+}
+
+// Inicia o servidor WebSocket
+$app = new Ratchet\App('localhost', 8080, '0.0.0.0');
+$app->route('/chat', new Chat, ['*']);
+$app->run();*/
+
+require __DIR__ . '/vendor/autoload.php';
+
+use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
+
+class Chat implements MessageComponentInterface {
+    protected $clients;
+
+    public function __construct() {
+        $this->clients = new \SplObjectStorage;
+    }
+
+    public function onOpen(ConnectionInterface $conn) {
+        // Adiciona o cliente conectado
+        $this->clients->attach($conn);
+        echo "Nova conexão: {$conn->resourceId}\n";
+    }
+
+    public function onMessage(ConnectionInterface $from, $msg) {
+        // Envia a mensagem para todos os clientes conectados
+        foreach ($this->clients as $client) {
+            if ($from !== $client) {
+                $client->send($msg);
+            }
+        }
+    }
+
+    public function onClose(ConnectionInterface $conn) {
+        // Remove o cliente desconectado
+        $this->clients->detach($conn);
         echo "Conexão {$conn->resourceId} fechada\n";
     }
 

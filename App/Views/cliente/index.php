@@ -12,7 +12,7 @@ $_SESSION['id_cliente'] = $cliente->id;
 ?>
 <main class="main">
 
-<div class="container" data-aos="fade-up">
+<div class="container">
 <h1><?php var_dump($_SESSION['id_cliente']) ?></h1>
 <h1><?php var_dump($_SESSION['cliente']) ?></h1>
 <h1><?php var_dump($_SESSION['profissional']) ?></h1>

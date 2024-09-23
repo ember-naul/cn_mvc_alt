@@ -3,7 +3,7 @@
 <?php if ($_SESSION['logado'] == true): ?>
     </div>
     <footer id="footer" class="footer">
-    <div id="preloader"></div>
+        <div id="preloader"></div>
         <div class="container footer-top">
             <div class="row gy-4">
                 <div class="col-lg-4 col-md-6 footer-about">
@@ -59,19 +59,34 @@
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-  
+
     </div>
 <?php endif; ?>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="/assets/js/main.js"></script>
- <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
-<script src="/assets/plugins/sweetalert2/sweetalert2.js"></script> 
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/plugins/sweetalert2/sweetalert2.js"></script>
 <script src="/assets/plugins/select2/js/select2.full.min.js"></script>
 <script src="/assets/vendor/aos/aos.js"></script>
 
+<script>
+    $(document).ready(function () {
+        // Exibir o toast com temporizador
+        $('.toast').toast({ delay: 3000 }); // O toast desaparecerá automaticamente após 3 segundos
+        $('.toast').toast('show'); // Mostra o toast
+
+        // Permitir fechar o toast com o botão "X"
+        $('.toast .close').on('click', function () {
+            $(this).closest('.toast').toast('hide');
+        });
+    });
+
+</script>
 
 </html>

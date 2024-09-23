@@ -56,7 +56,7 @@ class LoginController extends Controller
         }
 
         if ($senha != $confirmar_senha) {
-            throw new Exception("As senhas digitadas não correspondem");
+            return redirect('/cadastro')->erro(mensagem: "As senhas não correspondem!");
         }
 
         try {
