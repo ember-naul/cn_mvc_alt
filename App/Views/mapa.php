@@ -1,308 +1,346 @@
-<?php 
+<?php
 namespace App\Views;
+
 use App\Models\Endereco;
 
-$latitude = $_GET['latitude'] ?? 'não fornecida';
-$longitude = $_GET['longitude'] ?? 'não fornecida';
-
-$endereco = new Endereco();
-
-$endereco->latitude = $latitude;
-$endereco->longitude = $longitude;
-$endereco->save();
+//$latitude = $_GET['latitude'] ?? 'não fornecida';
+//$longitude = $_GET['longitude'] ?? 'não fornecida';
+//
+//$endereco = new Endereco();
+//
+//$endereco->latitude = $latitude;
+//$endereco->longitude = $longitude;
+//$endereco->save();
 
 ?>
 <head>
     <meta charset="utf-8">
     <title>Google Maps Example</title>
     <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <style>
+    <style>
 
-html ::-webkit-scrollbar {
-  width: 10px;
-}
+        html ::-webkit-scrollbar {
+            width: 10px;
+        }
 
-html ::-webkit-scrollbar-thumb {
-  border-radius: 50px;
-  background: #3d4d6a;
-}
+        html ::-webkit-scrollbar-thumb {
+            border-radius: 50px;
+            background: #3d4d6a;
+        }
 
-html ::-webkit-scrollbar-track {
-  background: #ededed;
-}
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        overflow-y: hidden;
-    }
+        html ::-webkit-scrollbar-track {
+            background: #ededed;
+        }
 
-    .container-mapa {
-        display: flex;
-        height: 100%;
-        width: 80%;
-        margin: auto;
-        margin-top: 2%;
-        flex-wrap: wrap;
-        margin-top:3rem;
-    }
-
-    gmp-map {
-        flex: 1;
-        height: 45rem;
-        width: 100%;
-        margin: auto;
-        border: 2px solid #ddd;
-        border-radius: 10px;
-    }
-
-    .prestadores-container {
-        display: flex;
-        flex-direction: column;
-        width: 28%;
-        max-height: 45rem; /* Mesma altura do mapa */
-        margin-right: 2%;
-        overflow-y: auto;
-        overflow-x: hidden;
-        box-sizing: border-box; /* Inclui padding e border no cálculo do tamanho */
-        margin:auto;
-        margin-right:1rem;
-    }
-
-    .prestador {
-        display: flex;
-        align-items: center;
-        background-color: white;
-        margin-bottom: 15px;
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        transition: transform 0.3s ease;
-    }
-
-    .prestador:hover {
-        transform: scale(1.02);
-    }
-
-    .prestador img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-right: 15px;
-    }
-
-    .h5-prestador {
-        flex-grow: 1;
-        font-family: 'Inter', sans-serif;
-        text-align: left;
-    }
-
-    .p-prestador {
-        margin-right: 8%;
-        font-size: 0.9em;
-        color: #888;
-        margin-top:4%
-    }
-
-    .distancia {
-        font-size: 0.9em;
-        color: #888;
-        text-align: right;
-        margin-left: 10px;
-    }
-
-    @media (max-width: 768px) {
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Desativa a rolagem geral */
+            font-family: Arial, sans-serif;
+            /*overflow-y: hidden;*/
+            overflow: auto; /* Alterado para auto */
         }
 
         .container-mapa {
-            flex-direction: column;
-            width: 100%;
-            height: 100vh; /* Usa a altura total da tela */
+            display: flex;
+            height: 100%;
+            width: 80%;
+            margin: auto;
+            flex-wrap: wrap;
+
         }
 
         gmp-map {
-            height: 50%;
-            order: 2; /* Posiciona o mapa abaixo da lista no mobile */
+            flex: 1;
+            height: 45rem;
+            width: 100%;
+            margin: auto;
+            border: 2px solid #ddd;
+            border-radius: 10px;
         }
 
         .prestadores-container {
-            width: 100%;
-            max-height: 50%; /* Limita a altura da lista a 50% da tela */
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px 20px 0 0;
-            padding: 20px;
-            position: fixed; /* Fixa a lista no final da tela */
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            width: 28%;
+            max-height: 45rem; /* Mesma altura do mapa */
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch; /* Suaviza a rolagem no iOS */
-            box-sizing: border-box;
-        
+            overflow-x: hidden;
+            box-sizing: border-box; /* Inclui padding e border no cálculo do tamanho */
+            margin: auto;
         }
 
         .prestador {
-            margin-bottom: 10px;
-            padding: 8px;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .prestador:hover {
+            transform: scale(1.02);
         }
 
         .prestador img {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
         }
 
         .h5-prestador {
-            font-size: 1em;
+            flex-grow: 1;
+            font-family: 'Inter', sans-serif;
+            text-align: left;
         }
 
-        .p-prestador, .distancia {
-            font-size: 0.8em;
+        .p-prestador {
+            margin-right: 8%;
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 4%
         }
-    }
+
+        .distancia {
+            font-size: 0.9em;
+            color: #888;
+            text-align: right;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden; /* Desativa a rolagem geral */
+            }
+
+            .container-mapa {
+                flex-direction: column;
+                width: 768px;
+                height: 38vh;
+                margin: 0; /* Usa a altura total da tela */
+            }
+
+            gmp-map {
+                height: 50%;
+                width: 54%;
+                margin: 0;
+                order: 2;
+            }
+
+            .prestadores-container {
+                width: 100%;
+                max-height: 50%; /* Limita a altura da lista a 50% da tela */
+                background-color: rgba(255, 255, 255, 0.9);
+                border-radius: 20px 20px 0 0;
+                padding: 20px;
+                position: fixed; /* Fixa a lista no final da tela */
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 999;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch; /* Suaviza a rolagem no iOS */
+                box-sizing: border-box;
+
+            }
+
+            .prestador {
+                margin-bottom: 10px;
+                padding: 8px;
+            }
+
+            .prestador img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .h5-prestador {
+                font-size: 1em;
+            }
+
+            .p-prestador, .distancia {
+                font-size: 0.8em;
+            }
+        }
+        .zoom-controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+
+        .zoom-controls button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #3d4d6a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .zoom-controls button:hover {
+            background-color: #2b3a50;
+        }
+
     </style>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 </head>
 
 <body>
-    <div class="container-mapa">
-        <div class="prestadores-container">
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>Bruninho</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+<div class="container-mapa">
+    <div class="prestadores-container">
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
             </div>
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>Bruninho</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
             </div>
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>Bruninho</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
             </div>
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>Bruninho</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
             </div>
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>Bruninho</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
             </div>
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>Bruninho</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
             </div>
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>Bruninho</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
             </div>
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>Bruninho</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
             </div>
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>PENES</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
             </div>
-
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>AMIGO</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
             </div>
-
-
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5>AMIGO</h5>
-                </div>
-                <div class="p-prestador">
-                    <p>50 anos - Jardinista</p>
-                </div>
-                <span class="distancia">5.2 km</span>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
             </div>
-            <!-- Mais prestadores... -->
-
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
+            </div>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
+            </div>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
+            </div>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
+            </div>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
+            </div>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>PENES</h5>
+            </div>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
+            </div>
+            <span class="distancia">5.2 km</span>
         </div>
 
-        <gmpx-api-loader key="AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4" solution-channel="GMP_GE_mapsandplacesautocomplete_v1"></gmpx-api-loader>
-        <gmp-map center="37.4219983,-122.084" zoom="17" map-id="DEMO_MAP_ID" id="map">
-            <div slot="control-block-start-inline-start" class="place-picker-container">
-                <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>AMIGO</h5>
             </div>
-            <gmp-advanced-marker></gmp-advanced-marker>
-        </gmp-map>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
+            </div>
+            <span class="distancia">5.2 km</span>
+        </div>
+
+
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>AMIGO</h5>
+            </div>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
+            </div>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <!-- Mais prestadores... -->
+
     </div>
+
+
+    <gmpx-api-loader key="AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4"
+                     solution-channel="GMP_GE_mapsandplacesautocomplete_v1"></gmpx-api-loader>
+    <gmp-map center="37.4219983,-122.084" zoom="17" map-id="DEMO_MAP_ID" id="map">
+        <div slot="control-block-start-inline-start" class="place-picker-container">
+
+
+            <div class="zoom-controls">
+                <button id="zoom-in">+</button>
+                <button id="zoom-out">-</button>
+            </div>
+        </div>
+        <gmp-advanced-marker></gmp-advanced-marker>
+    </gmp-map>
+</div>
+<gmpx-place-picker placeholder="Digite seu endereço."></gmpx-place-picker>
 <script>
     let map, marker, placePicker;
+    document.getElementById('zoom-in').addEventListener('click', () => {
+        map.zoom += 1;
+    });
+
+    document.getElementById('zoom-out').addEventListener('click', () => {
+        map.zoom -= 1;
+    });
 
     async function init() {
         await customElements.whenDefined('gmp-map');
@@ -314,7 +352,8 @@ html ::-webkit-scrollbar-track {
         placePicker = document.querySelector('gmpx-place-picker');
 
         map.innerMap.setOptions({
-            mapTypeControl: false
+            mapTypeControl: false,
+            gestureHandling: 'greedy'
         });
 
         placePicker.addEventListener('gmpx-placechange', () => {
@@ -342,8 +381,8 @@ html ::-webkit-scrollbar-track {
                     async (position) => {
                         const latitude = position.coords.latitude;
                         const longitude = position.coords.longitude;
-                            
-                        const userLocation = { lat: latitude, lng: longitude };
+
+                        const userLocation = {lat: latitude, lng: longitude};
                         const correctedLocation = await verifyCoordinates(userLocation);
 
                         map.center = correctedLocation;
@@ -353,7 +392,7 @@ html ::-webkit-scrollbar-track {
                     (error) => {
                         console.error("Error obtaining location: " + error.message);
                     },
-                    { enableHighAccuracy: true }
+                    {enableHighAccuracy: true}
                 );
             } else {
                 window.alert("Esse navegador não suporta o mapa.");
@@ -385,42 +424,42 @@ html ::-webkit-scrollbar-track {
         }
     }
 
-	function initializePusher() {
-		Pusher.logToConsole = true;
+    function initializePusher() {
+        Pusher.logToConsole = true;
 
-		var pusher = new Pusher('8702b12d1675f14472ac', {
+        var pusher = new Pusher('8702b12d1675f14472ac', {
             cluster: 'sa1'
         });
 
-		var channel = pusher.subscribe('my-channel');
+        var channel = pusher.subscribe('my-channel');
 
-		channel.bind('my-event', function(data) {
-			try {
-				const { lat, lng } = data;
-				updateMap(lat, lng);
-			} catch (e) {
-				console.error("Failed to parse JSON:", e.message);
-			}
-		});
-	}
+        channel.bind('my-event', function (data) {
+            try {
+                const {lat, lng} = data;
+                updateMap(lat, lng);
+            } catch (e) {
+                console.error("Failed to parse JSON:", e.message);
+            }
+        });
+    }
 
     function updateMap(lat, lng) {
-	
-		const newLocation = { lat, lng };
 
-		if (typeof lat === 'number' && typeof lng === 'number') {
-			map.center = newLocation;
+        const newLocation = {lat, lng};
 
-			marker.position = newLocation;
+        if (typeof lat === 'number' && typeof lng === 'number') {
+            map.center = newLocation;
 
-			map.zoom = 16;
-		} else {
-			console.error("Invalid coordinates provided for the map update.");
-		}
-	}
+            marker.position = newLocation;
+
+            map.zoom = 16;
+        } else {
+            console.error("Invalid coordinates provided for the map update.");
+        }
+    }
 
     document.addEventListener('DOMContentLoaded', init);
 
-    
+
 </script>
 </body>

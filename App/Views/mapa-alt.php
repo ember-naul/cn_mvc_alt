@@ -30,17 +30,6 @@ $pusher->trigger('location-channel', 'update-location', $data);
 
 echo json_encode(['status' => 'success', 'lat' => $lat, 'lng' => $lng]);
 
-
-// $latitude = $_GET['latitude'] ?? 'não fornecida';
-// $longitude = $_GET['longitude'] ?? 'não fornecida';
-
-// $endereco = new Endereco();
-
-// $endereco->latitude = $latitude;
-// $endereco->longitude = $longitude;
-// $endereco->save();
-
-// echo "A sua latitude é: $latitude, e a sua longitude é $longitude"; 
 ?>
 <head>
     <meta charset="utf-8">

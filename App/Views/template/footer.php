@@ -1,7 +1,6 @@
 <?php require_once __DIR__ . '../../redirect_cadastros.php'; ?>
 <?php //require_once __DIR__ . '../../cadastro_profissionais.php'; ?>
 <?php if ($_SESSION['logado'] == true): ?>
-    </div>
     <footer id="footer" class="footer">
         <div id="preloader"></div>
         <div class="container footer-top">
