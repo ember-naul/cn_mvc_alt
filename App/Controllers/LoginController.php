@@ -18,9 +18,9 @@ class LoginController extends Controller
     {
         if ($_SESSION['logado'] == false) {
             return require_once __DIR__ . '/../Views/login.php';
-        } else {
-            header('Location: /home');
-        }
+        } //else {
+          //  header('Location: /home');
+        //}
     }
 
     public function escolha_conta()
@@ -120,7 +120,8 @@ class LoginController extends Controller
             $_SESSION['escolha'] = true;
             return redirect('/home')->sucesso('Você foi redirecionado para escolher seu perfil!');
         } else {
-            throw new Exception("O usuário não possui perfil de cliente nem de profissional.");
+           return redirect('/home')->sucesso('Você foi redirecionado para escolher seu perfil!');
+//           throw new Exception("O usuário não possui perfil de cliente nem de profissional.");
         }
 
     } catch (Exception $e) {

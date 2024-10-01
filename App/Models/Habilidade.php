@@ -10,4 +10,9 @@ class Habilidade extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
 
+    public function profissionais()
+{
+    return $this->belongsToMany(Profissional::class, 'profissionais_habilidades', 'id_habilidade', 'id_profissional');
+}
+
 }

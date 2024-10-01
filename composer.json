@@ -16,6 +16,7 @@
         "illuminate/database": "^10.48",
         "phpmailer/phpmailer": "^6.9",
         "pusher/pusher-php-server": "^7.2",
-        "cboden/ratchet": "^0.4.4"
+        "cboden/ratchet": "^0.4.4",
+      "ext-http": "*"
     }
 }

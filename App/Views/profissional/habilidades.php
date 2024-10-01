@@ -73,7 +73,7 @@ $habilidades = Habilidade::all();
             <!-- Coluna da direita (Imagem) -->
                 <div class="col-md-6">
                 <div class="img-container">
-                    <img src="../assets/img/habilidades.png" class="img-fluid" alt="Habilidades">
+                    <img src="/assets/img/habilidades.png" class="img-fluid" alt="Habilidades">
                 </div>
             </div>
         </div>

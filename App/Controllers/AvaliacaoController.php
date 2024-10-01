@@ -3,54 +3,32 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
-use App\Models\Usuario;
-use App\Models\Cliente;
-use App\Models\Profissional;
-use App\Models\Endereco;
-use App\Models\AvaliacaoCliente;
+use App\Models\Avaliacao;
 use Exception;
 
 class AvaliacaoController extends Controller
 {
-    public function avaliacao_cliente()
+    public function avaliacao()
     {
-        $id_cliente = $_SESSION['id_cliente'];
+        $id_cliente = $_POST['id_cliente'];
+        $id_profissional = $_POST['id_profissional'];
         $id_servico = $_POST['id_servico'];
         $nota = $_POST['rating'];
         $comentario = $_POST['comentario'];
 
         try {
-            $avaliacao_cliente = new AvaliacaoCliente();
-            $avaliacao_cliente->id_cliente = $id_cliente;
-            $avaliacao_cliente->id_servico = $id_servico;
-            $avaliacao_cliente->nota = $nota;
-            $avaliacao_cliente->comentario = $comentario;
-            $avaliacao_cliente->save();
+            $avaliacao = new Avaliacao();
+            $avaliacao->id_cliente = $id_cliente;
+            $avaliacao->id_profissional = $id_profissional;
+            $avaliacao->id_servico = $id_servico;
+            $avaliacao->nota = $nota;
+            $avaliacao->comentario = $comentario;
+            $avaliacao->save();
             return redirect('/cliente/home')->sucesso("Deu certo!");
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
 
-    }
-
-    public function avaliacao_profissional()
-    {
-        $id_cliente = $_SESSION['id_cliente'];
-        $id_servico = $_POST['id_servico'];
-        $nota = $_POST['rating'];
-        $comentario = $_POST['comentario'];
-
-        try {
-            $avaliacao_cliente = new AvaliacaoCliente();
-            $avaliacao_cliente->id_cliente = $id_cliente;
-            $avaliacao_cliente->id_servico = $id_servico;
-            $avaliacao_cliente->nota = $nota;
-            $avaliacao_cliente->comentario = $comentario;
-            $avaliacao_cliente->save();
-            return redirect('/profissional/home')->sucesso("Deu certo!");
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
     }
 
 }

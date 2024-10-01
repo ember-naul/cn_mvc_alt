@@ -1,7 +1,6 @@
 <?php require_once __DIR__ . '../../redirect_cadastros.php'; ?>
 <?php //require_once __DIR__ . '../../cadastro_profissionais.php'; ?>
 <?php if ($_SESSION['logado'] == true): ?>
-    </div>
     <footer id="footer" class="footer">
         <div id="preloader"></div>
         <div class="container footer-top">
@@ -14,7 +13,7 @@
                         <p>Rua Vereador Sérgio Leopoldino Alves, 500</p>
                         <p>Distrito Industrial I, Santa Bárbara d'Oeste, SP</p>
                         <p class="mt-3"><strong>Celular:</strong> <span>+55 (19) 12345-6789</span></p>
-                        <p><strong>Email:</strong> <span>casanegocios@contao.com</span></p>
+                        <p><strong>Email:</strong> <span>casanegocios@contato.com</span></p>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 footer-links">

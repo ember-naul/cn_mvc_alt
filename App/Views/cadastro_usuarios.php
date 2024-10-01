@@ -23,7 +23,7 @@
                             <!-- Etapa 1 -->
                             <div id="step1">
                                 <div class="form-group">
-                                    <label for="nome">Nome de usuário</label>
+                                    <label for="nome">Nome Completo</label>
                                     <input name="nome" type="text" required class="form-control" id="nome"
                                         placeholder="Digite seu nome de usuário">
                                 </div>
@@ -42,17 +42,17 @@
                             <div id="step2" class="d-none">
                                 <div class="form-group">
                                     <label for="celular">Celular</label>
-                                    <input name="celular" type="number" required class="form-control" id="celular"
+                                    <input name="celular" type="number" maxlength="11" required class="form-control" id="celular"
                                         placeholder="Digite o número do seu celular">
                                 </div>
                                 <div class="form-group">
                                     <label for="rg">RG</label>
-                                    <input name="rg" type="number" required class="form-control" id="rg"
+                                    <input name="rg" type="number" maxlength="9" required class="form-control" id="rg"
                                         placeholder="Digite o seu RG">
                                 </div>
                                 <div class="form-group">
                                     <label for="cpf">CPF</label>
-                                    <input name="cpf" type="number" required class="form-control" id="cpf"
+                                    <input name="cpf" type="number" maxlength="9" required class="form-control" id="cpf"
                                         placeholder="Digite o seu CPF">
                                 </div>
                                 <button type="button" class="btn btn-secondary btn-block mt-4"
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="col-md-6 d-none d-md-block">
-                <img src="../../assets/img/login-img.png" class="img-fluid" alt="Imagem de Cadastro">
+                <img src="/assets/img/login-img.png" class="img-fluid" alt="Imagem de Cadastro">
             </div>
         </div>
     </div>

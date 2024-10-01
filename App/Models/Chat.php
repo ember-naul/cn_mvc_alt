@@ -4,18 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AvaliacaoCliente extends Model
+class Chat extends Model
 {
-    protected $table = 'avaliacoes_clientes';
+    protected $table = 'chat';
     protected $primaryKey = 'id';
     public $timestamps = false;
 
-    public function cliente()
+    public function chat()
     {
         return $this->belongsTo(Cliente::class, 'id_cliente', 'id');
     }
-    public function servico()
+    public function profissional()
     {
-        return $this->belongsTo(Servico::class, 'id_servico', 'id');
+        return $this->belongsTo(Profissional::class, 'id_profissional', 'id');
     }
 }

@@ -13,4 +13,9 @@ class Profissional extends Model
     {
         return $this->belongsTo(Usuario::class, 'id_usuario', 'id');
     }
+    public function habilidades()
+    {
+        return $this->belongsToMany(Habilidade::class, 'profissionais_habilidades', 'id_profissional', 'id_habilidade');
+    }
+    
 }

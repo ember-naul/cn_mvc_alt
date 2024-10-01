@@ -15,17 +15,17 @@
             <div class="form-group">
               <label for="nome">Seu nome</label>
               <input type="text" class="form-control" id="nome" name="nome" disabled
-                value='<?php echo ($_SESSION['nome']); ?>' required>
+                value='<?php echo ($_SESSION['nome']); ?>'>
             </div>
             <div class="form-group">
               <label for="celular">Seu celular</label>
               <input type="text" class="form-control" id="celular" name="celular" disabled
-                value='<?php echo ($_SESSION['celular']); ?>' required>
+                value='<?php echo ($_SESSION['celular']); ?>'>
             </div>
             <div class="form-group">
               <label for="rg">Seu RG</label>
               <input type="text" class="form-control" id="rg" name="rg" disabled
-                value='<?php echo ($_SESSION['rg']); ?>' required>
+                value='<?php echo ($_SESSION['rg']); ?>'>
             </div>
             <div class="form-group">
               <label for="cep">Seu CEP</label>
@@ -56,7 +56,7 @@
     </div>
   </section>
   <div class="col-md-12 text-center">
-    <div class="loading">Loading</div>
+    <div class="loading"></div>
     <div class="error-message"></div>
   </div>
 </main>
@@ -69,7 +69,7 @@
     if (value.length === 8) {
       const cep = value.replace('-', '');
       const loading = document.querySelector('.loading');
-      loading.style.display = 'block'; // Mostrar o loading
+      loading.style.display = 'block';
 
       fetch(`https://viacep.com.br/ws/${cep}/json/`)
         .then(response => {
