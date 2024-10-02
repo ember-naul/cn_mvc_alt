@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt_BR">
+<html lang="pt-BR">
 
 <head>
   <title>Casa & Negócios</title>
@@ -31,12 +31,24 @@
   <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
   <style>
     .toast {
-  position: fixed;
-  top: 20px; 
-  right: 20px;
-  z-index: 1050; 
-  width: 300px; 
-}
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1050;
+      width: 300px;
+    }
+
+    .logocn {
+      width: 70px;
+      height: 70px;
+    }
+
+    @media (max-width: 768px) {
+      .logocn {
+        width: 60px;
+        height: 60px
+      }
+    }
   </style>
 </head>
 
@@ -47,7 +59,8 @@ if ($_SESSION['logado'] == true): ?>
     <header id="header" class="header d-flex align-items-center sticky-top">
       <?php require_once __DIR__ . '/../../../App/Views/template/navbar.php'; ?>
       <?php if (isset($_SESSION['sucesso'])) { ?>
-        <div class="toast bg-success text-white" role="alert" data-aos="fade-up" data-aos-delay="100" aria-live="assertive" aria-atomic="true">
+        <div class="toast bg-success text-white" role="alert" data-aos="fade-up" data-aos-delay="100" aria-live="assertive"
+          aria-atomic="true">
           <div class="toast-header">
             <img src="/assets/img/logo2.png" width="30px" height="30px" class="rounded mr-2" alt="...">
             <strong class="mr-auto">Sucesso!</strong>
@@ -57,7 +70,7 @@ if ($_SESSION['logado'] == true): ?>
             </button>
           </div>
           <div class="toast-body">
-          <?= $_SESSION['sucesso'] ?>
+            <?= $_SESSION['sucesso'] ?>
           </div>
         </div>
         <?php
@@ -65,7 +78,7 @@ if ($_SESSION['logado'] == true): ?>
       }
       if (isset($_SESSION['erro'])) {
         ?>
-       <div class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
 
           <div class="toast-header">
             <img src="/assets/img/logo2.png" width="30px" height="30px" class="rounded mr-2" alt="...">
@@ -76,7 +89,7 @@ if ($_SESSION['logado'] == true): ?>
             </button>
           </div>
           <div class="toast-body">
-          <?= $_SESSION['erro'] ?>
+            <?= $_SESSION['erro'] ?>
           </div>
         </div>
         <?php

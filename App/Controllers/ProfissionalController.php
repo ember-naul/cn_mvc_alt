@@ -48,7 +48,6 @@ class ProfissionalController extends Controller
 
     public function novoProfissional()
     {
-        $path = "../../config/certifications/cacert.perm";
         $cnpj = $_POST['cnpj'] ?? null;
 
         // Validação básica do CNPJ
@@ -95,10 +94,8 @@ class ProfissionalController extends Controller
 
     private function validarCNPJ($cnpj)
     {
-        // Remove caracteres não numéricos
         $cnpj = preg_replace('/\D/', '', $cnpj);
 
-        // Verifica se tem 14 dígitos
         if (strlen($cnpj) != 14) {
             return false;
         }
@@ -107,8 +104,6 @@ class ProfissionalController extends Controller
         if (preg_match('/^(\d)\1{13}$/', $cnpj)) {
             return false;
         }
-
-        // Cálculo do primeiro dígito verificador
         $soma = 0;
         $mult = 5;
 

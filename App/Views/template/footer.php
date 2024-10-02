@@ -44,7 +44,7 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <strong>&copy; 2024 <a href="/home">Casa & Negócios</a>.</strong> Todos os direitos reservados.
+            <strong>&copy; 2024 <a href="/">Casa & Negócios</a>.</strong> Todos os direitos reservados.
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you've purchased the pro version. -->
