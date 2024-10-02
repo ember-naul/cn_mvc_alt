@@ -1,6 +1,8 @@
 <?php
 namespace App\Views\cliente;
 
+namespace App\Views\cliente;
+
 use App\Models\Cliente;
 use App\Models\Profissional;
 use App\Models\Habilidade;
