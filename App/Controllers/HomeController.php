@@ -39,7 +39,7 @@ class HomeController extends Controller {
     public function mapa(){
         return require_once __DIR__ . '/../Views/mapa.php';
     }
-    public function a(){
+    public function at(){
         return require_once __DIR__ . '/../Views/profissional/server.php';
     }
 

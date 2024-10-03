@@ -24,8 +24,10 @@
                     <h4>Links úteis</h4>
                     <ul>
                         <li><i class="bi bi-chevron-right"></i> <a href="/home">Home</a></li>
+                        <?php if ($_SESSION['logado'] == false): ?>
                         <li><i class="bi bi-chevron-right"></i> <a href="/home#about">Sobre nós</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="/home#services">Serviços</a></li>
+                        <?php endif;?>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Termos de serviço</a></li>
                     </ul>
                 </div>

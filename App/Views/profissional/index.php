@@ -220,25 +220,46 @@ $_SESSION['profissional_id'] = $profissional->id;
     <script>
         var map;
         var marker;
-        var firstUpdate = true; // Para centralizar o mapa apenas na primeira atualização
+        var firstUpdate = true;
         const professionalId = '<?php echo $_SESSION['profissional_id']; ?>'; // ID do profissional
+
+        /////////////////////////////////////// PARTE DA LOCALIZAÇÃO PELO AJAX E PELO PUSHER /////////////////////////////////////////
+        function enviarLocalizacao(lat, lon) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/at', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('Localização enviada com sucesso');
+                }
+            };
+
+            var params = 'latitude=' + lat + '&longitude=' + lon;
+            xhr.send(params);
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        function atualizarLocalizacao() {
+            navigator.geolocation.getCurrentPosition(success, error, {
+                enableHighAccuracy: true,
+                timeout: 5000
+            });
+        }
 
         function success(pos) {
             var lat = pos.coords.latitude;
             var lon = pos.coords.longitude;
             console.log(lat, lon);
 
-            // Inicializa o mapa apenas uma vez
             if (!map) {
                 map = L.map('map').setView([lat, lon], 13);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
-
-                // Cria o marcador na localização inicial
                 marker = L.marker([lat, lon]).addTo(map);
             } else {
-                // Atualiza a posição do marcador
                 marker.setLatLng([lat, lon]);
             }
 
@@ -248,71 +269,21 @@ $_SESSION['profissional_id'] = $profissional->id;
                 firstUpdate = false;
             }
 
-            // Envia a localização do profissional ao servidor
-            sendProfessionalLocation(lat, lon);
+            enviarLocalizacao(lat, lon);
         }
 
         function error(err) {
             console.log(err);
         }
 
-        // Ativa o rastreamento da localização
-        navigator.geolocation.watchPosition(success, error, {
-            enableHighAccuracy: true,
-            timeout: 5000
-        });
+        // Ativa o rastreamento da localização a cada 10 segundos
+        setInterval(atualizarLocalizacao, 10000); // 10000 ms = 10 segundos
 
-        // Inicializa o Pusher para o Profissional
-        const professionalPusher = new Pusher('8702b12d1675f14472ac', {
-            cluster: 'sa1'
-        });
+        // Faz a primeira chamada imediatamente
+        atualizarLocalizacao();
 
-        // Função para enviar a localização do profissional
-        function sendProfessionalLocation(latitude, longitude) {
-            fetch('server.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({latitude, longitude, type: 'professional', id: professionalId})
-            }).then(response => {
-                console.log('Status da resposta: [opt 1]:', response.status); // Verifique o status da resposta
-                return response.text(); // Mude para .text() para depurar o conteúdo
-            }).then(data => {
-                console.log('Dados da resposta [opt 2]:', data); // Verifique a resposta
-                try {
-                    const jsonData = JSON.parse(data); // Tente analisar o JSON
-                    console.log(jsonData);
-                } catch (e) {
-                    console.error('JSON Erro na conversão [opt 3]:', e);
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-            });
 
-            // Listener para atualizações de clientes
-            const clientChannel = professionalPusher.subscribe('location-channel');
-            clientChannel.bind('location-updated', function (data) {
-                // Atualizar o mapa com as novas localizações dos clientes
-                updateClientMap(data.clients);
-            });
-
-            // Função para atualizar o mapa com localizações de clientes
-            function updateClientMap(clients) {
-                // Aqui você pode implementar a lógica para adicionar marcadores de clientes no mapa
-                console.log(clients);
-            }
-        } // Feche a função sendProfessionalLocation
-    </script> <!-- Fechar a tag <script> -->
-    <div class="prestadores-container">
-        <?php
-        // Exibir profissionais
-        // foreach ($profissionais as $profissional):
-        ?>
-        <!-- <div class="prestador" onclick="handlePrestadorClick(1)"> -->
-        <!-- Aqui você pode exibir informações dos profissionais -->
-        <!-- </div> -->
-        <?php // endforeach; ?>
-    </div>
+    </script>
+    <div class="prestadores-container"></div>
 </div>
 </body>

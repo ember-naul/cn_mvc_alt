@@ -1,9 +1,13 @@
 <?php
+
 use App\Models\Habilidade;
 use App\Models\Profissional;
+use App\Models\Cliente;
 use App\Models\Usuario;
 use App\Models\ProfissionalHabilidade;
+
 $usuario = Usuario::where('id', $_SESSION['id_usuario'])->first();
+$cliente = Cliente::where('id_usuario', $usuario->id)->first();
 $profissional = Profissional::where('id_usuario', $usuario->id)->first();
 
 $habilidades = [];
@@ -23,8 +27,11 @@ if ($profissional) {
     <nav id="navmenu" class="navmenu">
         <ul>
             <li><a href="/home">Home</a></li>
-            <li><a href="/home#about">Sobre nós</a></li>
-            <li><a href="/home#services">Serviços</a></li>
+
+            <?php if ($_SESSION['logado'] == false): ?>
+                <li><a href="/home#about">Sobre nós</a></li>
+                <li><a href="/home#services">Serviços</a></li>
+            <?php endif; ?>
             <?php if (isset($_SESSION['profissional']) && $_SESSION['profissional'] == true): ?>
                 <li><a href="/profissional/habilidades">Habilidades</a></li>
             <?php endif; ?>
@@ -45,6 +52,7 @@ if ($profissional) {
     return (strlen($cpf) !== 11) ? 'CPF inválido' :
         substr($cpf, 0, 3) . '.***.***-' . substr($cpf, -2);
 }
+
 function censurarRG($rg)
 {
     $rg = preg_replace(
@@ -53,10 +61,11 @@ function censurarRG($rg)
         $rg
     );
     return (strlen($rg) < 8 || strlen($rg) > 12) ? 'RG inválido' : substr($rg, 0, 2) . '.***.***-' . substr(
-        $rg,
-        -2
-    );
+            $rg,
+            -2
+        );
 }
+
 ?>
 
 <div class="modal fade" id="modal-lg" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
@@ -65,7 +74,7 @@ function censurarRG($rg)
             <div class="modal-header justify-content-center">
                 <h4 class="modal-title" id="modalLabel">Ajustes</h4>
                 <button type="button" class="close position-absolute" style="right: 15px;" data-dismiss="modal"
-                    aria-label="Close">
+                        aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -74,7 +83,7 @@ function censurarRG($rg)
                 <div class="row mb-3">
                     <div class="card-body box-profile text-center">
                         <img width="150px" height="150px" class="profile-user-img img-fluid img-circle"
-                            src="/assets/img/perfilicon.png" alt="User profile picture">
+                             src="/assets/img/perfilicon.png" alt="User profile picture">
                         <h3 class="profile-username"><?= $usuario->nome ?></h3>
 
                         <div class="form-group">
@@ -82,7 +91,7 @@ function censurarRG($rg)
                             <div id="skills-container" class="d-flex flex-wrap justify-content-center">
                                 <?php foreach ($habilidades as $profissionalHabilidade): ?>
                                     <span
-                                        class="badge badge-info m-1"><?= $profissionalHabilidade->habilidade->nome ?></span>
+                                            class="badge badge-info m-1"><?= $profissionalHabilidade->habilidade->nome ?></span>
                                 <?php endforeach; ?>
                             </div>
 
@@ -106,7 +115,7 @@ function censurarRG($rg)
                 <div class="row text-center">
                     <div class="col-6 mb-2">
                         <button
-                            class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
+                                class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
                             <img src="/assets/img/servicos.png" alt="Histórico de Serviços" width="24" class="mr-2">
                             Histórico de Serviços
                         </button>
@@ -114,32 +123,36 @@ function censurarRG($rg)
                     <div class="col-6 mb-2">
                         <a href="/enderecos">
                             <button
-                                class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
+                                    class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
                                 <img src="/assets/img/endereco.png" alt="Endereços" width="24" class="mr-2"> Endereços
                             </button>
                         </a>
                     </div>
                     <div class="col-6 mb-2">
                         <button
-                            class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
+                                class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
                             <img src="/assets/img/pagamento.png" alt="Pagamento" width="24" class="mr-2"> Pagamento
                         </button>
                     </div>
-                    <div class="col-6 mb-2">
-                        <button
-                            class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
-                            <img src="/assets/img/suporte.png" alt="Suporte" width="24" class="mr-2"> Suporte
-                        </button>
-                    </div>
+                    <?php if (!$cliente || !$profissional || !$cliente && !$profissional): ?>
+                        <div class="col-6 mb-2">
+                            <button data-toggle="modal" data-target="#exampleModalCenter"
+                                    class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
+                                <img src="/assets/img/suporte.png" alt="Suporte" width="24" class="mr-2"> Cadastrar em
+                                outro perfil
+                            </button>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="col-6 mb-2">
                         <a href="/home#about"
-                            class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
+                           class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
                             <img src="/assets/img/sobre.png" alt="Sobre" width="24" class="mr-2"> Sobre
                         </a>
                     </div>
                     <div class="col-6 mb-2">
                         <a href="/deslogar"
-                            class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
+                           class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
                             <img src="/assets/img/sair.png" alt="Sair" width="24" class="mr-2"> Sair
                         </a>
                     </div>
