@@ -23,10 +23,13 @@ class DefaultServices {
             $_SESSION['email']  = null;
             $_SESSION['nome']   = null;
             $_SESSION['id_usuario'] = null;
+            $_SESSION['cliente'] = null;
+            $_SESSION['profissional'] = null;
+            $_SESSION['escolha'] = null;
 
             session_destroy();
             
-            header('Location: /login');
+            header('Location: /');
             exit();
         }catch(Exception $e){
             throw new Exception($e->getMessage());

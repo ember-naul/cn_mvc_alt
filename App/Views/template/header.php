@@ -29,7 +29,9 @@
   <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
-  <style>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+    <style>
     .toast {
       position: fixed;
       top: 20px;
@@ -52,13 +54,7 @@
   </style>
 </head>
 
-<?php
-if ($_SESSION['logado'] == true): ?>
-
-  <body class="starter-page-page">
-    <header id="header" class="header d-flex align-items-center sticky-top">
-      <?php require_once __DIR__ . '/../../../App/Views/template/navbar.php'; ?>
-      <?php if (isset($_SESSION['sucesso'])) { ?>
+<?php if (isset($_SESSION['sucesso'])) { ?>
         <div class="toast bg-success text-white" role="alert" data-aos="fade-up" data-aos-delay="100" aria-live="assertive"
           aria-atomic="true">
           <div class="toast-header">
@@ -95,5 +91,11 @@ if ($_SESSION['logado'] == true): ?>
         <?php
         unset($_SESSION['erro']);
       }
-      ?>
+
+if ($_SESSION['logado'] == true): ?>
+
+  <body class="starter-page-page">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+      <?php require_once __DIR__ . '/../../../App/Views/template/navbar.php'; ?>
+      
     <?php endif; ?>

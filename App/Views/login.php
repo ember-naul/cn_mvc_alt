@@ -23,14 +23,14 @@
                             <form action='/iniciarsessao' method='post'>
                                 <div class="form-group">
                                     <label for="email">Seu email</label>
-                                    <input name="email" type="email" required class="form-control" id="email" placeholder="Email">
+                                    <input name="email" type="email" required class="form-control" id="email_login" placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label for="senha">Senha</label>
-                                    <input name="senha" type="password" required class="form-control" id="senha" placeholder="Senha">
+                                    <input name="senha" type="password" required class="form-control" id="senha_login" placeholder="Senha">
                                 </div>
                                 <div class="form-group form-check">
-                                    <input id="remember-me" name="remember-me" type="checkbox" class="form-check-input">
+                                    <input id="remember-me_login" name="remember-me" type="checkbox" class="form-check-input">
                                     <label for="remember-me" class="form-check-label">Lembrar este dispositivo</label>
                                 </div>
                                 <div class="d-flex justify-content-between">
@@ -48,25 +48,3 @@
             </div>
         </div>
     </main>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modal_escolha_conta" tabindex="-1" role="dialog" aria-labelledby="modalEscolhaContaLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalEscolhaContaLabel">Escolha de Conta</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Você tem contas de cliente e profissional. Por favor, escolha como deseja entrar:</p>
-                    <div class="d-flex justify-content-around">
-                        <a href="/cliente/home" class="btn btn-primary">Entrar como Cliente</a>
-                        <a href="/profissional/home" class="btn btn-success">Entrar como Profissional</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-

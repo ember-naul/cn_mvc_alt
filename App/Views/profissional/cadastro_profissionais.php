@@ -3,10 +3,7 @@
 <main class="main">
   <div class="page-title" data-aos="fade">
     <div class="container">
-      <h1>Starter Page</h1>
-    </div>
-  </div>
-  <section id="starter-section" class="starter-section section">
+    <section id="starter-section" class="starter-section section">
     <div class="container" data-aos="fade-up">
       <div class="section-title" data-aos="fade-up">
         <h2>Cadastro</h2>
@@ -41,4 +38,7 @@
       </div>
     </div>
   </section>
+    </div>
+  </div>
+  
 </main>

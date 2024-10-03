@@ -1,4 +1,5 @@
 <?php require_once __DIR__ . '../../redirect_cadastros.php'; ?>
+<?php //require_once __DIR__ .'/../modals/modal_perfil.php';?>
 <?php //require_once __DIR__ . '../../cadastro_profissionais.php'; ?>
 <?php if ($_SESSION['logado'] == true): ?>
     <footer id="footer" class="footer">
@@ -44,7 +45,7 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <strong>&copy; 2024 <a href="/">Casa & Negócios</a>.</strong> Todos os direitos reservados.
+            <strong>&copy; 2024 <a href="/home">Casa & Negócios</a>.</strong> Todos os direitos reservados.
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you've purchased the pro version. -->
@@ -62,7 +63,9 @@
     </div>
 <?php endif; ?>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -71,6 +74,7 @@
 <script src="/assets/js/main.js"></script>
 <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
 <script src="/assets/plugins/sweetalert2/sweetalert2.js"></script>
+<!-- <script src="/assets/plugins/inputmask/jquery.inputmask.min.js"></script> -->
 <script src="/assets/plugins/select2/js/select2.full.min.js"></script>
 <script src="/assets/vendor/aos/aos.js"></script>
 

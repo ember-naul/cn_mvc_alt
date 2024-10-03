@@ -681,8 +681,8 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v10.48.20",
-            "version_normalized": "10.48.20.0",
+            "version": "v10.48.22",
+            "version_normalized": "10.48.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -739,8 +739,8 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v10.48.20",
-            "version_normalized": "10.48.20.0",
+            "version": "v10.48.22",
+            "version_normalized": "10.48.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -788,8 +788,8 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v10.48.20",
-            "version_normalized": "10.48.20.0",
+            "version": "v10.48.22",
+            "version_normalized": "10.48.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -842,8 +842,8 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v10.48.20",
-            "version_normalized": "10.48.20.0",
+            "version": "v10.48.22",
+            "version_normalized": "10.48.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -893,17 +893,17 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v10.48.20",
-            "version_normalized": "10.48.20.0",
+            "version": "v10.48.22",
+            "version_normalized": "10.48.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "f11ecaa2b29f3fb9c0a46ef20ad93508372ef833"
+                "reference": "098df19dc27f8a1c938547fbaa0e308b405b61c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/f11ecaa2b29f3fb9c0a46ef20ad93508372ef833",
-                "reference": "f11ecaa2b29f3fb9c0a46ef20ad93508372ef833",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/098df19dc27f8a1c938547fbaa0e308b405b61c5",
+                "reference": "098df19dc27f8a1c938547fbaa0e308b405b61c5",
                 "shasum": ""
             },
             "require": {
@@ -930,7 +930,7 @@
                 "illuminate/pagination": "Required to paginate the result set (^10.0).",
                 "symfony/finder": "Required to use Eloquent model factories (^6.2)."
             },
-            "time": "2024-08-07T21:07:46+00:00",
+            "time": "2024-09-09T13:54:22+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -969,8 +969,8 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v10.48.20",
-            "version_normalized": "10.48.20.0",
+            "version": "v10.48.22",
+            "version_normalized": "10.48.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1018,8 +1018,8 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v10.48.20",
-            "version_normalized": "10.48.20.0",
+            "version": "v10.48.22",
+            "version_normalized": "10.48.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
@@ -2574,17 +2574,17 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v6.4.10",
-            "version_normalized": "6.4.10.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "117f1f20a7ade7bcea28b861fb79160a21a1e37b"
+                "reference": "133ac043875f59c26c55e79cf074562127cce4d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/117f1f20a7ade7bcea28b861fb79160a21a1e37b",
-                "reference": "117f1f20a7ade7bcea28b861fb79160a21a1e37b",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/133ac043875f59c26c55e79cf074562127cce4d2",
+                "reference": "133ac043875f59c26c55e79cf074562127cce4d2",
                 "shasum": ""
             },
             "require": {
@@ -2606,7 +2606,7 @@
                 "symfony/mime": "^5.4|^6.0|^7.0",
                 "symfony/rate-limiter": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-07-26T12:36:27+00:00",
+            "time": "2024-09-20T08:18:25+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2634,7 +2634,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v6.4.10"
+                "source": "https://github.com/symfony/http-foundation/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -2654,21 +2654,21 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.30.0",
-            "version_normalized": "1.30.0.0",
+            "version": "v1.31.0",
+            "version_normalized": "1.31.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c"
+                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fd22ab50000ef01661e2a31d850ebaa297f8e03c",
-                "reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/85181ba99b2345b0ef10ce42ecac37612d9fd341",
+                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "provide": {
                 "ext-mbstring": "*"
@@ -2676,7 +2676,7 @@
             "suggest": {
                 "ext-mbstring": "For best performance"
             },
-            "time": "2024-06-19T12:30:46+00:00",
+            "time": "2024-09-09T11:45:10+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -2717,7 +2717,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -2737,23 +2737,23 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.30.0",
-            "version_normalized": "1.30.0.0",
+            "version": "v1.31.0",
+            "version_normalized": "1.31.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433"
+                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/77fa7995ac1b21ab60769b7323d600a991a90433",
-                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
+                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
-            "time": "2024-05-31T15:07:36+00:00",
+            "time": "2024-09-09T11:45:10+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -2800,7 +2800,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -2899,17 +2899,17 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v6.4.11",
-            "version_normalized": "6.4.11.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "8ee0c24c1bf61c263a26f1b9b6d19e83b1121f2a"
+                "reference": "a7c8036bd159486228dc9be3e846a00a0dda9f9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/8ee0c24c1bf61c263a26f1b9b6d19e83b1121f2a",
-                "reference": "8ee0c24c1bf61c263a26f1b9b6d19e83b1121f2a",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/a7c8036bd159486228dc9be3e846a00a0dda9f9f",
+                "reference": "a7c8036bd159486228dc9be3e846a00a0dda9f9f",
                 "shasum": ""
             },
             "require": {
@@ -2931,7 +2931,7 @@
                 "symfony/http-foundation": "^5.4|^6.0|^7.0",
                 "symfony/yaml": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-08-29T08:15:38+00:00",
+            "time": "2024-09-20T08:32:26+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -2965,7 +2965,7 @@
                 "url"
             ],
             "support": {
-                "source": "https://github.com/symfony/routing/tree/v6.4.11"
+                "source": "https://github.com/symfony/routing/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -2985,17 +2985,17 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v6.4.10",
-            "version_normalized": "6.4.10.0",
+            "version": "v6.4.12",
+            "version_normalized": "6.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "94041203f8ac200ae9e7c6a18fa6137814ccecc9"
+                "reference": "cf8360b8352b086be620fae8342c4d96e391a489"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/94041203f8ac200ae9e7c6a18fa6137814ccecc9",
-                "reference": "94041203f8ac200ae9e7c6a18fa6137814ccecc9",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/cf8360b8352b086be620fae8342c4d96e391a489",
+                "reference": "cf8360b8352b086be620fae8342c4d96e391a489",
                 "shasum": ""
             },
             "require": {
@@ -3032,7 +3032,7 @@
                 "symfony/service-contracts": "^2.5|^3",
                 "symfony/yaml": "^5.4|^6.0|^7.0"
             },
-            "time": "2024-07-26T12:30:32+00:00",
+            "time": "2024-09-16T06:02:54+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3063,7 +3063,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v6.4.10"
+                "source": "https://github.com/symfony/translation/tree/v6.4.12"
             },
             "funding": [
                 {

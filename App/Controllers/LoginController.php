@@ -5,8 +5,6 @@ use App\Models\Cliente;
 use App\Models\Profissional;
 use App\Controllers\Controller;
 use App\Services\DefaultServices;
-use App\Services\RedirectServices;
-use PHPMailer\PHPMailer\PHPMailer;
 use Exception;
 
 class LoginController extends Controller
@@ -47,12 +45,13 @@ class LoginController extends Controller
 
         $usuario = Usuario::where([
             ['email', '=', $email],
+            ['celular', '=', $celular],
             ['cpf', '=', $cpf],
             ['rg', '=', $rg]
         ])->first();
 
         if ($usuario) {
-            throw new Exception("Email já cadastrado");
+            return redirect('/cadastro')->erro(mensagem: "Já há um usuário cadastrado com algum dos seguintes dados: E-mail, Celular, RG ou CPF.");
         }
 
         if ($senha != $confirmar_senha) {
@@ -121,7 +120,6 @@ class LoginController extends Controller
             return redirect('/home')->sucesso('Você foi redirecionado para escolher seu perfil!');
         } else {
            return redirect('/home')->sucesso('Você foi redirecionado para escolher seu perfil!');
-//           throw new Exception("O usuário não possui perfil de cliente nem de profissional.");
         }
 
     } catch (Exception $e) {

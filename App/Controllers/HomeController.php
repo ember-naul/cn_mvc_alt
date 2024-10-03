@@ -9,10 +9,6 @@ use App\Models\Usuario;
 class HomeController extends Controller {
     public $validarLogin = false;
     public function index() {
-        // Verifica se o usuário está logado
-        //if (!isset($_SESSION['id_usuario'])) {
-        //    return redirect('/login')->erro("Você precisa estar logado para acessar essa página.");
-        //}
         if (isset($_SESSION['profissonal']) || isset($_SESSION['cliente'])){
         $usuario = Usuario::find($_SESSION['id_usuario']);
         $cliente = Cliente::where('id_usuario', $usuario->id)->first();
@@ -42,6 +38,9 @@ class HomeController extends Controller {
 
     public function mapa(){
         return require_once __DIR__ . '/../Views/mapa.php';
+    }
+    public function a(){
+        return require_once __DIR__ . '/../Views/profissional/server.php';
     }
 
     public function chat_teste(){

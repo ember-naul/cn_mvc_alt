@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Views\cliente;
 
 namespace App\Views\cliente;
@@ -14,12 +15,17 @@ $cliente = Cliente::where('id_usuario', $usuario->id)->first();
 $profissionais = Profissional::with('habilidades')->get();
 $_SESSION['cliente_id'] = $cliente->id;
 ?>
+
 <head>
     <meta charset="utf-8">
     <title>Google Maps Example</title>
-    <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6"></script> -->
     <style>
-
         html ::-webkit-scrollbar {
             width: 10px;
         }
@@ -33,41 +39,45 @@ $_SESSION['cliente_id'] = $cliente->id;
             background: #ededed;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            /*overflow-y: hidden;*/
-            overflow: auto; /* Alterado para auto */
+            overflow-x: hidden;
+            background-color: #e1e1e1;
         }
 
         .container-mapa {
             display: flex;
-            height: 100%;
-            width: 80%;
-            margin: auto;
+            height: 87vh;
+            width: 80vw;
+            margin: 0 auto;
             flex-wrap: wrap;
         }
 
-        gmp-map {
+        #map {
             flex: 1;
-            height: 45rem;
+            height: 100%;
             width: 100%;
-            margin: auto;
+            margin: 0;
             border: 2px solid #ddd;
             border-radius: 10px;
+            z-index: 4;
         }
+
 
         .prestadores-container {
             display: flex;
             flex-direction: column;
-            width: 28%;
-            max-height: 45rem; /* Mesma altura do mapa */
+            width: 35%;
+            max-height: 45rem;
             overflow-y: auto;
             overflow-x: hidden;
-            box-sizing: border-box; /* Inclui padding e border no cálculo do tamanho */
+            box-sizing: border-box;
             margin: auto;
+
         }
 
         .prestador {
@@ -121,11 +131,14 @@ $_SESSION['cliente_id'] = $cliente->id;
         }
 
         @media (max-width: 768px) {
-            html, body {
+
+            html,
+            body {
                 height: 100%;
                 margin: 0;
                 padding: 0;
-                overflow: hidden; /* Desativa a rolagem geral */
+                overflow: hidden;
+                /* Desativa a rolagem geral */
             }
 
             .container-mapa {
@@ -133,24 +146,29 @@ $_SESSION['cliente_id'] = $cliente->id;
                 width: 768px;
                 height: 45%;
                 /*height: calc(100% - 100px);*/
-                margin: 0; /* Usa a altura total da tela */
+                margin: 0;
+                /* Usa a altura total da tela */
                 margin-bottom: 100%;
             }
 
 
-            gmp-map {
-                height: 50%;
-                width: 54%;
+            #map {
+                height: 50vh;
+                width: 100vw;
                 margin: 0;
                 order: 2;
             }
 
             .prestadores-container {
                 width: 100%;
-                max-height: 39.4%; /* Adjust height for mobile */
-                margin: 0; /* Remove margin */
-                border-radius: 20px 20px 0 0; /* Rounded corners on top */
-                position: fixed; /* Fixed at bottom */
+                max-height: 26rem;
+                /* Adjust height for mobile */
+                margin: 0;
+                /* Remove margin */
+                border-radius: 20px 20px 0 0;
+                /* Rounded corners on top */
+                position: fixed;
+                /* Fixed at bottom */
                 bottom: 0;
                 left: 0;
                 right: 0;
@@ -174,7 +192,8 @@ $_SESSION['cliente_id'] = $cliente->id;
                 font-size: 1em;
             }
 
-            .p-prestador, .distancia {
+            .p-prestador,
+            .distancia {
                 font-size: 0.8em;
             }
         }
@@ -199,66 +218,80 @@ $_SESSION['cliente_id'] = $cliente->id;
         .zoom-controls button:hover {
             background-color: #2b3a50;
         }
-
     </style>
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 </head>
 
 <body>
-<div class="search">
-    <gmpx-place-picker placeholder="Digite seu endereço."></gmpx-place-picker>
-</div>
-
 <div class="container-mapa">
-    <gmpx-api-loader key="AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4"
-                     solution-channel="GMP_GE_mapsandplacesautocomplete_v1"></gmpx-api-loader>
-    <gmp-map center="37.4219983,-122.084" zoom="17" map-id="DEMO_MAP_ID" id="map">
-        <div slot="control-block-start-inline-start" class="place-picker-container">
-            <div class="zoom-controls">
-                <button id="zoom-in">+</button>
-                <button id="zoom-out">-</button>
-            </div>
-        </div>
-        <gmp-advanced-marker></gmp-advanced-marker>
-    </gmp-map>
-    <?php
-        
-        // foreach ($profissionais as $profissional) {
-        //     $cont = 1;
-        //     $nomeUsuario = $profissional->usuario ? $profissional->usuario->nome : 'Usuário não encontrado';
-        //     echo "Nome do Profissional: " . $nomeUsuario . "<br>";
-        //     echo "Habilidades: \n";
-        
-        //     foreach ($profissional->habilidades as $habilidade) {
-                
-        //         echo " $cont- \n" . $habilidade->nome . " - \n"; // ajuste o campo 'nome' conforme sua tabela
-        //         $cont++;
-        //     }
-            
-        //     echo "<br>"; 
-        // }
-        ?>
+
+    <div id="map"></div>
+    <script>
+        var map;
+        var marker;
+        var firstUpdate = true; // Variável de controle para centralizar apenas uma vez
+
+        function success(pos) {
+            var lat = pos.coords.latitude;
+            var lon = pos.coords.longitude;
+            console.log(lat, lon);
+            // Inicializa o mapa apenas uma vez
+            if (!map) {
+
+                map = L.map('map').setView([lat, lon], 13);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                // Cria o marcador na localização inicial
+                marker = L.marker([lat, lon]).addTo(map);
+
+            } else {
+                // Atualiza a posição do marcador
+                marker.setLatLng([lat, lon]);
+            }
+
+            // Centraliza o mapa apenas na primeira vez
+            if (firstUpdate) {
+                map.setView([lat, lon], 13);
+                firstUpdate = false;
+            }
+        }
+
+        function error(err) {
+            console.log(err);
+        }
+
+        // Ativa o rastreamento da localização
+        navigator.geolocation.watchPosition(success, error, {
+            enableHighAccuracy: true,
+            timeout: 5000
+        });
+    </script>
+
+
+    </script>
     <div class="prestadores-container">
-         <?php 
-         foreach ($profissionais as $profissional):
-            
-         $nomeUsuario = $profissional->usuario ? $profissional->usuario->nome : 'Usuário não encontrado';?>
-        <div class="prestador" onclick="handlePrestadorClick(1)">
-            <img src="/assets/img/eletricista.jpg" alt="bruno">
-            <div class="h5-prestador">
-                <h5><?= $nomeUsuario ?></h5>
+        <?php
+        foreach ($profissionais as $profissional):
+
+            $nomeUsuario = $profissional->usuario ? $profissional->usuario->nome : 'Usuário não encontrado'; ?>
+            <div class="prestador" onclick="handlePrestadorClick(1)">
+                <img src="/assets/img/eletricista.jpg" alt="bruno">
+                <div class="h5-prestador">
+                    <h5><?= $nomeUsuario ?></h5>
+                </div>
+                <div class="p-prestador">
+                    <?php foreach ($profissional->habilidades as $habilidade): ?>
+
+                        <p><?= $habilidade->nome . " "; ?></p>
+                    <?php endforeach; ?>
+                </div>
+                <span class="distancia">5.2 km</span>
             </div>
-            <div class="p-prestador">
-                <?php foreach($profissional->habilidades as $habilidade):?>
-                    
-                <p><?= $habilidade->nome . " ";?></p>
-                <?php endforeach; ?>
-            </div>
-            <span class="distancia">5.2 km</span>
-        </div>
         <?php endforeach; ?>
-        
-        
+
+
         <div class="prestador" onclick="handlePrestadorClick(1)">
             <img src="/assets/img/eletricista.jpg" alt="bruno">
             <div class="h5-prestador">
@@ -272,7 +305,7 @@ $_SESSION['cliente_id'] = $cliente->id;
         <div class="prestador" onclick="handlePrestadorClick(1)">
             <img src="/assets/img/eletricista.jpg" alt="bruno">
             <div class="h5-prestador">
-                <h5>gdfgfdgfd</h5>
+                <h5>Bruninho</h5>
             </div>
             <div class="p-prestador">
                 <p>50 anos - Jardinista</p>
@@ -282,7 +315,7 @@ $_SESSION['cliente_id'] = $cliente->id;
         <div class="prestador" onclick="handlePrestadorClick(1)">
             <img src="/assets/img/eletricista.jpg" alt="bruno">
             <div class="h5-prestador">
-                <h5>hgfhgfh</h5>
+                <h5>Bruninho</h5>
             </div>
             <div class="p-prestador">
                 <p>50 anos - Jardinista</p>
@@ -292,160 +325,76 @@ $_SESSION['cliente_id'] = $cliente->id;
         <div class="prestador" onclick="handlePrestadorClick(1)">
             <img src="/assets/img/eletricista.jpg" alt="bruno">
             <div class="h5-prestador">
-                <h5>cxzczxc</h5>
+                <h5>Bruninho</h5>
             </div>
             <div class="p-prestador">
-                <p>57 anos - Jardinista</p>
+                <p>50 anos - Jardinista</p>
             </div>
             <span class="distancia">5.2 km</span>
         </div>
-        
-        
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
+            </div>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
+            </div>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
+            </div>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
+            </div>
+            <span class="distancia">5.2 km</span>
+        </div>
+        <div class="prestador" onclick="handlePrestadorClick(1)">
+            <img src="/assets/img/eletricista.jpg" alt="bruno">
+            <div class="h5-prestador">
+                <h5>Bruninho</h5>
+            </div>
+            <div class="p-prestador">
+                <p>50 anos - Jardinista</p>
+            </div>
+            <span class="distancia">5.2 km</span>
+        </div>
+
         <!-- Mais prestadores... -->
 
     </div>
 </div>
-
-<script>
-    let map, marker, placePicker;
-    document.getElementById('zoom-in').addEventListener('click', () => {
-        map.zoom += 1;
-    });
-
-    document.getElementById('zoom-out').addEventListener('click', () => {
-        map.zoom -= 1;
-    });
-
-    async function init() {
-        await customElements.whenDefined('gmp-map');
-        await customElements.whenDefined('gmpx-place-picker');
-        await customElements.whenDefined('gmp-advanced-marker');
-
-        map = document.querySelector('gmp-map');
-        marker = document.querySelector('gmp-advanced-marker');
-        placePicker = document.querySelector('gmpx-place-picker');
-
-        map.innerMap.setOptions({
-            mapTypeControl: false,
-            gestureHandling: 'greedy'
-        });
-
-        placePicker.addEventListener('gmpx-placechange', () => {
-            const place = placePicker.value;
-
-            if (!place.location) {
-                window.alert("No details available for input: '" + place.name + "'");
-                marker.position = null;
-                return;
-            }
-
-            if (place.viewport) {
-                map.innerMap.fitBounds(place.viewport);
-            } else {
-                map.center = place.location;
-                map.zoom = 24;
-            }
-
-            marker.position = place.location;
-        });
-
-        try {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    async (position) => {
-                        const latitude = position.coords.latitude;
-                        const longitude = position.coords.longitude;
-
-                        const userLocation = {lat: latitude, lng: longitude};
-                        const correctedLocation = await verifyCoordinates(userLocation);
-
-                        map.center = correctedLocation;
-                        map.zoom = 16;
-                        marker.position = correctedLocation;
-                    },
-                    (error) => {
-                        console.error("Error obtaining location: " + error.message);
-                    },
-                    {enableHighAccuracy: true}
-                );
-            } else {
-                window.alert("Esse navegador não suporta o mapa.");
-            }
-        } catch (error) {
-            console.error("Error: " + error.message);
-        }
-
-        // Initialize Pusher
-        initializePusher();
-    }
-
-    async function verifyCoordinates(location) {
-        const apiKey = 'AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4';
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${apiKey}`;
-
-        const response = await fetch(url);
-        const data = await response.json();
-
-        if (data.status === 'OK') {
-            const result = data.results[0].geometry.location;
-            console.log("Geocoding result:", result);
-            return {
-                lat: result.lat,
-                lng: result.lng
-            };
-        } else {
-            throw new Error('Geocoding failed: ' + data.status);
-        }
-    }
-
-    function initializePusher() {
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('8702b12d1675f14472ac', {
-            cluster: 'sa1'
-        });
-
-        var channel = pusher.subscribe('my-channel');
-
-        channel.bind('my-event', function (data) {
-            try {
-                const {lat, lng} = data;
-                updateMap(lat, lng);
-            } catch (e) {
-                console.error("Failed to parse JSON:", e.message);
-            }
-        });
-    }
-
-    function updateMap(lat, lng) {
-
-        const newLocation = {lat, lng};
-
-        if (typeof lat === 'number' && typeof lng === 'number') {
-            map.center = newLocation;
-
-            marker.position = newLocation;
-
-            map.zoom = 16;
-        } else {
-            console.error("Invalid coordinates provided for the map update.");
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', init);
-
-
-</script>
-<footer id="footer">
-    <!-- conteúdo do footer -->
-</footer>
-
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var footer = document.getElementById('footer');
-        if (footer) {
-            footer.style.display = 'none'; // Oculta o footer
-        }
-    });
-</script>
+<!--<script>-->
+<!--    // Inicializar o Pusher para o Cliente-->
+<!--    const clientPusher = new Pusher('YOUR_APP_KEY', {-->
+<!--        cluster: 'YOUR_APP_CLUSTER'-->
+<!--    });-->
+<!---->
+<!--    // Função para enviar a localização do cliente-->
+<!--    function sendClientLocation(latitude, longitude) {-->
+<!--        fetch('/../../../server.php', {-->
+<!--            method: 'POST',-->
+<!--            headers: {-->
+<!--                'Content-Type': 'application/json'-->
+<!--            },-->
+<!--            body: JSON.stringify({latitude, longitude, type: 'client'})-->
+<!--        }).then(response => {-->
+<!--            return response.json();-->
+<!--        }).then(data => {-->
+<!--            console.log(data);-->
+<!--        }).catch(error => {-->
+<!--            console.error('Error:', error);-->
+<!--        });-->
+<!--    }-->
+<!---->
+<!--    // Listener para atualizações de profissionais-->
+<!--    const professionalChannel = clientPusher.subscribe('location-channel');-->
+<!--    professionalChannel.bind('location-updated', function (data) {-->
+<!--        // Atualizar o mapa com as novas localizações dos profissionais-->
+<!--        updateProfessionalMap(data.professionals);-->
+<!--    });-->
+<!--</script>-->

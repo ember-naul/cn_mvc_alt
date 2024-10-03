@@ -85,7 +85,9 @@ CREATE TABLE IF NOT EXISTS `pagamentos` (
 CREATE TABLE IF NOT EXISTS `profissionais` (
   `id` 					    int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_usuario` 				int NOT NULL,
-  `cnpj`				    char(14) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cnpj`				    	char(14) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitude`				DECIMAL(10, 8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitude` 				DECIMAL(11, 8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `saldo` 					DECIMAL(10,2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   KEY `id_usuario` (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
