@@ -54,5 +54,4 @@ class HomeController extends Controller {
     public function pareando(){
         return require_once __DIR__ . '/../Views/waiting.php';
     }
-    
 }

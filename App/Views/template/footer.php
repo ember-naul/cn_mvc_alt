@@ -1,6 +1,4 @@
 <?php require_once __DIR__ . '../../redirect_cadastros.php'; ?>
-<?php //require_once __DIR__ .'/../modals/modal_perfil.php';?>
-<?php //require_once __DIR__ . '../../cadastro_profissionais.php'; ?>
 <?php if ($_SESSION['logado'] == true): ?>
     <footer id="footer" class="footer">
         <div id="preloader"></div>
@@ -64,22 +62,18 @@
 
     </div>
 <?php endif; ?>
+<?php require_once __DIR__ . '../../termos_uso.php'; ?>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<!-- <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="/assets/js/main.js"></script>
 <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
 <script src="/assets/plugins/sweetalert2/sweetalert2.js"></script>
-<!-- <script src="/assets/plugins/inputmask/jquery.inputmask.min.js"></script> -->
 <script src="/assets/plugins/select2/js/select2.full.min.js"></script>
 <script src="/assets/vendor/aos/aos.js"></script>
-
 <script>
     $(document).ready(function () {
         // Exibir o toast com temporizador
@@ -93,5 +87,4 @@
     });
 
 </script>
-
 </html>

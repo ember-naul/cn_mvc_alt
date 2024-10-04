@@ -268,102 +268,26 @@ $_SESSION['cliente_id'] = $cliente->id;
             timeout: 5000
         });
     </script>
-
-
-    </script>
     <div class="prestadores-container">
         <?php
         foreach ($profissionais as $profissional):
-
-            $nomeUsuario = $profissional->usuario ? $profissional->usuario->nome : 'Usuário não encontrado'; ?>
-            <div class="prestador" onclick="handlePrestadorClick(1)">
-                <img src="/assets/img/eletricista.jpg" alt="bruno">
-                <div class="h5-prestador">
-                    <h5><?= $nomeUsuario ?></h5>
+            if ($profissional && $_SESSION['cliente'] && $profissional->id_usuario != $_SESSION['id_usuario']):
+                $nomeUsuario = $profissional->usuario ? $profissional->usuario->nome : 'Usuário não encontrado'; ?>
+                <div class="prestador" onclick="handlePrestadorClick(1)">
+                    <img src="/assets/img/eletricista.jpg" alt="bruno">
+                    <div class="h5-prestador">
+                        <h5><?= $nomeUsuario ?></h5>
+                    </div>
+                    <div class="p-prestador">
+                        <?php foreach ($profissional->habilidades as $habilidade): ?>
+                            <p><?= $habilidade->nome . " "; ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                    <span class="distancia">5.2 km</span>
                 </div>
-                <div class="p-prestador">
-                    <?php foreach ($profissional->habilidades as $habilidade): ?>
-
-                        <p><?= $habilidade->nome . " "; ?></p>
-                    <?php endforeach; ?>
-                </div>
-                <span class="distancia">5.2 km</span>
-            </div>
+            <?php endif; ?>
         <?php endforeach; ?>
 
-
-        <div class="prestador" onclick="handlePrestadorClick(1)">
-            <img src="/assets/img/eletricista.jpg" alt="bruno">
-            <div class="h5-prestador">
-                <h5>Bruninho</h5>
-            </div>
-            <div class="p-prestador">
-                <p>50 anos - Jardinista</p>
-            </div>
-            <span class="distancia">5.2 km</span>
-        </div>
-        <div class="prestador" onclick="handlePrestadorClick(1)">
-            <img src="/assets/img/eletricista.jpg" alt="bruno">
-            <div class="h5-prestador">
-                <h5>Bruninho</h5>
-            </div>
-            <div class="p-prestador">
-                <p>50 anos - Jardinista</p>
-            </div>
-            <span class="distancia">5.2 km</span>
-        </div>
-        <div class="prestador" onclick="handlePrestadorClick(1)">
-            <img src="/assets/img/eletricista.jpg" alt="bruno">
-            <div class="h5-prestador">
-                <h5>Bruninho</h5>
-            </div>
-            <div class="p-prestador">
-                <p>50 anos - Jardinista</p>
-            </div>
-            <span class="distancia">5.2 km</span>
-        </div>
-        <div class="prestador" onclick="handlePrestadorClick(1)">
-            <img src="/assets/img/eletricista.jpg" alt="bruno">
-            <div class="h5-prestador">
-                <h5>Bruninho</h5>
-            </div>
-            <div class="p-prestador">
-                <p>50 anos - Jardinista</p>
-            </div>
-            <span class="distancia">5.2 km</span>
-        </div>
-        <div class="prestador" onclick="handlePrestadorClick(1)">
-            <img src="/assets/img/eletricista.jpg" alt="bruno">
-            <div class="h5-prestador">
-                <h5>Bruninho</h5>
-            </div>
-            <div class="p-prestador">
-                <p>50 anos - Jardinista</p>
-            </div>
-            <span class="distancia">5.2 km</span>
-        </div>
-        <div class="prestador" onclick="handlePrestadorClick(1)">
-            <img src="/assets/img/eletricista.jpg" alt="bruno">
-            <div class="h5-prestador">
-                <h5>Bruninho</h5>
-            </div>
-            <div class="p-prestador">
-                <p>50 anos - Jardinista</p>
-            </div>
-            <span class="distancia">5.2 km</span>
-        </div>
-        <div class="prestador" onclick="handlePrestadorClick(1)">
-            <img src="/assets/img/eletricista.jpg" alt="bruno">
-            <div class="h5-prestador">
-                <h5>Bruninho</h5>
-            </div>
-            <div class="p-prestador">
-                <p>50 anos - Jardinista</p>
-            </div>
-            <span class="distancia">5.2 km</span>
-        </div>
-
-        <!-- Mais prestadores... -->
 
     </div>
 </div>

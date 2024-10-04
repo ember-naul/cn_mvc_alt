@@ -44,7 +44,7 @@ return function(RouteCollector $r) {
     $r->addRoute('GET', '/profissional/avalie', [ProfissionalController::class, 'avaliar']);
     $r->addRoute('POST', '/profissional/avaliou', [AvaliacaoController::class, 'avaliacao']);
     $r->addRoute('POST', '/profissional/habilidades/inserir', [ProfissionalController::class, 'habilidades_inserir']);
-    $r->addRoute('POST', '/update-usuario', [ClienteController::class, 'update']);
+    $r->addRoute('POST', '/update-usuario', [ClienteController::class, 'updateUser']);
     $r->addRoute('POST', '/at', [HomeController::class, 'at']);
 
     

@@ -66,6 +66,7 @@ class LoginController extends Controller
             $usuario->rg = $rg;
             $usuario->cpf = $cpf;
             $usuario->senha = $senha;
+            $usuario->tipo = 1;
             $usuario->save();
 
             return redirect('/login')->sucesso('Operação realizada com sucesso');

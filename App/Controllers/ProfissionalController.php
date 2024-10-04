@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Controllers\Controller;
 use App\Models\ProfissionalHabilidade;
 use App\Models\Profissional;
-use App\Models\Endereco;
 use Exception;
 
 class ProfissionalController extends Controller

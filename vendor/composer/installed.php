@@ -3,7 +3,7 @@
         'name' => 'luan/www',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '6a63e137f702ecdac3d81da25d2ccec2e00bf984',
+        'reference' => 'cd39f7bb3e48784ca413d9d374f4e42df6677f81',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -148,7 +148,7 @@
         'luan/www' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '6a63e137f702ecdac3d81da25d2ccec2e00bf984',
+            'reference' => 'cd39f7bb3e48784ca413d9d374f4e42df6677f81',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

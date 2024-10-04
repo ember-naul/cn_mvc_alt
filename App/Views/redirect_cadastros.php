@@ -3,10 +3,11 @@
 use App\Models\Usuario;
 use App\Models\Cliente;
 use App\Models\Profissional;
-
-$usuario = Usuario::where('id', $_SESSION['id_usuario'])->first();
-$cliente = Cliente::where('id_usuario', $usuario->id)->first();
-$profissional = Profissional::where('id_usuario', $usuario->id)->first();
+if ($_SESSION['logado']){
+    $usuario = Usuario::where('id', $_SESSION['id_usuario'])->first();
+    $cliente = Cliente::where('id_usuario', $usuario->id)->first();
+    $profissional = Profissional::where('id_usuario', $usuario->id)->first();
+}
 
 ?>
 <!doctype html>

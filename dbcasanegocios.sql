@@ -29,6 +29,8 @@ CREATE TABLE IF NOT EXISTS `avaliacoes` (
 CREATE TABLE IF NOT EXISTS `clientes` (
   `id` 					    int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_usuario` 				int NOT NULL,
+  `latitude`				DECIMAL(10, 8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitude` 				DECIMAL(11, 8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   KEY `id_usuario` (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -145,7 +147,7 @@ INSERT INTO `servicos` (`id`, `id_contrato`, `data_hora`, `status_servico`) VALU
 (1, 1, '2024-07-05 09:00:00', 'solicitado');
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `celular`, `cpf`, `rg`, `senha`, `tipo`) VALUES
-(1, 'Luan', 'lluann930@gmail.com', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 2);
+(1, 'Luan', 'lluann930@gmail.com', '11111111111', '11111111111', '111111111', 'adcd7048512e64b48da55b027577886ee5a36350', 2);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

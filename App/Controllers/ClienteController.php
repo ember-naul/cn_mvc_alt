@@ -18,11 +18,13 @@ class ClienteController extends Controller
         return require_once __DIR__ . '/../Views/cliente/index.php';
 
     }
+
     public function cadastro()
     {
         return require_once __DIR__ . '/../Views/cliente/cadastro_clientes.php';
 
     }
+
     public function avaliar()
     {
         return require_once __DIR__ . '/../Views/cliente/avaliacao_cliente.php';
@@ -32,11 +34,11 @@ class ClienteController extends Controller
     private function geocodeAddress($address)
     {
         $apiKey = 'AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4';
-    
+
         $url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($address) . "&key=" . $apiKey;
         $response = file_get_contents($url);
         $data = json_decode($response, true);
-    
+
         if ($data['status'] === 'OK') {
             $location = $data['results'][0]['geometry']['location'];
             return [
@@ -47,22 +49,21 @@ class ClienteController extends Controller
             throw new Exception('Geocoding failed: ' . $data['status']);
         }
     }
-    
 
 
     public function novoCliente()
     {
-        $cep        = $_POST['cep'] ?? null;
-        $endereco   = $_POST['endereco'] ?? null;
-        $bairro     = $_POST['bairro'] ?? null;
-        $cidade     = $_POST['cidade'] ?? null;
-        $numero     = $_POST['numero'] ?? null;
+        $cep = $_POST['cep'] ?? null;
+        $endereco = $_POST['endereco'] ?? null;
+        $bairro = $_POST['bairro'] ?? null;
+        $cidade = $_POST['cidade'] ?? null;
+        $numero = $_POST['numero'] ?? null;
 
         try {
             $cliente = new Cliente();
             $cliente->id_usuario = user()->id_usuario;
             $cliente->save();
-            
+
             $endereco_completo = sprintf('%s, %s, %s, %s', $endereco, $bairro, $cidade, $numero);
             $coordenadas_c = $this->geocodeAddress($endereco_completo);
 
@@ -82,28 +83,37 @@ class ClienteController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(array $data)
     {
         // Validação dos campos
-        $request->validate([
-            'field' => 'required|string|in:nome,email,celular',
-            'value' => 'required|string',
-        ]);
-
-        $usuarioId = auth()->id(); // Usando o método auth() para obter o ID do usuário autenticado
-
-        $cliente = Cliente::where('id_usuario', $usuarioId)->first();
-
-        if ($cliente) {
-            $cliente->{$request->field} = $request->value;
-            $cliente->save();
-
-            session()->flash('message', 'Informação atualizada com sucesso!');
-            return redirect()->back();
+        if (!isset($data['field']) || !in_array($data['field'], ['nome', 'email', 'celular'])) {
+            throw new Exception("Campo inválido.");
         }
 
-        session()->flash('message', 'Cliente não encontrado.');
-        return redirect()->back();
+        if (empty($data['value'])) {
+            throw new Exception("O novo valor não pode estar vazio.");
+        }
+
+        $usuarioId = $_SESSION['id_usuario'];
+        $usuario = Usuario::find($usuarioId); // Certifique-se de que Usuario é o nome correto do seu modelo
+
+        if ($usuario) {
+            // Atualiza o campo correspondente
+            $usuario->{$data['field']} = $data['value'];
+            $usuario->save();
+
+            // Armazena uma mensagem de sucesso na sessão
+            $_SESSION['message'] = 'Informação atualizada com sucesso!';
+            return redirect("/")->sucesso("Alteração realizada com sucesso!");
+        } else {
+            $_SESSION['message'] = 'Usuário não encontrado.';
+            return redirect("/")->erro("Alteração realizada com sucesso!");
+        }
     }
+    public function updateUser()
+    {
+        $this->update($_POST);
+    }
+
 
 }

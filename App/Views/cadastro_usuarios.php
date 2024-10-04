@@ -45,8 +45,6 @@
                                         <label for="celular">Celular</label>
                                         <input name="celular" type="text" required class="form-control" id="celular"
                                             placeholder="Digite o número do seu celular" maxlength="15">
-                                        <!-- <input type="text" class="form-control"
-                                            data-inputmask='"mask": "(00) 00000-0000"' data-mask> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="rg">RG</label>
@@ -80,7 +78,7 @@
                                     <div class="icheck-primary">
                                         <input type="checkbox" id="agreeTerms" name="terms" required value="agree">
                                         <label for="agreeTerms">
-                                            Concordo com os <a href="/termos">termos de uso</a>
+                                            Concordo com os <a href="#" data-toggle="modal" data-target="#termosModal">termos de uso</a>
                                         </label>
                                     </div>
                                     <button type="button" class="btn btn-secondary btn-block mt-4"
@@ -100,7 +98,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
-    3
+
 
     <script>
         let currentStep = 1;
@@ -136,10 +134,15 @@
 
             // Remove masking before form submission
             $('#multiStepForm').on('submit', function () {
+                // Remove input masks
                 $('#celular').inputmask('remove');
                 $('#rg').inputmask('remove');
                 $('#cpf').inputmask('remove');
+
+                // Clean up the input values to remove formatting
+                $('#celular').val($('#celular').val().replace(/\D/g, ''));
+                $('#rg').val($('#rg').val().replace(/\D/g, ''));
+                $('#cpf').val($('#cpf').val().replace(/\D/g, ''));
             });
         });
-
     </script>
