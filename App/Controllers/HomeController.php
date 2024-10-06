@@ -32,15 +32,11 @@ class HomeController extends Controller {
         }
      }
 
-        // Caso o usuário não tenha nenhum dos perfis, exibe a home geral
         return require_once __DIR__ . '/../Views/home.php';
 }   
 
     public function mapa(){
         return require_once __DIR__ . '/../Views/mapa.php';
-    }
-    public function at(){
-        return require_once __DIR__ . '/../Views/profissional/server.php';
     }
 
     public function chat_teste(){
@@ -54,4 +50,8 @@ class HomeController extends Controller {
     public function pareando(){
         return require_once __DIR__ . '/../Views/waiting.php';
     }
+    public function enderecos(){
+        return require_once __DIR__ . '/../Views/enderecos.php';
+    }
+
 }

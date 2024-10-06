@@ -19,8 +19,28 @@ if ($profissional) {
 }
 ?>
 <style>
+
+    .btn-outline-custom img {
+        transition: filter 0.3s; /* Transição suave para o filtro */
+    }
+
+    .btn-outline-custom:hover img {
+        filter: invert(1); /* Inverte as cores da imagem */
+    }
+    .btn-outline-custom {
+        border: 2px solid #3e4c69; /* Borda personalizada */
+        color: #3e4c69; /* Cor do texto */
+        background-color: transparent; /* Fundo transparente */
+        transition: background-color 0.3s, color 0.3s; /* Transição suave */
+    }
+
+    .btn-outline-custom:hover {
+        background-color: #3e4c69; /* Cor de fundo ao passar o mouse */
+        color: white; /* Cor do texto ao passar o mouse */
+    }
+
     .edit-button {
-        background-color: #007bff; /* Cor do botão */
+        background-color: #3e4c69; /* Cor do botão */
         color: #fff; /* Cor do texto */
         border: none; /* Remove a borda */
         border-radius: 5px; /* Bordas arredondadas */
@@ -31,7 +51,7 @@ if ($profissional) {
     }
 
     .edit-button:hover {
-        background-color: #0056b3; /* Cor ao passar o mouse */
+        background-color: #2c3e50; /* Cor ao passar o mouse */
     }
 
     .profile-user-img {
@@ -46,6 +66,14 @@ if ($profissional) {
         font-size: 12px; /* Tamanho da fonte */
     }
 
+    .badge-custom {
+        background-color: #3e4c69; /* Cor de fundo */
+        color: white; /* Cor do texto */
+    }
+
+    .badge-custom:hover {
+        background-color: #2c3e50; /* Cor ao passar o mouse */
+    }
 </style>
 
 <div class="container-fluid container-xl position-relative d-flex align-items-center">
@@ -162,7 +190,7 @@ function formatarCelular($celular) {
                             <h5>Habilidades:</h5>
                             <div id="skills-container" class="d-flex flex-wrap justify-content-center">
                                 <?php foreach ($habilidades as $profissionalHabilidade): ?>
-                                    <span class="badge badge-info m-1"><?= $profissionalHabilidade->habilidade->nome ?></span>
+                                    <span class="badge badge-info badge-custom m-1"><?= $profissionalHabilidade->habilidade->nome ?></span>
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -171,18 +199,16 @@ function formatarCelular($celular) {
             </div>
 
 
-            <div class="row text-center">
+            <div class="row text-center ml-5 mr-5">
                 <div class="col-6 mb-2">
-                    <button
-                            class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
+                    <button class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
                         <img src="/assets/img/servicos.png" alt="Histórico de Serviços" width="24" class="mr-2">
                         Histórico de Serviços
                     </button>
                 </div>
                 <div class="col-6 mb-2">
                     <a href="/enderecos">
-                        <button
-                                class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
+                        <button class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center">
                             <img src="/assets/img/endereco.png" alt="Endereços" width="24" class="mr-2"> Endereços
                         </button>
                     </a>
@@ -218,7 +244,6 @@ function formatarCelular($celular) {
             </div>
         </div>
     </div>
-</div>
 </div>
 <div id="editModal" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">

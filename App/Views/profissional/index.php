@@ -6,8 +6,6 @@ use App\Models\Profissional;
 use App\Models\Habilidade;
 use App\Models\Usuario;
 
-require_once __DIR__ . "/server.php";
-
 $usuario = Usuario::find($_SESSION['id_usuario']);
 $profissional = Profissional::where('id_usuario', $usuario->id)->first();
 $_SESSION['profissional_id'] = $profissional->id;
@@ -19,7 +17,7 @@ $_SESSION['profissional_id'] = $profissional->id;
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
     <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
     <link rel="stylesheet" href="/assets/css/index.css">
 </head>
@@ -29,33 +27,43 @@ $_SESSION['profissional_id'] = $profissional->id;
     <script>
         var map;
         var marker;
-        var routingControl; // Inicialize routingControl aqui
+        var routingControl;
         var firstUpdate = true;
-        var lastPosition = null; // Armazenar a última posição
-        var distanceThreshold = 0.005; // Limite de distância em graus
-        const professionalId = '<?php echo $_SESSION['profissional_id']; ?>'; // ID do profissional
+        var profissionalId = '<?php echo $_SESSION['profissional_id']; ?>';
+        var tempoEmSegundos = 0; // Inicializa o contador de tempo
+        var contadorEnvios = 0; // Contador para o número de envio
 
-        function calcularDistancia(lat1, lon1, lat2, lon2) {
-            // Função para calcular a distância entre dois pontos (Haversine)
-            const R = 6371; // Raio da Terra em km
-            const dLat = (lat2 - lat1) * Math.PI / 180;
-            const dLon = (lon2 - lon1) * Math.PI / 180;
-            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            return R * c; // Retorna a distância em km
+        var pusher = new Pusher('8702b12d1675f14472ac', {
+            cluster: 'sa1',
+            useTLS: true // Atualizado para usar TLS
+        });
+
+        var channel = pusher.subscribe('contratos');
+
+        function iniciarContagem() {
+            setInterval(function () {
+                tempoEmSegundos++; // Incrementa o contador a cada segundo
+                console.log("Tempo: " + tempoEmSegundos + " segundos");
+
+                // Envie a localização a cada 10 segundos
+                if (tempoEmSegundos % 10 === 0) {
+                    navigator.geolocation.getCurrentPosition(success, error, {
+                        enableHighAccuracy: true,
+                        timeout: 5000
+                    });
+                }
+            }, 1000);
         }
-
 
         function enviarLocalizacao(lat, lon) {
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/at', true);
+            xhr.open('POST', '/enviar_profissional', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log('Localização enviada com sucesso. Distância em KM: ' + calcularDistancia(lat, lon, -22.753724112140812, -47.35141976953807).toFixed(2));
+                    console.log("Localização enviada com sucesso"); // Exibe o contador
+                    console.log("Coordenadas: " + lat + ", " + lon); // Exibe as coordenadas
                 }
             };
 
@@ -73,8 +81,7 @@ $_SESSION['profissional_id'] = $profissional->id;
         function success(pos) {
             var lat = pos.coords.latitude;
             var lon = pos.coords.longitude;
-            console.log(lat, lon);
-            lastPosition = { lat: lat, lon: lon };
+            contadorEnvios++;
 
             if (!map) {
                 map = L.map('map').setView([lat, lon], 13);
@@ -88,7 +95,6 @@ $_SESSION['profissional_id'] = $profissional->id;
                 calcularRota([lat, lon], destination);
             }
 
-            // Centraliza o mapa apenas na primeira vez
             if (firstUpdate) {
                 map.setView([lat, lon], 13);
                 firstUpdate = false;
@@ -98,7 +104,7 @@ $_SESSION['profissional_id'] = $profissional->id;
         }
 
         function error(err) {
-            console.log(err);
+            console.error("Erro ao obter localização:", err);
         }
 
         function calcularRota(origem, destino) {
@@ -109,7 +115,7 @@ $_SESSION['profissional_id'] = $profissional->id;
             routingControl = L.Routing.control({
                 waypoints: [
                     L.latLng(origem[0], origem[1]),
-                    destino // Use diretamente o objeto L.latLng
+                    destino
                 ],
                 router: L.Routing.osrmv1({
                     serviceUrl: 'https://router.project-osrm.org/route/v1/'
@@ -118,12 +124,22 @@ $_SESSION['profissional_id'] = $profissional->id;
             }).addTo(map);
         }
 
-        // Ativa o rastreamento da localização a cada 10 segundos
-        setInterval(atualizarLocalizacao, 10000); // 10000 ms = 10 segundos
 
-        // Faz a primeira chamada imediatamente
+        channel.bind('nova-solicitacao', function (data) {
+            console.log("ID do profissional logado:", profissionalId);
+            console.log("ID do profissional recebido:", data.profissional_id);
+
+            if (parseInt(data.profissional_id) === parseInt(profissionalId)) {
+                alert(data.message);
+                document.getElementById('solicitacoes').innerHTML = "Nova solicitação recebida!";
+            }
+        });
+
+
+        iniciarContagem();
         atualizarLocalizacao();
     </script>
     <div class="prestadores-container"></div>
+    <div id="solicitacoes" class="solicitacoes"></div>
 </div>
 </body>

@@ -15,6 +15,7 @@ class ProfissionalController extends Controller
         return require_once __DIR__ . '/../Views/profissional/index.php';
 
     }
+
     public function habilidades()
     {
         return require_once __DIR__ . '/../Views/profissional/habilidades.php';
@@ -25,24 +26,6 @@ class ProfissionalController extends Controller
     {
         return require_once __DIR__ . '/../Views/profissional/cadastro_profissionais.php';
 
-    }
-
-    private function geocodeAddress($address)
-    {
-        $apiKey = 'AIzaSyBfEk2DdoQkxXmDs39CRqgCnE-1TTSY6_4';
-        $url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($address) . "&key=" . $apiKey;
-        $response = file_get_contents($url);
-        $data = json_decode($response, true);
-
-        if ($data['status'] === 'OK') {
-            $location = $data['results'][0]['geometry']['location'];
-            return [
-                'latitude' => $location['lat'],
-                'longitude' => $location['lng']
-            ];
-        } else {
-            throw new Exception('Geocoding failed: ' . $data['status']);
-        }
     }
 
     public function novoProfissional()
@@ -133,7 +116,6 @@ class ProfissionalController extends Controller
 
     public function habilidades_inserir()
     {
-
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -153,25 +135,38 @@ class ProfissionalController extends Controller
         $id_profissional = $profissional->id;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $habilidades = $_POST['habilidades'] ?? [];
+            $habilidades_post = $_POST['habilidades'] ?? [];
             $data_cadastro = date("Y-m-d");
 
-            if (empty($id_profissional) || empty($habilidades)) {
+            if (empty($id_profissional)) {
                 return redirect("/home")->erro("Dados incompletos.");
             }
 
             try {
-                foreach ($habilidades as $id_habilidade) {
-                    $prof_habilidade = new ProfissionalHabilidade();
-                    $prof_habilidade->id_profissional = $id_profissional;
-                    $prof_habilidade->id_habilidade = $id_habilidade;
-                    $prof_habilidade->data_cadastro = $data_cadastro;
-                    $prof_habilidade->save();
+                $habilidades_cadastradas = ProfissionalHabilidade::where('id_profissional', $id_profissional)
+                    ->pluck('id_habilidade')
+                    ->toArray();
+
+                $habilidades_para_remover = array_diff($habilidades_cadastradas, $habilidades_post);
+                foreach ($habilidades_para_remover as $id_habilidade) {
+                    ProfissionalHabilidade::where('id_profissional', $id_profissional)
+                        ->where('id_habilidade', $id_habilidade)
+                        ->delete();
                 }
 
-                return redirect("/home")->sucesso("Habilidades cadastradas com sucesso.");
+                foreach ($habilidades_post as $id_habilidade) {
+                    if (!in_array($id_habilidade, $habilidades_cadastradas)) {
+                        $prof_habilidade = new ProfissionalHabilidade();
+                        $prof_habilidade->id_profissional = $id_profissional;
+                        $prof_habilidade->id_habilidade = $id_habilidade;
+                        $prof_habilidade->data_cadastro = $data_cadastro;
+                        $prof_habilidade->save();
+                    }
+                }
+
+                return redirect("/home")->sucesso("Habilidades atualizadas com sucesso.");
             } catch (Exception $e) {
-                return redirect("/home")->erro("Erro ao cadastrar habilidades: " . $e->getMessage());
+                return redirect("/home")->erro("Erro ao atualizar habilidades: " . $e->getMessage());
             }
         } else {
             return redirect("/home")->erro("Método de requisição inválido.");

@@ -8,7 +8,7 @@ use App\Models\Cliente;
 use App\Models\Profissional;
 use App\Models\Endereco;
 use Exception;
-use http\Client\Request;
+
 
 class ClienteController extends Controller
 {
@@ -95,7 +95,7 @@ class ClienteController extends Controller
         }
 
         $usuarioId = $_SESSION['id_usuario'];
-        $usuario = Usuario::find($usuarioId); // Certifique-se de que Usuario é o nome correto do seu modelo
+        $usuario = Usuario::find($usuarioId);
 
         if ($usuario) {
             // Atualiza o campo correspondente
@@ -114,6 +114,9 @@ class ClienteController extends Controller
     {
         $this->update($_POST);
     }
+
+
+
 
 
 }

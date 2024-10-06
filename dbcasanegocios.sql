@@ -1,4 +1,5 @@
 -- Active: 1725406851568@@127.0.0.1@3306@dbcasanegocios
+
 DROP DATABASE if exists dbcasanegocios;
 CREATE DATABASE dbcasanegocios;
 USE dbcasanegocios;
@@ -41,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `contratos` (
   `data_inicio` 			datetime NOT NULL,
   `data_fim` 			  	datetime DEFAULT NULL,
   `valor` 				  	decimal(10,2) DEFAULT NULL,
+  `status_contrato` 	    enum('pendente','recusado','aceito') COLLATE utf8mb4_unicode_ci NOT NULL,
   `status_servico` 	        enum('ativo','inativo') COLLATE utf8mb4_unicode_ci NOT NULL,
   KEY `id_cliente` (`id_cliente`),
   KEY `id_profissional` (`id_profissional`)
@@ -84,6 +86,7 @@ CREATE TABLE IF NOT EXISTS `pagamentos` (
   KEY `id_contrato` (`id_contrato`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+
 CREATE TABLE IF NOT EXISTS `profissionais` (
   `id` 					    int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `id_usuario` 				int NOT NULL,
@@ -125,9 +128,10 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-INSERT INTO `avaliacoes` (`id`, `id_cliente`, `id_profissional` ,`id_servico`, `nota`, `comentario`, `tipo_avaliacao`) VALUES
-(1, 1, 1, 1, 5, 'Excelente serviço, muito satisfeito!', 1),
-(2, 1, 1, 1, 5, 'Bom serviço, mas poderia melhorar a pontualidade.', 2);
+INSERT INTO `avaliacoes` (`id_cliente`, `id_profissional`, `id_servico`, `nota`, `comentario`, `tipo_avaliacao`) VALUES
+(1, 1, 1, 5, 'Excelente serviço, muito satisfeito!', 'cliente'),
+(1, 1, 1, 5, 'Bom serviço, mas poderia melhorar a pontualidade.', 'profissional');
+
 
 INSERT INTO `contratos` (`id`, `id_cliente`, `id_profissional`, `data_inicio`, `data_fim`, `valor`, `status_servico`) VALUES
 (1, 1, 1, '2024-07-01 00:00:00', '2024-12-31 00:00:00', '1200.00', 'ativo');
@@ -140,14 +144,25 @@ INSERT INTO `habilidades` (`id`, `nome`, `descricao`) VALUES
 INSERT INTO `pagamentos` (`id`, `id_contrato`, `data_pagamento`, `valor`, `status_pagamento`) VALUES
 (1, 1, '2024-07-01', '1200.00', 'pago');
 
+INSERT INTO `profissionais`(`id_usuario`, `cnpj`, `latitude`, `longitude`, `saldo`) 
+VALUES 
+('2','1', null, null, null),
+('3','1', null, null, null),
+('4','1', null, null, null);
+
 INSERT INTO `profissionais_habilidades` (`id`, `id_profissional`, `id_habilidade`) VALUES
 (1, 1, 1);
 
 INSERT INTO `servicos` (`id`, `id_contrato`, `data_hora`, `status_servico`) VALUES
 (1, 1, '2024-07-05 09:00:00', 'solicitado');
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `celular`, `cpf`, `rg`, `senha`, `tipo`) VALUES
-(1, 'Luan', 'lluann930@gmail.com', '11111111111', '11111111111', '111111111', 'adcd7048512e64b48da55b027577886ee5a36350', 2);
+INSERT INTO `usuarios` (`nome`, `email`, `celular`, `cpf`, `rg`, `senha`, `tipo`) VALUES
+('Luan', 'lluann930@gmail.com', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 2),
+('teste1', 'a@2', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste2', 'a@3', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste3', 'a@4', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste4', 'a@5', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
