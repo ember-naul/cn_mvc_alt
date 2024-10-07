@@ -28,7 +28,7 @@ class JsonController
                 '1863692',
                 [
                     'cluster' => 'sa1',
-                    'useTLS' => true
+                    'useTLS' => false
                 ]
             );
             if ($cliente && $profissional) {

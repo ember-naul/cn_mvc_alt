@@ -43,7 +43,7 @@ $_SESSION['profissional_id'] = $profissional->id;
         function iniciarContagem() {
             setInterval(function () {
                 tempoEmSegundos++; // Incrementa o contador a cada segundo
-                console.log("Tempo: " + tempoEmSegundos + " segundos");
+                // console.log("Tempo: " + tempoEmSegundos + " segundos");
 
                 // Envie a localização a cada 10 segundos
                 if (tempoEmSegundos % 10 === 0) {
@@ -124,22 +124,20 @@ $_SESSION['profissional_id'] = $profissional->id;
             }).addTo(map);
         }
 
-
-        channel.bind('nova-solicitacao', function (data) {
-            console.log("ID do profissional logado:", profissionalId);
-            console.log("ID do profissional recebido:", data.profissional_id);
-
-            if (parseInt(data.profissional_id) === parseInt(profissionalId)) {
-                alert(data.message);
-                document.getElementById('solicitacoes').innerHTML = "Nova solicitação recebida!";
-            }
-        });
-
-
         iniciarContagem();
         atualizarLocalizacao();
     </script>
-    <div class="prestadores-container"></div>
-    <div id="solicitacoes" class="solicitacoes"></div>
+<!--    <div class="prestadores-container"></div>-->
+    <div id="solicitacoes" class="solicitacoes"><?php include("requestCliente.php"); ?></div>
 </div>
 </body>
+<script>
+    channel.bind('nova-solicitacao', function (data) {
+        console.log("ID do profissional logado:", profissionalId);
+        console.log("ID do cliemte recebido:", data.cliente_id);
+
+        if (parseInt(data.profissional_id) === parseInt(profissionalId)) {
+            alert(data.message);
+            document.getElementById('solicitacoes').innerHTML = "Nova solicitação recebida!";
+</script>
+

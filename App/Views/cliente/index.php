@@ -7,14 +7,12 @@ use App\Models\Profissional;
 use App\Models\Habilidade;
 use App\Models\Usuario;
 use App\Models\Endereco;
-
 $usuario = Usuario::find($_SESSION['id_usuario']);
 $cliente = Cliente::where('id_usuario', $usuario->id)->first();
 // Supondo que você já tenha as coordenadas do cliente
 $clienteLatitude = $cliente->latitude; // Latitude do cliente
 $clienteLongitude = $cliente->longitude; // Longitude do cliente
 
-// Raio da Terra em km
 $raioTerra = 6371;
 
 $profissionais = Profissional::with('habilidades')
@@ -38,7 +36,7 @@ $profissionais = Profissional::with('habilidades')
         $distance = $raioTerra * $c; // Distância em km
 
         // Retorna true se a distância for menor ou igual a 5 km
-        return $distance <= 155;
+        return $distance <= 5;
     });
 
 function calcularDistancia($lat1, $lon1, $lat2, $lon2)
@@ -83,6 +81,7 @@ foreach ($profissionais as $profissional) {
 $_SESSION['cliente_id'] = $cliente->id;
 ?>
 
+
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -91,11 +90,22 @@ $_SESSION['cliente_id'] = $cliente->id;
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css"/>
     <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <style>
+    .modal {
+    z-index: 1050; /* ou um valor maior */
+    }
 
+    .modal-backdrop {
+    z-index: 1040; /* ou um valor inferior ao do modal */
+    }
+    </style>
     <link href="/assets/css/index.css" rel="stylesheet">
 </head>
 
+
 <body>
+
+
 
 <div class="container-mapa">
     <div id="map"></div>
@@ -126,7 +136,7 @@ $_SESSION['cliente_id'] = $cliente->id;
             function iniciarContagem() {
                 setInterval(function () {
                     tempoEmSegundos++; // Incrementa o contador a cada segundo
-                    console.log("Tempo: " + tempoEmSegundos + " segundos");
+                    // console.log("Tempo: " + tempoEmSegundos + " segundos");
 
                     // Envie a localização a cada 10 segundos
                     if (tempoEmSegundos % 10 === 0) {
@@ -241,34 +251,92 @@ $_SESSION['cliente_id'] = $cliente->id;
             xhr.send();
         }
 
-
+        function teste(profid){
+            console.log(profid)
+        }
     </script>
 
     <div class="prestadores-container">
         <?php
         foreach ($profissionais as $profissional):
             if ($profissional && $_SESSION['cliente'] && $profissional->id_usuario != $_SESSION['id_usuario']):
+                $profissionalId = $profissional->id ? $profissional->id : "Profissional não encontrado";
+                $idUsuario = $profissional->usuario ? $profissional->usuario->id : 'Id não encontrado';
                 $nomeUsuario = $profissional->usuario ? $profissional->usuario->nome : 'Usuário não encontrado';
+                $celularUsuario = $profissional->usuario ? $profissional->usuario->celular : 'Celular não encontrado';
                 $valor = calcularDistancia($profissional->latitude, $profissional->longitude, $cliente->latitude, $cliente->longitude);
                 ?>
+                <a data-toggle="modal" onclick="teste(<?= $profissionalId ?>)" data-target="#prof<?= $profissionalId ?>" style= "border:none;">
                 <div class="prestador">
-                    <img src="/assets/img/eletricista.jpg" alt="bruno">
                     <div class="h5-prestador">
                         <h5><?= $nomeUsuario ?></h5>
                     </div>
                     <div class="p-prestador">
-                        <?php foreach ($profissional->habilidades as $habilidade): ?>
-                            <p><?= $habilidade->nome . " "; ?></p>
-                        <?php endforeach; ?>
+                        <p> Clique para ver mais</p>
                     </div>
-                    <span class="distancia"><?= round($valor, 2) ?> km</span> <!-- Exibir a distância calculada -->
-                    <button class="testJsonButton" onclick="testarJson(<?= $profissional->id ?>)">Testar JSON</button>
+                    <span class="distancia"><?= round($valor, 2) ?> km</span>
+                </div>
+                </a>
+                <div class="modal modalprofissional" id="prof<?= $profissionalId ?>" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content rounded-lg">
+                            <div class="modal-header justify-content-center">
+                                <h4 class="modal-title" id="modalLabel">Perfil Profissional</h4>
+                                <button type="button" class="close position-absolute" style="right: 15px;" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
 
+                            <div class="container-fluid">
+                                <div class="row mb-3">
+                                    <div class="card-body box-profile text-center">
+                                        <img style="padding-bottom: 1.1%" width="130px" height="130px" class="profile-user-img img-fluid img-circle"
+                                             src="/assets/img/perfilicon.png" alt="User profile picture">
+                                        <ul class="list-group list-group-unbordered mb-3">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <b>Nome</b>
+                                                <h4 class="profile-username"><?= $nomeUsuario ?></h4>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <b>Celular</b>
+                                                <span class="float-right"><?= $celularUsuario ?></span>
 
+                                            </li>
+                                        </ul>
+                                        <div class="form-group">
+                                            <h5>Habilidades:</h5>
+                                            <div id="skills-container" class="d-flex flex-wrap justify-content-center">
+                                                <?php foreach ($profissional->habilidades as $phabilidades): ?>
+                                                    <span class="badge badge-info badge-custom m-1"><?= $phabilidades->nome ?></span>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                        <div class="row text-center ml-5 mr-5">
+                                            <div class="col-6 mb-2">
+                                                <button class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center" onclick="testarJson(<?= $profissional->id ?>)">
+                                                <img src="/assets/img/celular.png" alt="Sobre" width="24" class="mr-2">Chamar
+                                                </button>
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <a class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center" data-dismiss="modal" aria-label="Close">
+                                                    <img src="/assets/img/recusar.png" alt="Sobre" width="24" class="mr-2"> Cancelar
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             <?php endif; ?>
         <?php endforeach; ?>
     </div>
 </div>
 
+
+
 </body>
+
+
