@@ -132,23 +132,51 @@ INSERT INTO `avaliacoes` (`id_cliente`, `id_profissional`, `id_servico`, `nota`,
 (1, 1, 1, 5, 'Excelente serviço, muito satisfeito!', 'cliente'),
 (1, 1, 1, 5, 'Bom serviço, mas poderia melhorar a pontualidade.', 'profissional');
 
-
 INSERT INTO `contratos` (`id`, `id_cliente`, `id_profissional`, `data_inicio`, `data_fim`, `valor`, `status_servico`) VALUES
 (1, 1, 1, '2024-07-01 00:00:00', '2024-12-31 00:00:00', '1200.00', 'ativo');
 
 INSERT INTO `habilidades` (`id`, `nome`, `descricao`) VALUES
 (1, 'Jardinagem', 'Cuidados e manutenção de jardins'),
 (2, 'Limpeza', 'Serviços de limpeza residencial e comercial'),
-(3, 'Cozinheira(o)', 'Serviços de cozinha residencial e comercial');
+(3, 'Cozinheira(o)', 'Serviços de cozinha residencial e comercial'),
+(4, 'Faxineiro(a)', 'Responsável por limpar e organizar ambientes.'),
+(5, 'Babysitter (Babá)', 'Cuida de crianças/bebês na ausência de responsáveis.'),
+(6, 'Organizador(a)', 'Profissional que organiza ambientes residenciais e comerciais, otimizando espaços.'),
+(7, 'Jardineiro(a) de Emergência', 'Serviços rápidos de jardinagem, como poda e limpeza de áreas externas.'),
+(8, 'Cuidador(a) de Animais', 'Profissional que cuida de pets, oferecendo alimentação e passeios.'),
+(9, 'Lavadeira', 'Serviço de lavanderia, incluindo lavagem, secagem e passagem de roupas.'),
+(10, 'Reparador(a) Doméstico', 'Realiza pequenos reparos e manutenções em casa, como troca de lâmpadas e consertos simples.'),
+(11, 'Assistente Pessoal', 'Ajuda com tarefas do dia a dia, como compras e agendamentos.'),
+(12, 'Serviço de Entrega de Compras', 'Profissional que realiza compras e entrega diretamente na residência do cliente.'),
+(13, 'Serviço de Desentupimento', 'Profissional que realiza desentupimentos rápidos em encanamentos e ralos.'),
+(14, 'Cozinheiro(a) de Refeições Rápidas', 'Prepara refeições simples e rápidas, como lanches e pratos do dia.'),
+(15, 'Montador(a) de Móveis', 'Realiza a montagem de móveis e objetos de decoração.'),
+(16, 'Babá Noturna', 'Cuida de crianças durante a noite, proporcionando conforto e segurança.'),
+(17, 'Técnico em Eletrodomésticos', 'Faz reparos e manutenções em eletrodomésticos, como geladeiras e máquinas de lavar.'),
+(18, 'Esteticista Domiciliar', 'Oferece serviços de estética, como manicure e pedicure, no conforto do lar.'),
+(19, 'Cuidador(a) de Idosos', 'Apoia idosos com cuidados diários, garantindo bem-estar e segurança.'),
+(20, 'Serviço de Passadoria', 'Profissional que passa roupas de maneira rápida e eficiente.'),
+(21, 'Limpeza Pós-Obra', 'Realiza limpeza profunda após reformas e construções.'),
+(22, 'Apoio a Eventos', 'Auxilia na organização e execução de pequenos eventos em casa.'),
+(23, 'Cuidador(a) de Plantas', 'Responsável pelo cuidado e manutenção de plantas internas e externas.'),
+(24, 'Serviço de Compras', 'Realiza compras de supermercado e outras necessidades do lar.'),
+(25, 'Assistente de Estudo', 'Ajuda crianças e adolescentes com lições de casa e estudos.'),
+(26, 'Reorganizador(a) de Armários', 'Ajuda a reorganizar e otimizar o espaço em armários e closets.');
 
 INSERT INTO `pagamentos` (`id`, `id_contrato`, `data_pagamento`, `valor`, `status_pagamento`) VALUES
 (1, 1, '2024-07-01', '1200.00', 'pago');
 
-INSERT INTO `profissionais`(`id_usuario`, `cnpj`, `latitude`, `longitude`, `saldo`) 
-VALUES 
+INSERT INTO `profissionais`(`id_usuario`, `cnpj`, `latitude`, `longitude`, `saldo`)
+VALUES
 ('2','1', null, null, null),
 ('3','1', null, null, null),
-('4','1', null, null, null);
+('4','1', null, null, null),
+('5','1', null, null, null),
+('6','1', null, null, null),
+('7','1', null, null, null),
+('8','1', null, null, null),
+('9','1', null, null, null),
+('10','1', null, null, null);
 
 INSERT INTO `profissionais_habilidades` (`id`, `id_profissional`, `id_habilidade`) VALUES
 (1, 1, 1);
@@ -158,10 +186,21 @@ INSERT INTO `servicos` (`id`, `id_contrato`, `data_hora`, `status_servico`) VALU
 
 INSERT INTO `usuarios` (`nome`, `email`, `celular`, `cpf`, `rg`, `senha`, `tipo`) VALUES
 ('Luan', 'lluann930@gmail.com', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 2),
-('teste1', 'a@2', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
-('teste2', 'a@3', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
-('teste3', 'a@4', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
-('teste4', 'a@5', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1);
+('brayan araujo', 'brayan.aramar@gmail.com', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 2),
+('teste1', 'a@1', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste2', 'a@2', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste3', 'a@3', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste4', 'a@4', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste5', 'a@5', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste6', 'a@6', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste7', 'a@7', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste8', 'a@8', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste9', 'a@9', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste10', 'a@10', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste11', 'a@11', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste12', 'a@12', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
+('teste13', 'a@13', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1);
+
 
 COMMIT;
 
