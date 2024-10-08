@@ -85,6 +85,9 @@ class LoginController extends Controller
             throw new Exception("Obrigatório inserir email e senha");
         }
 
+        // 12345
+        // 12345
+
         $usuario = Usuario::where([
             ['email', '=', $email],
             ['senha', '=', sha1(md5($senha))]

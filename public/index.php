@@ -1,5 +1,5 @@
 <?php
-
+// public/index.php
 ob_start();
 session_start();
 
@@ -8,8 +8,6 @@ require_once __DIR__ . '/../database.php';
 require_once __DIR__ . '/../config/functions.php';
 
 use App\Services\DefaultServices;
-
-
 
 $_SESSION['logado'] ??= false;
 
@@ -33,15 +31,17 @@ switch ($routeInfo[0]) {
         $vars = $routeInfo[2];
         [$controller, $method] = $handler;
 
-        if ($method == 'deslogar'){
-            DefaultServices::deslogar();
+        // Se for uma rota que retorna JSON, não inclua HTML
+        if (strpos($uri, '/api/') === 0) {
+            (new $controller)->$method($vars);
+            exit;
         }
 
+        // Para rotas que não são API, carregar cabeçalho e rodapé
         require_once __DIR__ . '/../App/views/template/header.php';
-
         (new $controller)->$method($vars);
-
         require_once __DIR__ . '/../App/views/template/footer.php';
         break;
 }
+
 ?>
