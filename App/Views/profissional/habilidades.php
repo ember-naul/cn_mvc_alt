@@ -1,5 +1,5 @@
 <?php
-namespace App\Views;
+namespace App\Views\habilidades;
 
 use App\Models\Habilidade;
 use App\Models\Profissional;
@@ -13,6 +13,7 @@ $habilidades_do_profissional = ProfissionalHabilidade::where('id_profissional',"
     ->distinct()
     ->pluck('id_habilidade')
     ->toArray();
+
 ?>
 <head>
     <meta charset="UTF-8">
@@ -20,7 +21,6 @@ $habilidades_do_profissional = ProfissionalHabilidade::where('id_profissional',"
     <title>Habilidades</title>
     <link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <style>
-
         .btn-custom {
             background-color: #3e4c69;
             color: white;

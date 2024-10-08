@@ -11,17 +11,17 @@
           <form action='/novocliente' id="form-cadastro-cliente" method='post'>
             <div class="form-group">
               <label for="nome">Seu nome</label>
-              <input type="text" class="form-control" id="nome" name="nome" disabled
+              <input type="text" class="form-control" id="nome" name="nome" readonly
                 value='<?php echo ($_SESSION['nome']); ?>'>
             </div>
             <div class="form-group">
               <label for="celular">Seu celular</label>
-              <input type="text" class="form-control" id="celular" name="celular" disabled
+              <input type="text" class="form-control" id="celular" name="celular" readonly
                 value='<?php echo ($_SESSION['celular']); ?>'>
             </div>
             <div class="form-group">
               <label for="rg">Seu RG</label>
-              <input type="text" class="form-control" id="rg" name="rg" disabled
+              <input type="text" class="form-control" id="rg" name="rg" readonly
                 value='<?php echo ($_SESSION['rg']); ?>'>
             </div>
             <div class="form-group">
@@ -30,15 +30,15 @@
             </div>
             <div class="form-group">
               <label for="endereco">Endereço</label>
-              <input type="text" class="form-control" id="endereco" name="endereco" required>
+              <input type="text" class="form-control" id="endereco" name="endereco" required readonly>
             </div>
             <div class="form-group">
               <label for="bairro">Bairro</label>
-              <input type="text" class="form-control" id="bairro" name="bairro" required>
+              <input type="text" class="form-control" id="bairro" name="bairro" required readonly>
             </div>
             <div class="form-group">
               <label for="cidade">Cidade</label>
-              <input type="text" class="form-control" id="cidade" name="cidade" required>
+              <input type="text" class="form-control" id="cidade" name="cidade" required readonly>
             </div>
             <div class="form-group">
               <label for="numero">Número</label>
