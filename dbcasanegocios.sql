@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `contratos`
     `data_inicio`     datetime                                                         NOT NULL,
     `data_fim`        datetime       DEFAULT NULL,
     `valor`           decimal(10, 2) DEFAULT NULL,
-    `status_contrato` enum ('pendente','recusado','aceito') COLLATE utf8mb4_unicode_ci NOT NULL,
+    `status_contrato` enum ('pendente', 'inativo', 'ativo', 'concluido', 'cancelado') COLLATE utf8mb4_unicode_ci NOT NULL,
     KEY `id_cliente` (`id_cliente`),
     KEY `id_profissional` (`id_profissional`)
 ) ENGINE = InnoDB
@@ -172,7 +172,7 @@ INSERT INTO `avaliacoes` (`id_cliente`, `id_profissional`, `id_servico`, `nota`,
 VALUES (1, 1, 1, 5, 'Excelente serviço, muito satisfeito!', 'cliente'),
        (1, 1, 1, 5, 'Bom serviço, mas poderia melhorar a pontualidade.', 'profissional');
 
-INSERT INTO `contratos` (`id`, `id_cliente`, `id_profissional`, `data_inicio`, `data_fim`, `valor`, `status_servico`)
+INSERT INTO `contratos` (`id`, `id_cliente`, `id_profissional`, `data_inicio`, `data_fim`, `valor`, `status_contrato`)
 VALUES (1, 1, 1, '2024-07-01 00:00:00', '2024-12-31 00:00:00', '1200.00', 'ativo');
 
 INSERT INTO `habilidades` (`id`, `nome`, `descricao`)
