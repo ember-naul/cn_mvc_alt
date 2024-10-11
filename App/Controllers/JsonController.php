@@ -7,6 +7,7 @@ use App\Models\Contrato;
 use App\Models\Habilidade;
 use App\Models\Profissional;
 use App\Models\ProfissionalHabilidade;
+use Exception;
 use Pusher\Pusher;
 
 class JsonController
@@ -68,76 +69,73 @@ class JsonController
             sin($dLon / 2) * sin($dLon / 2);
         $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
 
-        return $raioTerra * $c; // retorna valor em km's
+        return $raioTerra * $c;
     }
 
-    public function enviarHabilidades($vars)
+    public function enviarHabilidades()
     {
-        // Fetch raw input and decode if JSON is sent
+        // Pega o corpo da requisição JSON
         $requestBody = json_decode(file_get_contents('php://input'), true);
         $habilidadesSelecionadas = $requestBody['habilidades'] ?? [];
 
-        // Log as habilidades selecionadas
-        error_log("Habilidades selecionadas: " . json_encode($habilidadesSelecionadas));
-
-        // Attempt to find the client
         $cliente = Cliente::where('id_usuario', $_SESSION['id_usuario'])->first();
-
         if (!$cliente) {
-            echo json_encode(['error' => 'Cliente não encontrado.']);
-            return;
+            echo json_encode(['error' => 'ID Cliente não está definido!']);
+            exit;
         }
 
         if (!empty($habilidadesSelecionadas)) {
-            // Consulta os profissionais com as habilidades selecionadas
-            $profissionais = Profissional::with('habilidades')
-                ->whereHas('habilidades', function ($query) use ($habilidadesSelecionadas) {
-                    $query->whereIn('habilidades.id', $habilidadesSelecionadas);
+
+            $profissionaisComDistancia = Profissional::whereHas('habilidades', function ($query) use ($habilidadesSelecionadas) {
+                $query->whereIn('habilidades.id', $habilidadesSelecionadas);
+            })
+                ->get()
+                ->filter(function ($profissional) use ($cliente) {
+                    $distancia = $this->calcularDistancia($cliente->latitude, $cliente->longitude, $profissional->latitude, $profissional->longitude);
+                    return $distancia <= 25; // Filtra por distância
                 })
-                ->where('id_usuario', '!=', $_SESSION['id_usuario'])
-                ->get();
-
-            // Log do número de profissionais encontrados
-            error_log("Número de profissionais encontrados: " . count($profissionais));
-
-            if ($profissionais->isEmpty()) {
-                echo json_encode(['error' => 'Nenhum profissional encontrado para as habilidades selecionadas.']);
-                return;
-            }
-
-            // Prepara os dados para retornar
-            $profissionaisComDistancia = [];
-            foreach ($profissionais as $profissional) {
-                $distancia = $this->calcularDistancia(
-                    $cliente->latitude,
-                    $cliente->longitude,
-                    $profissional->latitude,
-                    $profissional->longitude
-                );
-
-                // Filtra por distância (se necessário)
-                if ($distancia <= 20) {
-                    $profissionaisComDistancia[] = [
+                ->map(function ($profissional) use ($cliente) {
+                    $distancia = $this->calcularDistancia($cliente->latitude, $cliente->longitude, $profissional->latitude, $profissional->longitude);
+                    return [
                         'id' => $profissional->id,
                         'nome' => $profissional->usuario->nome,
                         'latitude' => $profissional->latitude,
                         'longitude' => $profissional->longitude,
-                        'distancia' => $distancia
+                        'celular' => $profissional->usuario->celular,
+                        'habilidades' => $profissional->habilidades->pluck('nome')->toArray(),
+                        'distancia' => $distancia,
                     ];
-                }
+                });
+
+            if ($profissionaisComDistancia->isEmpty()) {
+                echo json_encode(['error' => "Nenhum profissional encontrado."]);
+            } else {
+                echo json_encode($profissionaisComDistancia->values()->all());
             }
-
-            // Ordena por distância
-            usort($profissionaisComDistancia, function ($a, $b) {
-                return $a['distancia'] <=> $b['distancia'];
-            });
-
-            // Retorna os dados dos profissionais
-            echo json_encode($profissionaisComDistancia);
         } else {
-            echo json_encode(['error' => 'Nenhuma habilidade selecionada.']);
+            echo json_encode(['error' => 'Nenhuma habilidade selecionada!']);
         }
     }
 
 
+
+
+
+//        try {
+
+//            $requestBody = json_decode(file_get_contents('php://input'), true);
+//            $habilidadesSelecionadas = $requestBody['habilidades'] ?? [];
+//
+//            return json_encode($habilidadesSelecionadas);
+
+//            echo("Habilidades selecionadas: " . json_encode($habilidadesSelecionadas));
+//
+//            $cliente = Cliente::where('id_usuario', $_SESSION['id_usuario'])->first();
+//
+//            if (!$cliente) {
+//                throw new Exception("Cliente não encontrado");
+////                echo json_encode(['error' => 'Cliente não encontrado.']);
+////                return;
+//            }
+//
 }

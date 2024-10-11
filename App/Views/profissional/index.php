@@ -24,12 +24,18 @@ $_SESSION['profissional_id'] = $profissional->id;
     <div id="map"></div>
     <div class="aceitar-container">
         <div id="aceitar-cliente" class="aceitar-cliente hidden">
+            <div class="user-container">
+                <img width="150px" style="margin:auto; justify-content: center;" height="150px" src="/assets/img/perfilicon.png" alt="Descrição da Imagem">
+            </div>
+            <div class="user-container"><h2>Você recebeu um chamado de Luan</h2>
+            </div>
+
             <div class="imagem-container">
                 <img src="/assets/img/profissionalgif.gif" alt="Descrição da Imagem">
             </div>
-            <div class="botao-container">
-                <button class="botao" style="background-color: green; color: white;" onclick="responderSolicitacao('aceitar')">Aceitar</button>
-                <button class="botao" style="background-color: red; color: white;" onclick="responderSolicitacao('recusar')">Recusar</button>
+            <div class="container-bottom">
+                <button class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center"  onclick="responderSolicitacao('aceitar')">Aceitar</button>
+                <button class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center"  onclick="responderSolicitacao('recusar')">Recusar</button>
             </div>
         </div>
     </div>
