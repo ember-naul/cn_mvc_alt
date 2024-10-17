@@ -5,14 +5,14 @@
         <div class="container footer-top">
             <div class="row gy-4">
                 <div class="col-lg-4 col-md-6 footer-about">
-                    <a href="index.html" class="d-flex align-items-center">
+                    <a href="/" class="d-flex align-items-center">
                         <span class="sitename">Casa & Negócios</span>
                     </a>
                     <div class="footer-contact pt-3">
                         <p>Rua Vereador Sérgio Leopoldino Alves, 500</p>
                         <p>Distrito Industrial I, Santa Bárbara d'Oeste, SP</p>
                         <p class="mt-3"><strong>Celular:</strong> <span>+55 (19) 12345-6789</span></p>
-                        <p><strong>Email:</strong> <span>casanegocios@contato.com</span></p>
+                        <p><strong>Email:</strong> <span>contato@casanegocios.com.br</span></p>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 footer-links">

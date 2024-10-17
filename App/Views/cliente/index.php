@@ -194,7 +194,7 @@ $_SESSION['cliente_id'] = $cliente->id;
 
         .prestadores-container {
             width: 100%;
-            max-height: 23rem;
+            max-height: 20rem;
             margin: 0;
             position: fixed;
             bottom: 0;

@@ -47,7 +47,9 @@ return function (RouteCollector $r) {
     $r->addRoute('POST', '/profissional/avaliou', [AvaliacaoController::class, 'avaliacao']);
     $r->addRoute('POST', '/profissional/habilidades/inserir', [ProfissionalController::class, 'habilidades_inserir']);
     $r->addRoute('POST', '/update-usuario', [ClienteController::class, 'updateUser']);
+    $r->addRoute('POST', '/upload-imagem', [HomeController::class, 'updateImagem']);
     $r->addRoute('POST', '/enviar_cliente', [LocalizacaoController::class, 'enviar_cliente']);
+    $r->addRoute('GET', '/enviar_imagem', [HomeController::class, 'enviarImagem']);
     $r->addRoute('GET', '/api/profissionais/{id:\d+}', [JsonController::Class, 'buscarProfissionais']);
     $r->addRoute('POST', '/api/habilidades', [JsonController::class, 'enviarHabilidades']);
 

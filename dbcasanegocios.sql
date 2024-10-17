@@ -159,6 +159,7 @@ CREATE TABLE IF NOT EXISTS `usuarios`
     `celular`            char(11) COLLATE utf8mb4_unicode_ci     NOT NULL,
     `cpf`                char(11) COLLATE utf8mb4_unicode_ci     NOT NULL,
     `rg`                 char(9) COLLATE utf8mb4_unicode_ci      NOT NULL,
+    `imagem`             varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     `senha`              varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
     `codigo_verificacao` varchar(255) COLLATE utf8mb4_unicode_ci,
     `codigo_expiracao`   datetime COLLATE utf8mb4_unicode_ci,

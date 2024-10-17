@@ -74,6 +74,44 @@ if ($profissional) {
     .badge-custom:hover {
         background-color: #2c3e50; /* Cor ao passar o mouse */
     }
+     .perfil-imagem {
+         position: relative;
+         width: 25%;
+         border-radius:100%;
+         margin: auto;
+     }
+
+    .image {
+        opacity: 1;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .perfil-imagem:hover .image {
+        opacity: 0.65;
+    }
+
+    .perfil-imagem:hover .middle {
+        opacity: 1;
+    }
+
+    .text {
+        background-color: #3d4d6a;
+        color: white;
+        font-size: 13px;
+        padding: 8px 16px;
+    }
 </style>
 
 <div class="container-fluid container-xl position-relative d-flex align-items-center">
@@ -103,7 +141,9 @@ if ($profissional) {
 
 </div>
 </header>
-<?php function censurarCPF($cpf)
+<?php
+
+function censurarCPF($cpf)
 {
     $cpf = preg_replace('/\D/', '', $cpf);
     return (strlen($cpf) !== 11) ? 'CPF inválido' :
@@ -149,9 +189,18 @@ function formatarCelular($celular) {
 
             <div class="container-fluid">
                 <div class="row mb-3">
+
                     <div class="card-body box-profile text-center">
-                        <img style="padding-bottom: 1.1%" width="130px" height="130px" class="profile-user-img img-fluid img-circle"
-                             src="/assets/img/perfilicon.png" alt="User profile picture">
+                       <div>
+                           <div class="perfil-imagem">
+                               <img src="<?= $usuario->imagem ? "https://storage.googleapis.com/profilepics-cn/{$usuario->imagem}" : '/assets/img/perfilicon.png' ?>" alt="Avatar" class="profile-user-img img-fluid img-circle image" style="padding-bottom: 1.1%; border-radius:100%;">
+                               <div class="middle">
+                                   <a href="/enviar_imagem"><div class="text">Editar</div></a>
+                               </div>
+                           </div>
+                       </div>
+
+
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <b>Nome</b>
@@ -272,7 +321,6 @@ function formatarCelular($celular) {
 </div>
 
 <script>
-    // Preenche o campo 'field' do formulário com o valor do campo que está sendo editado
     document.querySelectorAll('.edit-button').forEach(button => {
         button.addEventListener('click', function () {
             const field = this.getAttribute('data-field');
