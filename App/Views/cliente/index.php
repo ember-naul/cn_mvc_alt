@@ -92,10 +92,6 @@ $_SESSION['cliente_id'] = $cliente->id;
         transition: transform 0.3s ease;
     }
 
-    .prestador:hover {
-        transform: scale(1.02);
-    }
-
     .prestador img {
         width: 50px;
         height: 50px;
@@ -164,9 +160,11 @@ $_SESSION['cliente_id'] = $cliente->id;
     .modal-backdrop {
         z-index: 1040; /* ou um valor inferior ao do modal */
     }
+
     .modal {
         z-index: 1050; /* ou um valor maior */
     }
+
     @media (max-width: 768px) {
 
         html,
@@ -224,6 +222,7 @@ $_SESSION['cliente_id'] = $cliente->id;
         .distancia {
             font-size: 0.8em;
         }
+
         .modal {
             z-index: 2000;
         }
@@ -415,10 +414,6 @@ $_SESSION['cliente_id'] = $cliente->id;
         });
     }
 
-    function mostrarLista() {
-
-    }
-
     function mostrarLista(profissionais) {
         const listaContainer = $('.lista-container');
         listaContainer.empty(); // Limpa a lista anterior
@@ -459,8 +454,8 @@ $_SESSION['cliente_id'] = $cliente->id;
                     <div class="container-fluid">
                         <div class="row mb-3">
                             <div class="card-body box-profile text-center">
-                                <img style="padding-bottom: 1.1%" width="130px" height="130px"
-                                     class="profile-user-img img-fluid img-circle" src="/assets/img/perfilicon.png" alt="User profile picture">
+                                <img style="margin-bottom:5%; border-radius:100%;" width="130px" height="130px"
+                                     class="profile-user-img img-fluid img-circle" src="${profissional.imagem ? `https://storage.googleapis.com/profilepics-cn/${profissional.imagem}` : '/assets/img/perfilicon.png'}" alt="User profile picture">
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <b>Nome</b>
@@ -498,11 +493,30 @@ $_SESSION['cliente_id'] = $cliente->id;
         `);
 
             listaContainer.append(profissionalDiv);
+            let isPopupOpen = false; // Estado para rastrear se o popup está aberto
+
+            profissionalDiv.on('mouseover', function () {
+                const marker = markers[profissional.id];
+                if (marker && !isPopupOpen) {
+                    marker.openPopup(); // Abre o popup do marcador
+                    marker.setZIndexOffset(1000); // Traz o marcador para frente
+                    isPopupOpen = true; // Atualiza o estado
+                }
+            });
+
+            profissionalDiv.on('mouseout', function () {
+                const marker = markers[profissional.id];
+                if (marker && isPopupOpen) {
+                    marker.closePopup(); // Fecha o popup do marcador
+                    marker.setZIndexOffset(0); // Restaura o z-index
+                    isPopupOpen = false; // Restaura o estado
+                }
+            });
         });
     }
 
+    const markers = {}; // Objeto para armazenar os marcadores
 
-    // Atualize a chamada de mostrarLista na função mostrarProfissionaisNoMapa
     function mostrarProfissionaisNoMapa(response) {
         if (map) {
             map.eachLayer(function (layer) {
@@ -512,32 +526,37 @@ $_SESSION['cliente_id'] = $cliente->id;
             });
         }
 
-        // Verifica se a resposta é um array e não está vazio
         if (Array.isArray(response) && response.length > 0) {
+            response.sort((a, b) => {
+                return (a.distancia || Infinity) - (b.distancia || Infinity);
+            });
+
             response.forEach(item => {
-                const profissional = item; // Aqui, item é o profissional retornado
+                const profissional = item;
                 var color = 'red';
                 var awesomeIcon = 'star';
                 var geo = [profissional.latitude, profissional.longitude];
 
-                L.marker(geo, {
+                const marker = L.marker(geo, {
                     icon: L.AwesomeMarkers.icon({icon: awesomeIcon, prefix: 'fa', markerColor: color})
                 }).addTo(map)
                     .bindPopup(`${profissional.nome} - ${profissional.distancia ? profissional.distancia.toFixed(2) + ' km' : 'Distância não disponível'}`);
 
+                // Armazena o marcador com o ID do profissional
+                markers[profissional.id] = marker;
             });
 
-            mostrarLista(response); // Chama mostrarLista com a lista de profissionais
+            mostrarLista(response);
 
-            const clienteLatitude = userMarker.getLatLng().lat; // Pega a latitude do cliente
-            const clienteLongitude = userMarker.getLatLng().lng; // Pega a longitude do cliente
+            const clienteLatitude = userMarker.getLatLng().lat;
+            const clienteLongitude = userMarker.getLatLng().lng;
 
-            // Centraliza no cliente
-            map.setView([clienteLatitude, clienteLongitude], map.getZoom(13)); // Diminui o zoom em 1 nível
+            map.setView([clienteLatitude, clienteLongitude], map.getZoom(13));
         } else {
             console.warn("Nenhum profissional encontrado para as habilidades selecionadas.");
         }
     }
+
 
     // function calcularRota(origem, destino) {
     //     if (routingControl) {

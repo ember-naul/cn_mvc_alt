@@ -193,7 +193,7 @@ function formatarCelular($celular) {
                     <div class="card-body box-profile text-center">
                        <div>
                            <div class="perfil-imagem">
-                               <img src="<?= $usuario->imagem ? "https://storage.googleapis.com/profilepics-cn/{$usuario->imagem}" : '/assets/img/perfilicon.png' ?>" alt="Avatar" class="profile-user-img img-fluid img-circle image" style="padding-bottom: 1.1%; border-radius:100%;">
+                               <img src="<?= $usuario->imagem ? "https://storage.googleapis.com/profilepics-cn/{$usuario->imagem}" : '/assets/img/perfilicon.png' ?>" alt="Avatar" class="profile-user-img img-fluid img-circle image" style="margin-bottom:5%; border-radius:100%;">
                                <div class="middle">
                                    <a href="/enviar_imagem"><div class="text">Editar</div></a>
                                </div>
@@ -235,6 +235,7 @@ function formatarCelular($celular) {
                                 </span>
                             </li>
                         </ul>
+                        <?php if (!$_SESSION['cliente'] && $_SESSION['profissional']) : ?>
                         <div class="form-group">
                             <h5>Habilidades:</h5>
                             <div id="skills-container" class="d-flex flex-wrap justify-content-center">
@@ -243,6 +244,7 @@ function formatarCelular($celular) {
                                 <?php endforeach; ?>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

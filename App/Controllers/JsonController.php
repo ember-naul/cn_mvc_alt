@@ -99,6 +99,7 @@ class JsonController
                     return [
                         'id' => $profissional->id,
                         'nome' => $profissional->usuario->nome,
+                        'imagem' => $profissional->usuario->imagem,
                         'latitude' => $profissional->latitude,
                         'longitude' => $profissional->longitude,
                         'celular' => $profissional->usuario->celular,

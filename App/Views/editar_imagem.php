@@ -7,17 +7,20 @@
                         <h1>Enviar um Arquivo</h1>
                         <form id="uploadForm" action="/upload-imagem" method="post" enctype="multipart/form-data">
                             <label for="file">Escolha um arquivo:</label>
-                            <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg, .svg, .webp, .avif" required style="display: none;">
-                            <div id="drop-zone" style="border: 2px dashed #ccc; border-radius: 10px; padding: 20px; text-align: center;">
+                            <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg, .svg, .webp, .avif"
+                                   style="display: none;">
+                            <div id="drop-zone"
+                                 style="border: 2px dashed #ccc; border-radius: 10px; padding: 20px; text-align: center;">
                                 Arraste e solte o arquivo aqui ou clique para selecionar
                             </div>
                             <br><br>
                             <button type="button" id="save-button" style="display: none;">Salvar Imagem</button>
                             <input type="submit" value="Enviar" id="send-button" style="display: none;">
-                            <input type="hidden" name="croppedImage" id="croppedImage"> <!-- Campo oculto para a imagem -->
+                            <input type="hidden" name="croppedImage" id="croppedImage">
                         </form>
+
                         <div id="cropper-container" style="display: none;">
-                            <img id="image" src="" alt="Imagem para recorte" />
+                            <img id="image" src="" alt="Imagem para recorte"/>
                         </div>
                     </div>
                 </div>
@@ -60,11 +63,15 @@
             if (validateFileType(file)) {
                 originalFileName = file.name;
                 validateImage(file);
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files;
             } else {
-                alert('Por favor, envie apenas arquivos de imagem (PNG, JPG, JPEG, SVG, WEBP, AVIF).');
+                alert('Por favor, envie apenas arquivos de imagem (PNG, JPG/JPEG, WEBP, AVIF).');
             }
         }
     });
+
 
     fileInput.addEventListener('change', (event) => {
         if (event.target.files.length > 0) {
@@ -73,7 +80,7 @@
                 originalFileName = file.name;
                 validateImage(file);
             } else {
-                alert('Por favor, envie apenas arquivos de imagem (PNG, JPG, JPEG, SVG, WEBP, AVIF).');
+                alert('Por favor, envie apenas arquivos de imagem (PNG, JPG/JPEG, WEBP, AVIF).');
                 fileInput.value = '';
                 dropZone.textContent = 'Arraste e solte o arquivo aqui ou clique para selecionar';
             }
@@ -89,16 +96,15 @@
         const img = new Image();
         const reader = new FileReader();
 
-        reader.onload = function(event) {
+        reader.onload = function (event) {
             img.src = event.target.result;
 
-            img.onload = function() {
+            img.onload = function () {
                 document.getElementById('cropper-container').style.display = 'block';
                 document.getElementById('image').src = img.src;
 
-                // Inicializa o cropper
                 if (cropper) {
-                    cropper.destroy(); // Destrói o cropper anterior se existir
+                    cropper.destroy();
                 }
 
                 cropper = new Cropper(document.getElementById('image'), {
@@ -121,6 +127,20 @@
         reader.readAsDataURL(file);
     }
 
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        const fileInput = document.getElementById('file');
+
+        // Verifica se há um arquivo selecionado
+        if (fileInput.files.length === 0) {
+            fileInput.style.display = 'block'; // Mostra o campo
+            fileInput.focus(); // Foca no campo
+            alert('Por favor, selecione uma imagem antes de enviar.');
+            event.preventDefault(); // Previne o envio do formulário
+        }
+    });
+
+
+
     document.getElementById('save-button').addEventListener('click', function () {
         if (!originalFileName) {
             alert('Por favor, selecione uma imagem primeiro.');
@@ -132,13 +152,13 @@
             height: 200,
         });
 
-        canvas.toBlob(function(blob) {
-            const file = new File([blob], originalFileName, { type: 'image/png' });
+        canvas.toBlob(function (blob) {
+            const file = new File([blob], originalFileName, {type: 'image/png'});
             croppedImage = file;
             dropZone.textContent = file.name;
 
             const reader = new FileReader();
-            reader.onloadend = function() {
+            reader.onloadend = function () {
                 croppedImageInput.value = reader.result; // Armazena a imagem no campo oculto
             };
             reader.readAsDataURL(file);
@@ -153,6 +173,7 @@
     #drop-zone {
         cursor: pointer;
     }
+
     #drop-zone.hover {
         background-color: #f0f0f0;
     }
