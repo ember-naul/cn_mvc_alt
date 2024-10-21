@@ -6,7 +6,7 @@
     }
 
     .chat-container {
-        max-width: 500px;
+        max-width: 600px;
         margin: 20px auto;
         padding: 10px;
         background: #fff;
@@ -43,7 +43,7 @@
     .chat-container {
         display: flex;
         flex-direction: column;
-        height: 100vh;
+        height: 80vh;
         width: 100%;
     }
 

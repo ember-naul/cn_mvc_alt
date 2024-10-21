@@ -32,37 +32,29 @@ class ProfissionalController extends Controller
     {
         $cnpj = $_POST['cnpj'] ?? null;
 
-        // Validação básica do CNPJ
-        if (!$this->validarCNPJ($cnpj)) {
+        // Permite CNPJ vazio
+        if (!empty($cnpj) && !$this->validarCNPJ($cnpj)) {
             return redirect('/profissional/cadastro')->erro("CNPJ inválido.");
         }
 
         try {
-            $existeProfissional = Profissional::where('cnpj', $cnpj)->first();
+            // Verifica apenas se CNPJ não é vazio
+            if (!empty($cnpj)) {
+                $existeProfissional = Profissional::where('cnpj', $cnpj)->first();
 
-            if ($existeProfissional) {
-                return redirect('/profissional/cadastro')->erro("Já existe um profissional cadastrado com este CNPJ.");
+                if ($existeProfissional) {
+                    return redirect('/profissional/cadastro')->erro("Já existe um profissional cadastrado com este CNPJ.");
+                }
             }
-            // API CNPJ
-            $url = "https://publica.cnpj.ws/cnpj/$cnpj";
-            $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_CAINFO, __DIR__ . '/../../config/certifications/cacert.pem');
-
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            $resp = curl_exec($curl);
-            curl_close($curl);
-            if ($resp === false) {
-                throw new Exception(curl_error($curl));
-            }
-            $data = json_decode($resp, true);
-            if (isset($data['status']) && $data['status'] !== 'OK') {
-                throw new Exception("Erro na consulta ao CNPJ: " . $data['message']);
-            }
-            //
 
             $profissional = new Profissional();
             $profissional->id_usuario = user()->id_usuario;
-            $profissional->cnpj = $cnpj;
+
+            // Apenas atribui o CNPJ se não for vazio
+            if (!empty($cnpj)) {
+                $profissional->cnpj = $cnpj;
+            }
+
             $profissional->save();
 
             $_SESSION['cliente'] = false;
@@ -73,6 +65,7 @@ class ProfissionalController extends Controller
             return redirect('/home')->erro($e->getMessage());
         }
     }
+
 
     private function validarCNPJ($cnpj)
     {

@@ -5,10 +5,12 @@ use App\Models\Cliente;
 use App\Models\Profissional;
 use App\Models\Habilidade;
 use App\Models\Usuario;
+use Pusher\Pusher;
 
 $usuario = Usuario::find($_SESSION['id_usuario']);
 $profissional = Profissional::where('id_usuario', $usuario->id)->first();
 $_SESSION['profissional_id'] = $profissional->id;
+
 ?>
 
 <head>
@@ -148,19 +150,40 @@ $_SESSION['profissional_id'] = $profissional->id;
 
 
 
-    function responderSolicitacao(acao) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/responder_solicitacao', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log("Resposta enviada com sucesso: " + acao);
-                addHidden(); // Esconder o aviso após resposta
-            }
-        };
-        var params = 'acao=' + acao + '&profissional_id=' + profissionalId;
-        xhr.send(params);
-    }
+        function responderSolicitacao(acao) {
+            const params = new URLSearchParams();
+            params.append('acao', acao);
+            params.append('profissional_id', profissionalId);
+
+            fetch('/api/responder_solicitacao', {
+                method: 'POST',
+                body: params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+                .then(response => {
+                    return response.text()
+                })
+                .then(data => {
+                    console.log('Resposta do servidor:', data);
+                    try {
+                        const jsonData = JSON.parse(data);
+                        if (acao === 'aceitar') {
+                            console.log(jsonData);
+                            window.location.href = '/chat?id=' + jsonData.contrato_id + '&cliente_id=' + jsonData.cliente_id + '&profissional_id=' + profissionalId;
+                        } else if (acao === 'recusar'){
+                            const aceitarClienteElement = document.getElementById('aceitar-cliente');
+                            aceitarClienteElement.classList.add('hidden');
+                        }
+                    } catch (e) {
+                        console.error('Erro ao analisar JSON:', e);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+
+        }
+
 
     iniciarContagem();
     atualizarLocalizacao();

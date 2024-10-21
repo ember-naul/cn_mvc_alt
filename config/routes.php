@@ -17,7 +17,7 @@ return function (RouteCollector $r) {
     $r->addRoute('GET', '/home', [HomeController::class, 'index']);
     $r->addRoute('GET', '/mapa', [HomeController::class, 'mapa']);
     $r->addRoute('GET', '/gravardados', [HomeController::class, 'gravardados']);
-    $r->addRoute('GET', '/chat_teste', [HomeController::class, 'chat_teste']);
+    $r->addRoute('GET', '/chat', [HomeController::class, 'chat_teste']);
     $r->addRoute('GET', '/enderecos', [HomeController::class, 'enderecos']);
     $r->addRoute('POST', '/enviar_mensagem', [HomeController::class, 'enviar_mensagem']);
 
@@ -52,6 +52,7 @@ return function (RouteCollector $r) {
     $r->addRoute('GET', '/enviar_imagem', [HomeController::class, 'enviarImagem']);
     $r->addRoute('GET', '/api/profissionais/{id:\d+}', [JsonController::Class, 'buscarProfissionais']);
     $r->addRoute('POST', '/api/habilidades', [JsonController::class, 'enviarHabilidades']);
+    $r->addRoute('POST', '/api/responder_solicitacao', [JsonController::class, 'responderSolicitacao']);
 
 
     $r->addRoute('POST', '/enviar_profissional', [LocalizacaoController::class, 'enviar_profissional']);

@@ -493,23 +493,23 @@ $_SESSION['cliente_id'] = $cliente->id;
         `);
 
             listaContainer.append(profissionalDiv);
-            let isPopupOpen = false; // Estado para rastrear se o popup está aberto
+            let isPopupOpen = false;
 
             profissionalDiv.on('mouseover', function () {
                 const marker = markers[profissional.id];
                 if (marker && !isPopupOpen) {
-                    marker.openPopup(); // Abre o popup do marcador
-                    marker.setZIndexOffset(1000); // Traz o marcador para frente
-                    isPopupOpen = true; // Atualiza o estado
+                    marker.openPopup();
+                    marker.setZIndexOffset(1000);
+                    isPopupOpen = true;
                 }
             });
 
             profissionalDiv.on('mouseout', function () {
                 const marker = markers[profissional.id];
                 if (marker && isPopupOpen) {
-                    marker.closePopup(); // Fecha o popup do marcador
-                    marker.setZIndexOffset(0); // Restaura o z-index
-                    isPopupOpen = false; // Restaura o estado
+                    marker.closePopup();
+                    marker.setZIndexOffset(0);
+                    isPopupOpen = false;
                 }
             });
         });
@@ -533,17 +533,21 @@ $_SESSION['cliente_id'] = $cliente->id;
 
             response.forEach(item => {
                 const profissional = item;
-                var color = 'red';
-                var awesomeIcon = 'star';
-                var geo = [profissional.latitude, profissional.longitude];
 
-                const marker = L.marker(geo, {
-                    icon: L.AwesomeMarkers.icon({icon: awesomeIcon, prefix: 'fa', markerColor: color})
-                }).addTo(map)
-                    .bindPopup(`${profissional.nome} - ${profissional.distancia ? profissional.distancia.toFixed(2) + ' km' : 'Distância não disponível'}`);
+                // Verifique se a latitude e a longitude não são nulas
+                if (profissional.latitude !== null && profissional.longitude !== null) {
+                    var color = 'red';
+                    var awesomeIcon = 'star';
+                    var geo = [profissional.latitude, profissional.longitude];
 
-                // Armazena o marcador com o ID do profissional
-                markers[profissional.id] = marker;
+                    const marker = L.marker(geo, {
+                        icon: L.AwesomeMarkers.icon({icon: awesomeIcon, prefix: 'fa', markerColor: color})
+                    }).addTo(map)
+                        .bindPopup(`${profissional.nome} - ${profissional.distancia ? profissional.distancia.toFixed(2) + ' km' : 'Distância não disponível'}`);
+
+                    // Armazena o marcador com o ID do profissional
+                    markers[profissional.id] = marker;
+                }
             });
 
             mostrarLista(response);
@@ -551,7 +555,7 @@ $_SESSION['cliente_id'] = $cliente->id;
             const clienteLatitude = userMarker.getLatLng().lat;
             const clienteLongitude = userMarker.getLatLng().lng;
 
-            map.setView([clienteLatitude, clienteLongitude], map.getZoom(13));
+            map.setView([clienteLatitude, clienteLongitude], 13);
         } else {
             console.warn("Nenhum profissional encontrado para as habilidades selecionadas.");
         }
@@ -575,8 +579,21 @@ $_SESSION['cliente_id'] = $cliente->id;
     //     }).addTo(map);
     // }
 
-    iniciarContagem();
-    atualizarLocalizacao();
+    var pusher = new Pusher('8702b12d1675f14472ac', {
+        cluster: 'sa1'
+    });
+
+    var channelCliente = pusher.subscribe('clientes_' + clienteId);
+    console.log('Inscrito no canal: clientes_' + clienteId);
+
+    // Bind para receber a notificação quando a solicitação é aceita
+    channelCliente.bind('client:solicitacao_aceita', function(data) {
+        console.log('Evento recebido:', data);
+        window.location.href = '/chat?id=' + data.contrato_id + '&cliente_id=' + data.cliente_id + '&profissional_id=' + data.profissional_id;
+    });
+
+
+
 
     function testarJson(id) {
         var xhr = new XMLHttpRequest();
@@ -592,7 +609,7 @@ $_SESSION['cliente_id'] = $cliente->id;
         };
         xhr.send();
     }
-
-
+    iniciarContagem();
+    atualizarLocalizacao();
 </script>
 </body>

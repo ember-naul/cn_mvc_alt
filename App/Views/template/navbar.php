@@ -149,6 +149,16 @@ function censurarCPF($cpf)
     return (strlen($cpf) !== 11) ? 'CPF inválido' :
         substr($cpf, 0, 3) . '.***.***-' . substr($cpf, -2);
 }
+function censurarCNPJ($cnpj)
+{
+    if(empty($cnpj)){
+        return 'Não possui.';
+    }
+    $cnpj = preg_replace('/\D/', '', $cnpj);
+    return (strlen($cnpj) !== 14) ? 'CNPJ inválido' :
+//        substr($cnpj, 0, 2) . '.***.***/***-' . substr($cnpj, -2);
+        substr($cnpj, 0, 2) . '.' . substr($cnpj, 2, 2) . '*.***/****-' . substr($cnpj, -2);
+}
 
 function censurarRG($rg)
 {
@@ -234,8 +244,16 @@ function formatarCelular($celular) {
                                 <span style="opacity:0;"><i class="fa fa-edit"></i>
                                 </span>
                             </li>
+                            <?php if (isset($_SESSION['cliente']) && isset($_SESSION['profissional']) && !$_SESSION['cliente'] && $_SESSION['profissional']) : ?>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <b>CNPJ</b>
+                                <span class="float-right"><?= censurarCNPJ($profissional->cnpj); ?></span>
+                                <span style="opacity:0;"><i class="fa fa-edit"></i>
+                                </span>
+                            </li>
+                            <?php endif; ?>
                         </ul>
-                        <?php if (!$_SESSION['cliente'] && $_SESSION['profissional']) : ?>
+                        <?php if (isset($_SESSION['cliente']) && isset($_SESSION['profissional']) && !$_SESSION['cliente'] && $_SESSION['profissional']) : ?>
                         <div class="form-group">
                             <h5>Habilidades:</h5>
                             <div id="skills-container" class="d-flex flex-wrap justify-content-center">

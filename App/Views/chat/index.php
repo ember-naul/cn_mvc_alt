@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="/assets/css/chat.css">
 </head>
 <body>
+
     <div class="chat-container">
+        <div style="display:flex; justify-content: space-evenly">
+            <button> Aceitar </button>
+            <button> Recusar </button>
+        </div>
+
         <div id="chat-box"></div>
         <form id="chat-form">
             <input type="text" id="message" placeholder="Digite sua mensagem..." required>
@@ -16,6 +22,24 @@
     </div>
 
     <?php
+
+    use Pusher\Pusher;
+
+    $pusher = new Pusher(
+        '8702b12d1675f14472ac',
+        '0e7618b4f23dcfaf415c',
+        '1863692',
+        [
+            'cluster' => 'sa1',
+            'useTLS' => false
+        ]
+    );
+
+    $contratoId = $_GET['id'] ?? null;
+    $clienteId = $_GET['cliente_id'] ?? null;
+    $profissionalId = $_GET['profissional_id'] ?? null;
+
+
     $username = isset($_SESSION['nome']) ? $_SESSION['nome'] : 'UsuárioDesconhecido';
     ?>
     

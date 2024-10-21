@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `mensagens`
     `id`       int PRIMARY KEY                         NOT NULL AUTO_INCREMENT,
     `id_chat`  varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
     `mensagem` text COLLATE utf8mb4_unicode_ci,
+    `timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP COLLATE utf8mb4_unicode_ci NOT NULL,
     KEY `id_chat` (`id_chat`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
@@ -214,12 +215,7 @@ INSERT INTO `profissionais`(`id_usuario`, `cnpj`, `latitude`, `longitude`, `sald
 VALUES ('2', '1', null, null, null),
        ('3', '1', null, null, null),
        ('4', '1', null, null, null),
-       ('5', '1', null, null, null),
-       ('6', '1', null, null, null),
-       ('7', '1', null, null, null),
-       ('8', '1', null, null, null),
-       ('9', '1', null, null, null),
-       ('10', '1', null, null, null);
+       ('5', '1', null, null, null);
 
 INSERT INTO `profissionais_habilidades` (`id`, `id_profissional`, `id_habilidade`)
 VALUES (1, 1, 1);
@@ -236,13 +232,7 @@ VALUES ('Luan', 'lluann930@gmail.com', '1', '1', '1', 'adcd7048512e64b48da55b027
        ('teste4', 'a@4', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
        ('teste5', 'a@5', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
        ('teste6', 'a@6', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
-       ('teste7', 'a@7', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
-       ('teste8', 'a@8', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
-       ('teste9', 'a@9', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
-       ('teste10', 'a@10', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
-       ('teste11', 'a@11', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
-       ('teste12', 'a@12', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1),
-       ('teste13', 'a@13', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1);
+       ('teste7', 'a@7', '1', '1', '1', 'adcd7048512e64b48da55b027577886ee5a36350', 1);
 
 
 COMMIT;
