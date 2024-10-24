@@ -30,8 +30,8 @@ body {
 }
 
 #map {
-    flex: 1; /* Mapa ocupa o espaço disponível */
-    height: 100%; /* Altura total do contêiner */
+    flex: 1; 
+    height: 100%;
     margin: 0;
     border: 2px solid #ddd;
     border-radius: 10px;
@@ -43,7 +43,7 @@ body {
     flex-direction: column;
     width: 30%;
     height: 100%;
-    max-height: 50rem;
+    max-height: 60rem;
     overflow-y: auto;
     overflow-x: hidden;
     box-sizing: border-box;

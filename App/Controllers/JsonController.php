@@ -2,12 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Models\Chat;
 use App\Models\Cliente;
 use App\Models\Contrato;
 use App\Models\Habilidade;
 use App\Models\Profissional;
 use App\Models\ProfissionalHabilidade;
 use App\Models\Usuario;
+use App\Models\Mensagem;
 use Exception;
 use Pusher\Pusher;
 
@@ -18,7 +20,7 @@ class JsonController
     {
 
         $id = $vars['id'] ?? null;
-        $data_inicio = date('Y-m-d H:i:s');
+
         if ($id !== null) {
             $cliente = Cliente::where("id_usuario", "=", $_SESSION["id_usuario"])->first();
             $profissional = Profissional::where("id", "=", $id)->first();
@@ -26,28 +28,47 @@ class JsonController
             // Configurar o cabeçalho da resposta
             header('Content-Type: application/json');
             $pusher = new Pusher(
-                '8702b12d1675f14472ac',
-                '0e7618b4f23dcfaf415c',
-                '1863692',
-                [
-                    'cluster' => 'sa1',
-                    'useTLS' => false
-                ]
-            );
-            if ($cliente && $profissional) {
-                $contrato = new Contrato();
-                $contrato->id_cliente = $cliente->id;
-                $contrato->id_profissional = $profissional->id;
-                $contrato->data_inicio = $data_inicio;
-                $contrato->status_contrato = 1;
-                $contrato->save();
-                $data = [
-                    'message' => 'Você recebeu uma nova solicitação de contrato!',
-                    'cliente_id' => $contrato->id_cliente,
-                    'profissional_id' => $contrato->id_profissional
-                ];
-                $pusher->trigger('contratos', 'nova-solicitacao', $data);
-                echo json_encode($data);
+                    '8702b12d1675f14472ac',
+                    '0e7618b4f23dcfaf415c',
+                    '1863692',
+                    [
+                        'cluster' => 'sa1',
+                        'useTLS' => false
+                    ]
+                );
+                if ($cliente && $profissional) {
+                    $data = [
+                        'message' => 'Você recebeu uma nova solicitação de contrato!',
+                        'cliente_id' => $cliente->id,
+                        'cliente_nome' => $cliente->usuario->nome,
+                        'profissional_id' => $profissional->id,
+                        'cliente_img' => $cliente->usuario->imagem,
+                    ];
+                    $pusher->trigger('contratos', 'nova-solicitacao', $data);
+                    echo json_encode($data);
+            } else {
+                echo json_encode(['error' => 'Profissional não encontrado']);
+            }
+        } else {
+            echo json_encode(['error' => 'ID do profissional não fornecido']);
+        }
+    }
+
+    public function retornarEstado()
+    {
+        $profissionalId = $_SESSION['profissional_id'] ?? null;
+
+        if ($profissionalId) {
+            $profissional = Profissional::find($profissionalId);
+
+            if ($profissional) {
+                if ($profissional->status == 'nao-pareando'){
+                    $profissional->status = 'pareando';
+                } else if ($profissional->status == 'pareando'){
+                    $profissional->status = 'nao-pareando';
+                }
+                $profissional->save();
+                echo json_encode(['status' => $profissional->status]);
             } else {
                 echo json_encode(['error' => 'Profissional não encontrado']);
             }
@@ -97,7 +118,7 @@ class JsonController
                 ->get()
                 ->filter(function ($profissional) use ($cliente) {
                     $distancia = $this->calcularDistancia($cliente->latitude, $cliente->longitude, $profissional->latitude, $profissional->longitude);
-                    return $distancia <= 25; // Filtra por distância
+                    return $profissional->status == 'pareando' && $distancia <= 25;
                 })
                 ->map(function ($profissional) use ($cliente) {
                     $distancia = $this->calcularDistancia($cliente->latitude, $cliente->longitude, $profissional->latitude, $profissional->longitude);
@@ -130,6 +151,7 @@ class JsonController
         $usuario = Usuario::find($_SESSION['id_usuario']);
         $profissional = Profissional::find($profissionalId);
         $cliente = Cliente::where("id_usuario", "!=", $usuario->id)->first();
+        $data_inicio = date('Y-m-d H:i:s');
 
         $pusher = new Pusher(
             '8702b12d1675f14472ac',
@@ -141,12 +163,7 @@ class JsonController
             ]
         );
 
-
         if ($acao) {
-            $contrato = Contrato::where('id_profissional', $profissional->id)
-                ->where('id_cliente', $cliente->id)
-                ->first();
-
             if (!$cliente) {
                 echo json_encode(['error' => 'Cliente não encontrado.']);
                 return;
@@ -155,14 +172,14 @@ class JsonController
                 echo json_encode(['error' => 'Profissional não encontrado.']);
                 return;
             }
-            if (!$contrato) {
-                echo json_encode(['error' => 'Contrato não encontrado.']);
-                return;
-            }
 
             if ($acao === 'aceitar') {
-                $contrato->status_contrato = 3; // 3 é o status "aceito"
-                $contrato->save();
+                $contrato = new Contrato();
+                $contrato->id_cliente = $cliente->id;
+                $contrato->id_profissional = $profissional->id;
+                $contrato->data_inicio = $data_inicio;
+                $contrato->status_contrato = 'aceito';
+                $contrato->save(); // Salva a atualização do status
 
                 $data = [
                     'success' => 'Solicitação aceita com sucesso!',
@@ -170,27 +187,27 @@ class JsonController
                     'cliente_id' => $contrato->id_cliente,
                     'chat_url' => '/chat?id=' . $contrato->id . '&cliente_id=' . $contrato->id_cliente . '&profissional_id=' . $profissional->id
                 ];
-
-                // Disparar o evento correto
+                $chat = new Chat();
+                $chat->id_contrato = $contrato->id;
+                $chat->save();
+                // Dispara eventos para notificação
                 $pusher->trigger('clientes_' . $cliente->id, 'client:solicitacao_aceita', [
                     'contrato_id' => $contrato->id,
                     'cliente_id' => $cliente->id,
-                    'profissional_id' => $profissional->id
+                    'profissional_id' => $profissional->id,
+                    'chat_id' => $chat->id,
                 ]);
 
+
                 $pusher->trigger('contratos', 'solicitacao-resposta', $data);
-                echo json_encode($data); // Retorne a URL do chat
+                echo json_encode($data);
             } elseif ($acao === 'recusar') {
-                $contrato->status_contrato = 5; // 5 é o status "recusado"
-                $contrato->save();
                 $data = [
                     'message' => 'O profissional recusou a solicitação.',
-                    'contrato_id' => $contrato->id,
                     'profissional_id' => $profissional->id,
                     'cliente_id' => $cliente->id
                 ];
                 $pusher->trigger('contratos', 'solicitacao-resposta', $data);
-
                 echo json_encode(['success' => 'Solicitação recusada com sucesso!']);
             } else {
                 echo json_encode(['error' => 'Ação inválida.']);
@@ -199,5 +216,29 @@ class JsonController
             echo json_encode(['error' => 'Dados incompletos.']);
         }
     }
+    public function enviarMensagem() {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $id_chat = $data['id_chat'] ?? null;
+        $mensagem = $data['mensagem'] ?? null;
 
+        if ($id_chat && $mensagem) {
+            $novaMensagem = new Mensagem();
+            $novaMensagem->id_chat = $id_chat;
+            $novaMensagem->mensagem = $mensagem; 
+            if ($_SESSION['cliente' == true]){
+                $novaMensagem->tipo_usuario = 'cliente'; 
+            } 
+            if ($_SESSION['profissional'] == true) {
+                $novaMensagem->tipo_usuario = 'profissional'; 
+            }
+            if ($novaMensagem->save()) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['error' => 'Falha ao salvar a mensagem.']);
+            }
+        } else {
+            echo json_encode(['error' => 'Dados incompletos.']);
+        }
+    }
+    
 }

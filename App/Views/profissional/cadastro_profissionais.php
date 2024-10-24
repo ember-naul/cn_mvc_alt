@@ -32,7 +32,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group" id="cnpjOpt" style="display:none;">
-                                    <label for="cnpj">Seu CNPJ (Se possuir)</label>
+                                    <label for="cnpj">Seu CNPJ</label>
                                     <input type="text" class="form-control" maxlength="14" id="cnpj" name="cnpj">
                                 </div>
                                 <div class="text-center">
@@ -54,10 +54,10 @@
 
         if (this.value === 'jurídica') {
             cnpjOpt.style.display = 'block';
-            cnpjInp.required = true; // Define como obrigatório
+            cnpjInp.required = true;
         } else {
             cnpjOpt.style.display = 'none';
-            cnpjInp.required = false; // Remove a obrigatoriedade
+            cnpjInp.required = false;
         }
     });
 </script>

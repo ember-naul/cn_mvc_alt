@@ -16,8 +16,6 @@ $_SESSION['cliente_id'] = $cliente->id;
 ?>
 <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<!--<link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css"/>-->
-<!--<script src="https://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>-->
 <link rel="stylesheet" href="/assets/css/leaflet.awesome-markers.css">
 <script src="/assets/js/leaflet.awesome-markers.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css"/>
@@ -69,7 +67,7 @@ $_SESSION['cliente_id'] = $cliente->id;
         flex-direction: column;
         width: 30%;
         height: 100%;
-        max-height: 50rem;
+        max-height: 60rem;
         overflow-y: auto;
         overflow-x: hidden;
         box-sizing: border-box;
@@ -276,7 +274,6 @@ $_SESSION['cliente_id'] = $cliente->id;
         margin-bottom: 1rem;
     }
 </style>
-<!--<link href="/assets/css/index.css" rel="stylesheet">-->
 <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/leaflet.awesome-markers.css">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -474,7 +471,7 @@ $_SESSION['cliente_id'] = $cliente->id;
                                 </div>
                                 <div class="row text-center ml-5 mr-5">
                                     <div class="col-6 mb-2">
-                                        <button class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center" onclick="testarJson(${profissional.id})">
+                                        <button class="btn btn-outline-custom btn-block d-flex justify-content-start align-items-center" onclick="encontrarProfissional(${profissional.id})">
                                             <img src="/assets/img/celular.png" alt="Sobre" width="24" class="mr-2">Chamar
                                         </button>
                                     </div>
@@ -545,7 +542,6 @@ $_SESSION['cliente_id'] = $cliente->id;
                     }).addTo(map)
                         .bindPopup(`${profissional.nome} - ${profissional.distancia ? profissional.distancia.toFixed(2) + ' km' : 'Distância não disponível'}`);
 
-                    // Armazena o marcador com o ID do profissional
                     markers[profissional.id] = marker;
                 }
             });
@@ -586,7 +582,6 @@ $_SESSION['cliente_id'] = $cliente->id;
     var channelCliente = pusher.subscribe('clientes_' + clienteId);
     console.log('Inscrito no canal: clientes_' + clienteId);
 
-    // Bind para receber a notificação quando a solicitação é aceita
     channelCliente.bind('client:solicitacao_aceita', function(data) {
         console.log('Evento recebido:', data);
         window.location.href = '/chat?id=' + data.contrato_id + '&cliente_id=' + data.cliente_id + '&profissional_id=' + data.profissional_id;
@@ -595,7 +590,7 @@ $_SESSION['cliente_id'] = $cliente->id;
 
 
 
-    function testarJson(id) {
+    function encontrarProfissional(id) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '/api/profissionais/' + id, true);
         xhr.onreadystatechange = function () {

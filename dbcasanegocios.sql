@@ -41,6 +41,15 @@ CREATE TABLE IF NOT EXISTS `clientes`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `chat`
+(
+    `id`            int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `id_contrato`   int             NOT NULL,
+    KEY `id_contrato` (`id_contrato`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `contratos`
 (
     `id`              int PRIMARY KEY                                                  NOT NULL AUTO_INCREMENT,
@@ -62,9 +71,6 @@ CREATE TABLE IF NOT EXISTS `enderecos`
     `id_cliente`      int,
     `id_profissional` int,
     `cep`             char(9) COLLATE utf8mb4_unicode_ci        DEFAULT NULL,
-    `endereco`        varchar(30) COLLATE utf8mb4_unicode_ci    DEFAULT NULL,
-    `bairro`          varchar(70) COLLATE utf8mb4_unicode_ci    DEFAULT NULL,
-    `cidade`          varchar(50) COLLATE utf8mb4_unicode_ci    DEFAULT NULL,
     `numero`          varchar(6) COLLATE utf8mb4_unicode_ci     DEFAULT NULL,
     `latitude`        decimal(10, 8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     `longitude`       decimal(11, 8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -89,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `mensagens`
     `id_chat`  varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
     `mensagem` text COLLATE utf8mb4_unicode_ci,
     `timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP COLLATE utf8mb4_unicode_ci NOT NULL,
+    `tipo_usuario` ENUM('cliente', 'profissional') COLLATE utf8mb4_unicode_ci NOT NULL,
     KEY `id_chat` (`id_chat`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
@@ -124,7 +131,8 @@ CREATE TABLE IF NOT EXISTS `profissionais`
     `latitude`   DECIMAL(10, 8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     `longitude`  DECIMAL(11, 8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     `saldo`      DECIMAL(10, 2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-    KEY `id_usuario` (`id_usuario`)
+    `status`	   ENUM('nao-pareando', 'pareando') COLLATE utf8mb4_unicode_ci NOT NULL,   
+KEY `id_usuario` (`id_usuario`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;

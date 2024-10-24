@@ -10,14 +10,14 @@
 
     <div class="chat-container">
         <div style="display:flex; justify-content: space-evenly">
-            <button> Aceitar </button>
-            <button> Recusar </button>
+            <button class="btn btn-success"> Aceitar </button>
+            <button class="btn btn-danger"> Recusar </button>
         </div>
 
         <div id="chat-box"></div>
-        <form id="chat-form">
+        <form id="chat-form" method='post' action='/api/enviar_mensagem'>
             <input type="text" id="message" placeholder="Digite sua mensagem..." required>
-            <button type="submit">Enviar</button>
+            <input type="submit"></input>
         </form>
     </div>
 
@@ -44,42 +44,54 @@
     ?>
     
     <script>
-        let conn = new WebSocket('ws://localhost:8080/chat');
-        const chatBox = document.getElementById('chat-box');
-        const form = document.getElementById('chat-form');
-        const messageInput = document.getElementById('message');
+    let conn = new WebSocket('ws://localhost:8080/chat');
+    const chatBox = document.getElementById('chat-box');
+    const form = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message');
 
-        const username = <?php echo json_encode($username); ?>;
+    const username = <?php echo json_encode($username); ?>;
 
-        conn.onmessage = function(e) {
-            let message = JSON.parse(e.data);
-            let messageElement = document.createElement('div');
-            if (message.user === username) {
-                messageElement.classList.add('message-self');
-                messageElement.textContent = `Você: ${message.text}`;
-            } else {
-                messageElement.classList.add('message-other');
-                messageElement.textContent = `${message.user}: ${message.text}`;
-            }
-            
-            chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        };
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            let message = messageInput.value;
-            let outgoingMessage = JSON.stringify({ user: username, text: message });
-            conn.send(outgoingMessage);
-            
-            let messageElement = document.createElement('div');
+    conn.onmessage = function(e) {
+        let message = JSON.parse(e.data);
+        let messageElement = document.createElement('div');
+        if (message.user === username) {
             messageElement.classList.add('message-self');
-            messageElement.textContent = `Você: ${message}`;
-            chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight; 
-            messageInput.value = '';
+            messageElement.textContent = `Você: ${message.text}`;
+        } else {
+            messageElement.classList.add('message-other');
+            messageElement.textContent = `${message.user}: ${message.text}`;
+        }
+        
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    };
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let message = messageInput.value;
+        let outgoingMessage = JSON.stringify({ user: username, text: message });
+        conn.send(outgoingMessage);
+
+        fetch('/api/enviar_mensagem', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_chat: '<?php echo $contratoId; ?>',
+                mensagem: message
+            })
         });
 
-    </script>
+        // Exibir a mensagem na interface
+        let messageElement = document.createElement('div');
+        messageElement.classList.add('message-self');
+        messageElement.textContent = `Você: ${message}`;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        messageInput.value = '';
+    });
+</script>
+
 </body>
 </html>

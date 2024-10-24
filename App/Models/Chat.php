@@ -10,12 +10,13 @@ class Chat extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
 
-    public function chat()
+    public function contrato()
     {
-        return $this->belongsTo(Cliente::class, 'id_cliente', 'id');
+        return $this->belongsTo(Contrato::class, 'id_contrato', 'id');
     }
-    public function profissional()
+
+    public function mensagens()
     {
-        return $this->belongsTo(Profissional::class, 'id_profissional', 'id');
+        return $this->hasMany(Mensagem::class, 'id_chat', 'id');
     }
 }
