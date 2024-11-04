@@ -26,7 +26,6 @@
                         <li><i class="bi bi-chevron-right"></i> <a href="/home#about">Sobre nós</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="/home#services">Serviços</a></li>
                         <?php endif;?>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Termos de serviço</a></li>
                     </ul>
                 </div>
 
@@ -62,7 +61,6 @@
 
     </div>
 <?php endif; ?>
-<?php require_once __DIR__ . '../../termos_uso.php'; ?>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>

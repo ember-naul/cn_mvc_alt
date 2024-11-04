@@ -44,7 +44,7 @@
 
                         <p>A Casa & Negócios poderá alterar os Termos relativos aos Serviços a qualquer momento.
                             Aditamentos
-                            entrarão em vigor quando a Uber fizer a publicação da versão atualizada dos Termos neste
+                            entrarão em vigor quando a Casa & Negócios fizer a publicação da versão atualizada dos Termos neste
                             local
                             ou
                             das condições atualizadas ou Termos Suplementares sobre o respectivo Serviço. O fato de Você
@@ -82,7 +82,7 @@
                             TRANSPORTE
                             OU
                             LOGÍSTICA, NEM FUNCIONA COMO TRANSPORTADORA, E QUE TODOS ESSES SERVIÇOS SÃO PRESTADOS POR
-                            PARCEIROS(AS) INDEPENDENTES, QUE NÃO SÃO EMPREGADOS(AS) E NEM REPRESENTANTES DA UBER, NEM DE
+                            PARCEIROS(AS) INDEPENDENTES, QUE NÃO SÃO EMPREGADOS(AS) E NEM REPRESENTANTES DA Casa & Negócios, NEM DE
                             QUALQUER DE SUAS AFILIADAS.</p><br>
 
                         <h3>2- Licença</h3><br>
@@ -155,7 +155,7 @@
                             SERVIÇOS E
                             CONTEÚDO DE TERCEIROS(AS). A CASA & NEGÓCIOS NÃO ENDOSSA ESSES SERVIÇOS E CONTEÚDO DE
                             TERCEIROS(AS)
-                            E A UBER NÃO SERÁ, EM HIPÓTESE ALGUMA, RESPONSÁVEL POR NENHUM PRODUTO OU SERVIÇO DESSES(AS)
+                            E A Casa & Negócios NÃO SERÁ, EM HIPÓTESE ALGUMA, RESPONSÁVEL POR NENHUM PRODUTO OU SERVIÇO DESSES(AS)
                             TERCEIROS(AS) FORNECEDORES(AS). Além disto, Apple Inc., Google, Inc., Microsoft Corporation
                             ou
                             BlackBerry Limited e/ou suas subsidiárias e afiliadas internacionais serão terceiros(as)
@@ -371,7 +371,7 @@
                             adquirir e atualizar os equipamentos e dispositivos necessários para acessar e usar os
                             Serviços
                             e
-                            Aplicativos e quaisquer de suas atualizações. A UBER NÃO GARANTE QUE OS SERVIÇOS, OU
+                            Aplicativos e quaisquer de suas atualizações. A Casa & Negócios NÃO GARANTE QUE OS SERVIÇOS, OU
                             QUALQUER
                             PARTE
                             DELES, FUNCIONARÃO EM QUALQUER EQUIPAMENTO OU DISPOSITIVO EM PARTICULAR. Além disso, os
@@ -410,7 +410,7 @@
                             for
                             um método de pagamento aceito, Você poderá escolher receber eventuais valores devidos
                             pelo(a)
-                            Parceiro(a) Independente a título de troco na forma de créditos Uber Cash, que poderão ser
+                            Parceiro(a) Independente a título de troco na forma de créditos Casa & Negócios Cash, que poderão ser
                             utilizados para pagamento em novas solicitações de Serviços.</p><br>
 
                         <p>
@@ -463,14 +463,14 @@
                             e/ou
                             contribuições governamentais, serão de Sua responsabilidade e Você reembolsará o(a)
                             Parceiro(a)
-                            Independente e/ou a Uber por todas as tarifas, taxas, impostos e/ou contribuições
+                            Independente e/ou a Casa & Negócios por todas as tarifas, taxas, impostos e/ou contribuições
                             governamentais
                             pagas em Seu nome. Para mais detalhes sobre aumento de Preço em decorrência de aumento da
                             demanda,
-                            clique aqui. A Uber envidará esforços razoáveis para informá-lo(a) dos Preços que poderão se
+                            clique aqui. A Casa & Negócios envidará esforços razoáveis para informá-lo(a) dos Preços que poderão se
                             aplicar, sendo certo que Você será responsável pelo pagamento dos Preços lançados em Sua
                             Conta
-                            independentemente de estar ciente desses Preços ou de seus valores. A Uber poderá, a
+                            independentemente de estar ciente desses Preços ou de seus valores. A Casa & Negócios poderá, a
                             qualquer
                             momento, fornecer a certos(as) usuários(as) ofertas e descontos promocionais que poderão
                             resultar em

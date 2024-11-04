@@ -50,36 +50,94 @@ class ClienteController extends Controller
         }
     }
 
-
-    public function novoCliente()
+    public function enderecoCadastro()
     {
-        $cep = $_POST['cep'] ?? null;
-        $endereco = $_POST['endereco'] ?? null;
-        $bairro = $_POST['bairro'] ?? null;
-        $cidade = $_POST['cidade'] ?? null;
-        $numero = $_POST['numero'] ?? null;
+        $enderecoCompleto = $_POST['enderecoCompleto'] ?? null;
+        $rua = $_POST['rua'] ?? null;
+
+        $usuario = Usuario::find($_SESSION['id_usuario']);
+        $cliente = Cliente::where("id_usuario", $usuario->id)->first();
+
+        if (!$cliente) {
+            return redirect('/home')->erro('Cliente não encontrado.');
+        }
 
         try {
-            $cliente = new Cliente();
-            $cliente->id_usuario = user()->id_usuario;
-            $cliente->save();
+            if (empty($enderecoCompleto)) {
+                throw new Exception('O endereço completo deve ser preenchido.');
+            }
 
-            $endereco_completo = sprintf('%s, %s, %s, %s', $endereco, $bairro, $cidade, $numero);
-            $coordenadas_c = $this->geocodeAddress($endereco_completo);
+            $partes = explode(',', $enderecoCompleto);
 
+            if (count($partes) < 2) {
+                throw new Exception("Formato de endereço inválido. $enderecoCompleto");
+            }
+
+            $enderecoComNumero = trim($partes[1]);
+
+            preg_match('/(\d+)/', $enderecoComNumero, $matches);
+            $numero = $matches[1] ?? null; // O número está no primeiro grupo de captura
+
+            if (!$numero) {
+                throw new Exception("Número não encontrado no endereço. $enderecoCompleto");
+            }
+
+            // Obtém o CEP e coordenadas
+            $coordenadas_c = $this->geocodeAddress($enderecoCompleto);
+            $cep = $this->buscarCepPeloEndereco($enderecoCompleto);
+
+            // Valida se o CEP foi encontrado
+            if (!$cep) {
+                throw new Exception('CEP não encontrado para o endereço.');
+            }
+            // Salva o endereço
             $endereco_c = new Endereco();
             $endereco_c->id_cliente = $cliente->id;
-            $endereco_c->id_profissional = null;
+            $endereco_c->rua = $rua;
             $endereco_c->cep = $cep;
             $endereco_c->numero = $numero;
             $endereco_c->latitude = $coordenadas_c['latitude'];
             $endereco_c->longitude = $coordenadas_c['longitude'];
             $endereco_c->save();
+
+            return redirect('/cliente/home')->sucesso('Seu endereço foi cadastrado com sucesso');
+        } catch (Exception $e) {
+            return redirect('/enderecos')->erro('Erro ao cadastrar seu endereço! '. $e->getMessage());
+        }
+    }
+
+
+    private function buscarCepPeloEndereco($enderecoCompleto)
+    {
+        $apiKey = 'AIzaSyBV2RbCH4G9_X8i1sxWKAtdwiCkYFg44ig';
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($enderecoCompleto) . "&key=" . $apiKey;
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        if ($data['status'] === 'OK') {
+            $components = $data['results'][0]['address_components'];
+            return $components[6]['long_name'];
+        } else {
+            throw new Exception('Erro ao obter o CEP pelo endereço.');
+        }
+    }
+
+
+    public function novoCliente()
+    {
+        $usuario = Usuario::find($_SESSION['id_usuario']);
+
+        try {
+            $cliente = new Cliente();
+            $cliente->id_usuario = $usuario->id;
+            $cliente->save();
             $_SESSION['cliente'] = true;
             $_SESSION['profissional'] = false;
+            $this->enderecoCadastro();
             return redirect('/cliente/home')->sucesso('Você se cadastrou como cliente.');
+
         } catch (Exception $e) {
-            return redirect('/home')->erro($e->getMessage());
+            return redirect('/enderecos')->erro($e->getMessage());
         }
     }
 
@@ -110,13 +168,11 @@ class ClienteController extends Controller
             return redirect("/")->erro("Alteração realizada com sucesso!");
         }
     }
+
     public function updateUser()
     {
         $this->update($_POST);
     }
-
-
-
 
 
 }

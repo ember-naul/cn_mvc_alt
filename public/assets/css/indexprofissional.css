@@ -150,6 +150,107 @@ body {
     z-index: 1050; /* ou um valor maior */
 }
 
+.hidden {
+    display: none !important;
+}
+
+.circle-wrapper {
+    position: relative;
+    width: 40vmin;
+    height: 40vmin;
+    margin: 0 auto;
+}
+
+.circle {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    border: 5px solid #60c5ff;
+    border-top: 5px solid transparent;
+    animation: spin 2s linear infinite;
+}
+
+.gif-container {
+    margin: auto;
+}
+
+.gif-container img {
+    margin-top: 8%;
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+}
+
+.counter {
+    font-size: 2vw;
+    margin-top: 1rem;
+}
+
+.cancel-wrapper {
+    display: inline-block;
+    margin-top: 2rem;
+    cursor: pointer;
+    text-align: center;
+    width: 10%;
+}
+
+.cancel-wrapper img {
+    width: 50%;
+    height: 50%;
+}
+
+.cancel-wrapper img:hover {
+    opacity: 0.7;
+}
+
+.cancel-text {
+    margin-top: 0.5rem;
+    font-size: 1vw;
+    color: #ff0000;
+}
+
+h3 {
+    font-size: 1.5vw;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 5%;
+    }
+
+    .circle-wrapper {
+        width: 70vmin;
+        height: 70vmin;
+    }
+
+    .counter {
+        font-size: 5vw;
+    }
+
+    .cancel-wrapper {
+        width: 30%;
+    }
+
+    h3 {
+        font-size: 6vw;
+    }
+
+    .cancel-text {
+        font-size: 2.5vw;
+    }
+}
+
 @media (max-width: 768px) {
 
     html,

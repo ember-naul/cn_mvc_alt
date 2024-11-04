@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="form-group" id="cnpjOpt" style="display:none;">
                                     <label for="cnpj">Seu CNPJ</label>
-                                    <input type="text" class="form-control" maxlength="14" id="cnpj" name="cnpj">
+                                    <input type="text" class="form-control" maxlength="18" id="cnpj" name="cnpj">
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Salvar</button>
@@ -46,18 +46,32 @@
         </div>
     </div>
 </main>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 <script>
-    document.getElementById('tipo_profissional').addEventListener('change', function() {
-        var cnpjOpt = document.getElementById('cnpjOpt');
-        var cnpjInp = document.getElementById('cnpj');
+    $(document).ready(function () {
+        // Inicialização do evento de mudança
+        $('#tipo_profissional').on('change', function() {
+            var cnpjOpt = $('#cnpjOpt');
+            var cnpjInp = $('#cnpj'); // Adicionado a definição correta aqui
 
-        if (this.value === 'jurídica') {
-            cnpjOpt.style.display = 'block';
-            cnpjInp.required = true;
-        } else {
-            cnpjOpt.style.display = 'none';
-            cnpjInp.required = false;
-        }
+            if (this.value === 'jurídica') {
+                cnpjOpt.show();
+                cnpjInp.prop('required', true);
+                cnpjInp.inputmask({
+                    mask: "99.999.999/9999-99",
+                    placeholder: "__.___.___/____-__",
+                    clearMaskOnLostFocus: true
+                });
+            } else {
+                cnpjOpt.hide();
+                cnpjInp.prop('required', false).val(''); // Limpa o campo
+                cnpjInp.inputmask('remove'); // Remove a máscara se não for necessário
+            }
+        });
+        $('#form-cadastro-cliente').on('submit', function () {
+            $('#cnpj').inputmask('remove');
+            $('#cnpj').val($('#cnpj').val().replace(/\D/g, ''));
+        });
     });
 </script>

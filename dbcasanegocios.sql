@@ -68,14 +68,13 @@ CREATE TABLE IF NOT EXISTS `contratos`
 CREATE TABLE IF NOT EXISTS `enderecos`
 (
     `id`              int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `id_cliente`      int,
-    `id_profissional` int,
-    `cep`             char(9) COLLATE utf8mb4_unicode_ci        DEFAULT NULL,
-    `numero`          varchar(6) COLLATE utf8mb4_unicode_ci     DEFAULT NULL,
+    `id_cliente`      int NOT NULL,
+    `rua`             varchar(250)   COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `cep`             char(9)        COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `numero`          varchar(6)     COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     `latitude`        decimal(10, 8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     `longitude`       decimal(11, 8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-    KEY `id_cliente` (`id_cliente`),
-    KEY `id_profissional` (`id_profissional`)
+    KEY `id_cliente` (`id_cliente`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
@@ -188,7 +187,7 @@ VALUES (1, 1, 1, '2024-07-01 00:00:00', '2024-12-31 00:00:00', '1200.00', 'ativo
 INSERT INTO `habilidades` (`id`, `nome`, `descricao`)
 VALUES (1, 'Jardinagem', 'Cuidados e manutenção de jardins'),
        (2, 'Limpeza', 'Serviços de limpeza residencial e comercial'),
-       (3, 'Cozinheira(o)', 'Serviços de cozinha residencial e comercial'),
+       (3, 'Cozinheira(o)', 'Serviços de cozinha residencial e comercial por longos períodos'),
        (4, 'Faxineiro(a)', 'Responsável por limpar e organizar ambientes.'),
        (5, 'Babysitter (Babá)', 'Cuida de crianças/bebês na ausência de responsáveis.'),
        (6, 'Organizador(a)', 'Profissional que organiza ambientes residenciais e comerciais, otimizando espaços.'),
@@ -211,10 +210,8 @@ VALUES (1, 'Jardinagem', 'Cuidados e manutenção de jardins'),
        (20, 'Serviço de Passadoria', 'Profissional que passa roupas de maneira rápida e eficiente.'),
        (21, 'Limpeza Pós-Obra', 'Realiza limpeza profunda após reformas e construções.'),
        (22, 'Apoio a Eventos', 'Auxilia na organização e execução de pequenos eventos em casa.'),
-       (23, 'Cuidador(a) de Plantas', 'Responsável pelo cuidado e manutenção de plantas internas e externas.'),
-       (24, 'Serviço de Compras', 'Realiza compras de supermercado e outras necessidades do lar.'),
-       (25, 'Assistente de Estudo', 'Ajuda crianças e adolescentes com lições de casa e estudos.'),
-       (26, 'Reorganizador(a) de Armários', 'Ajuda a reorganizar e otimizar o espaço em armários e closets.');
+       (23, 'Serviço de Compras', 'Realiza compras de supermercado e outras necessidades do lar.'),
+       (24, 'Assistente de Estudo', 'Ajuda crianças e adolescentes com lições de casa e estudos.');
 
 INSERT INTO `pagamentos` (`id`, `id_contrato`, `data_pagamento`, `valor`, `status_pagamento`)
 VALUES (1, 1, '2024-07-01', '1200.00', 'pago');

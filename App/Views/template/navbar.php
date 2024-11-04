@@ -135,7 +135,7 @@ if ($profissional) {
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
     <?php if (!isset($_SESSION['profissional']) && !isset($_SESSION['cliente'])): ?>
-        <a class="btn-getstarted" data-toggle="modal" data-target="#exampleModalCenter">Comece agora</a>
+        <a data-toggle="modal" data-target="#exampleModalCenter"><button class="btn btn-getstarted">Comece agora</button></a>
     <?php endif; ?>
 
 

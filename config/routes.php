@@ -15,7 +15,6 @@ use FastRoute\RouteCollector;
 return function (RouteCollector $r) {
     $r->addRoute('GET', '/', [HomeController::class, 'index']);
     $r->addRoute('GET', '/home', [HomeController::class, 'index']);
-    $r->addRoute('GET', '/mapa', [HomeController::class, 'mapa']);
     $r->addRoute('GET', '/gravardados', [HomeController::class, 'gravardados']);
     $r->addRoute('GET', '/chat', [HomeController::class, 'chat_teste']);
     $r->addRoute('GET', '/enderecos', [HomeController::class, 'enderecos']);
@@ -34,6 +33,7 @@ return function (RouteCollector $r) {
     $r->addRoute('POST', '/enviar', [SenhaController::class, 'enviar']);
 
     $r->addRoute('POST', '/novocliente', [ClienteController::class, 'novoCliente']);
+    $r->addRoute('POST', '/novoEndereco', [ClienteController::class, 'enderecoCadastro']);
     $r->addRoute('POST', '/novoprofissional', [ProfissionalController::class, 'novoProfissional']);
 
     $r->addRoute('GET', '/cliente/home', [ClienteController::class, 'cliente_home']);
@@ -54,8 +54,9 @@ return function (RouteCollector $r) {
     $r->addRoute('GET', '/api/profissionais/{id:\d+}', [JsonController::Class, 'buscarProfissionais']);
     $r->addRoute('POST', '/api/habilidades', [JsonController::class, 'enviarHabilidades']);
     $r->addRoute('POST', '/api/responder_solicitacao', [JsonController::class, 'responderSolicitacao']);
-    $r->addRoute('GET', '/api/retornar_estado', [JsonController::class, 'retornarEstado']);
+    $r->addRoute('POST', '/api/retornar_estado', [JsonController::class, 'retornarEstado']);
     $r->addRoute('POST', '/api/enviar_mensagem', [JsonController::class, 'enviarMensagem']);
+    $r->addRoute('POST', '/api/concluir_contrato', [JsonController::class, 'concluirContrato']);
 
 
     $r->addRoute('POST', '/enviar_profissional', [LocalizacaoController::class, 'enviar_profissional']);

@@ -57,23 +57,30 @@ class JsonController
     public function retornarEstado()
     {
         $profissionalId = $_SESSION['profissional_id'] ?? null;
+        $acao = $_POST['acao'] ?? null;
 
-        if ($profissionalId) {
+        if ($profissionalId && $acao) {
             $profissional = Profissional::find($profissionalId);
 
+            if (!in_array($acao, ['pareando', 'nao-pareando'])) {
+                echo json_encode(['error' => 'Ação inválida']);
+                return;
+            }
+
             if ($profissional) {
-                if ($profissional->status == 'nao-pareando'){
-                    $profissional->status = 'pareando';
-                } else if ($profissional->status == 'pareando'){
-                    $profissional->status = 'nao-pareando';
+                if ($acao === 'pareando') {
+                    $profissional->status = 'pareando'; // Forçar o estado para 'pareando'
+                } elseif ($acao === 'nao-pareando') {
+                    $profissional->status = 'nao-pareando'; // Forçar o estado para 'nao-pareando'
                 }
+
                 $profissional->save();
                 echo json_encode(['status' => $profissional->status]);
             } else {
                 echo json_encode(['error' => 'Profissional não encontrado']);
             }
         } else {
-            echo json_encode(['error' => 'ID do profissional não fornecido']);
+            echo json_encode(['error' => 'Dados insuficientes']);
         }
     }
 
@@ -240,5 +247,45 @@ class JsonController
             echo json_encode(['error' => 'Dados incompletos.']);
         }
     }
-    
+
+    public function concluirContrato() {
+        $options = array(
+            'cluster' => 'sa1',
+            'useTLS' => false
+        );
+
+        $pusher = new Pusher(
+            '8702b12d1675f14472ac',
+            '0e7618b4f23dcfaf415c',
+            '1863692',
+            $options
+        );
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['username'])) {
+                $username = $_POST['username'];
+                $role = $_POST['role'];
+
+                try {
+                    $pusher->trigger('chat-conc', 'user-aceitou', [
+                        'username' => $username,
+                        'role' => $role
+                    ]);
+
+                    echo json_encode(['status' => 'success']);
+                } catch (Exception $e) {
+                    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+                }
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Username não fornecido.']);
+            }
+            exit;
+        } else {
+
+            echo json_encode(['status' => 'error', 'message' => 'Método não permitido.']);
+            exit;
+        }
+    }
+
+
 }

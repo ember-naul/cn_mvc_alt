@@ -12,7 +12,6 @@ $usuario = Usuario::find($_SESSION['id_usuario']);
 $cliente = Cliente::where('id_usuario', $usuario->id)->first();
 $habilidades = Habilidade::all();
 $_SESSION['cliente_id'] = $cliente->id;
-
 ?>
 <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

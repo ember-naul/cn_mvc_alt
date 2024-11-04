@@ -29,10 +29,6 @@
                                     <label for="senha">Senha</label>
                                     <input name="senha" type="password" required class="form-control" id="senha_login" placeholder="Senha">
                                 </div>
-                                <div class="form-group form-check">
-                                    <input id="remember-me_login" name="remember-me" type="checkbox" class="form-check-input">
-                                    <label for="remember-me" class="form-check-label">Lembrar este dispositivo</label>
-                                </div>
                                 <div class="d-flex justify-content-between">
                                     <a href="/recuperarsenha" class="text-primary">Esqueceu sua senha?</a>
                                 </div>

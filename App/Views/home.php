@@ -52,14 +52,14 @@
                     <div class="d-flex">
                         <?php if ($_SESSION['logado'] == true): ?>
                             <?php if (isset($_SESSION['escolha'])): ?>
-                                <button data-toggle="modal" data-target="#modalescolha" class="btn-get-started">Comece
+                                <button data-toggle="modal" data-target="#modalescolha" class="btn btn-get-started">Comece
                                     agora
                                 </button>
                             <?php endif;
                         ; ?>
                             <?php if (!isset($_SESSION['escolha'])): ?>
                                 <button data-toggle="modal" data-target="#exampleModalCenter"
-                                        class="btn-get-started">Escolha seu perfil!
+                                        class="btn btn-get-started">Escolha seu perfil!
                                 </button>
                             <?php endif;; ?>
                         <?php endif;; ?>
@@ -172,96 +172,86 @@
 
             <div class="row gy-4">
 
-                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-item position-relative">
-                        <div class="card-img">
-                            <img src="" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="#" class="stretched-link">Jardinagem</a></h3>
-                        <p>Cumque eos in qui numquam. Aut aspernatur perferendis sed atque quia voluptas quisquam
-                            repellendus temporibus itaqueofficiis odit</p>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-item position-relative">
+                    <div class="card-img">
+                        <img src="" alt="" class="img-fluid">
                     </div>
+                    <h3><a href="#" class="stretched-link">Jardinagem</a></h3>
+                    <p>Cuida de jardins e plantas, garantindo seu crescimento saudável e embelezando espaços.</p>
                 </div>
+            </div>
 
-                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-item position-relative">
-                        <div class="card-img">
-                            <img src="" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="#" class="stretched-link">Diarista</a></h3>
-                        <p>Asperiores provident dolor accusamus pariatur dolore nam id audantium ut et iure incidunt
-                            molestiae dolor ipsam ducimus occaecati nisi</p>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-item position-relative">
+                    <div class="card-img">
+                        <img src="" alt="" class="img-fluid">
                     </div>
+                    <h3><a href="#" class="stretched-link">Limpeza Pós-Obra</a></h3>
+                    <p>Realiza a limpeza de espaços após reformas, removendo sujeira e resíduos da construção.</p>
                 </div>
+            </div>
 
-                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-item position-relative">
-                        <div class="card-img">
-                            <img src="" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="#" class="stretched-link">Babá</a></h3>
-                        <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit
-                            doloremque
-                            oluptatem aut et molestiae ut et nihil</p>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-item position-relative">
+                    <div class="card-img">
+                        <img src="" alt="" class="img-fluid">
                     </div>
+                    <h3><a href="#" class="stretched-link">Assistente</a></h3>
+                    <p>Auxilia em diversas tarefas do dia a dia, ajudando na organização e execução de atividades.</p>
                 </div>
+            </div>
 
-                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
-                    <div class="service-item position-relative">
-                        <div class="card-img">
-                            <img src="" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="#" class="stretched-link">Cozinheira(o)</a></h3>
-                        <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit
-                            doloremque
-                            oluptatem aut et molestiae ut et nihil</p>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-item position-relative">
+                    <div class="card-img">
+                        <img src="" alt="" class="img-fluid">
                     </div>
+                    <h3><a href="#" class="stretched-link">Cozinheira(o)</a></h3>
+                    <p>Prepara refeições, criando cardápios e garantindo a qualidade dos pratos servidos.</p>
                 </div>
+            </div>
 
-                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="500">
-                    <div class="service-item position-relative">
-                        <div class="card-img">
-                            <img src="" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="#" class="stretched-link">Eletricista</a></h3>
-                        <p>Illo consequuntur quisquam delectus praesentium modi dignissimos facere vel cum
-                            onsequuntur
-                            maiores beatae consequatur magni voluptates</p>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="500">
+                <div class="service-item position-relative">
+                    <div class="card-img">
+                        <img src="" alt="" class="img-fluid">
                     </div>
+                    <h3><a href="#" class="stretched-link">Eletricista</a></h3>
+                    <p>Instala e mantém sistemas elétricos, garantindo segurança e funcionamento adequado.</p>
                 </div>
+            </div>
 
-                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="600">
-                    <div class="service-item position-relative">
-                        <div class="card-img">
-                            <img src="" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="#" class="stretched-link">Lavador(a)</a></h3>
-                        <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi
-                            quisquam aut nostrum unde et qui est non quo nulla</p>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="600">
+                <div class="service-item position-relative">
+                    <div class="card-img">
+                        <img src="" alt="" class="img-fluid">
                     </div>
+                    <h3><a href="#" class="stretched-link">Lavador(a)</a></h3>
+                    <p>Realiza a lavagem e limpeza de roupas, garantindo cuidado e conservação dos tecidos.</p>
                 </div>
+            </div>
 
-                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="700">
-                    <div class="service-item position-relative">
-                        <div class="card-img">
-                            <img src="" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="#" class="stretched-link">Churrasqueiro(a)</a></h3>
-                        <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi
-                            quisquam aut nostrum unde et qui est non quo nulla</p>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="700">
+                <div class="service-item position-relative">
+                    <div class="card-img">
+                        <img src="" alt="" class="img-fluid">
                     </div>
+                    <h3><a href="#" class="stretched-link">Babysitter (babá)</a></h3>
+                    <p>Cuida de crianças, garantindo segurança e entretenimento enquanto os pais estão ausentes.</p>
                 </div>
+            </div>
 
-                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="800">
-                    <div class="service-item position-relative">
-                        <div class="card-img">
-                            <img src="" alt="" class="img-fluid">
-                        </div>
-                        <h3><a href="#" class="stretched-link">Copeiro(a)</a></h3>
-                        <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi
-                            quisquam aut nostrum unde et qui est non quo nulla</p>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="800">
+                <div class="service-item position-relative">
+                    <div class="card-img">
+                        <img src="" alt="" class="img-fluid">
                     </div>
+                    <h3><a href="#" class="stretched-link">Cuidador(a) de Animais</a></h3>
+                    <p>Oferece cuidados para animais de estimação, incluindo alimentação, passeios e atenção.</p>
                 </div>
+            </div>
+
             </div>
             <div class="container section-title" data-aos="fade-up" data-aos-delay="200" style="padding-top:6%">
                 <h5>Entre outros serviços...</h5>
